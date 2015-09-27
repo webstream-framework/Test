@@ -1,9 +1,15 @@
 <?php
 namespace WebStream\Test;
 
-require_once dirname(__FILE__) . "/../../../vendor/autoload.php";
-require_once dirname(__FILE__) . '/../Module/Functions.php';
-require_once dirname(__FILE__) . '/../Module/ClassLoader.php';
+use WebStream\Module\Utility;
+use WebStream\Module\Logger;
+
+require_once dirname(__FILE__) . '/TestConstant.php';
+require_once dirname(__FILE__) . '/../TestApp/vendor/autoload.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Functions.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/ClassLoader.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Logger.php';
 
 /**
  * ユニットテスト基底クラス
@@ -13,9 +19,12 @@ require_once dirname(__FILE__) . '/../Module/ClassLoader.php';
  */
 class TestBase extends \PHPUnit_Framework_TestCase
 {
+    use TestConstant, Utility;
+
     public function setUp()
     {
         $this->autoLoad();
+        Logger::init($this->getLogConfigPath() . "/log.test.debug.ok.ini");
         $this->preloadClass();
     }
 
@@ -26,7 +35,7 @@ class TestBase extends \PHPUnit_Framework_TestCase
     protected function autoLoad()
     {
         $classLoader = new \WebStream\Module\ClassLoader();
-        $classLoader->test();
+        // $classLoader->test();
         spl_autoload_register([$classLoader, "load"]);
         register_shutdown_function('shutdownHandler');
     }
@@ -34,7 +43,7 @@ class TestBase extends \PHPUnit_Framework_TestCase
     protected function preloadClass()
     {
         $classLoader = new \WebStream\Module\ClassLoader();
-        $classLoader->test();
+        // $classLoader->test();
         $classLoader->load([
             "WebStream\Annotation\Autowired",
             "WebStream\Annotation\Inject",

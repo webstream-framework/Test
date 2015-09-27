@@ -5,9 +5,5 @@
         "twig/twig": "1.*",
         "mustangostang/spyc": "*",
         "leafo/lessphp": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "*",
-        "phing/phing": "*"
     }
 }

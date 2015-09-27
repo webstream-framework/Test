@@ -29,5 +29,5 @@ $> vendor/phpunit/phpunit/phpunit Test/hoge.php
 
 ## Phing
 ```sh
-$> vender/phing/phing -f Test/build.xml
+$> vendor/phing/phing/bin/phing -f Test/build.xml
 ```

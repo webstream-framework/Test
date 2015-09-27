@@ -5,44 +5,39 @@ trait TestConstant
 {
     private function getDocumentRootURL()
     {
-        return "http://" . gethostname() . "/webstream-framework/WebStream/core/WebStream/Test/Sample";
+        return "http://" . gethostname() . "/webstream-framework/Test/TestApp";
     }
 
     private function getProjectRootPath()
     {
-        if (preg_match('/(.+webstream-framework\/WebStream)/', dirname(__FILE__), $matches)) {
+        if (preg_match('/(.+webstream-framework\/Test)/', dirname(__FILE__), $matches)) {
             return $matches[1];
         }
     }
 
-    private function getSampleAppPath()
-    {
-        return "/core/WebStream/Test/Sample";
-    }
-
     private function getLogFilePath()
     {
-        return $this->getSampleAppPath() . "/log/webstream.test.log";
+        return "/log/webstream.test.log";
     }
 
     private function getLogConfigPath()
     {
-        return $this->getSampleAppPath() . "/config/log_config";
+        return "/config/log_config";
     }
 
     private function getCacheDir777()
     {
-        return $this->getSampleAppPath() . "/cache777";
+        return "/cache777";
     }
 
     private function getCacheDir000()
     {
-        return $this->getSampleAppPath() . "/cache000";
+        return "/cache000";
     }
 
     private function getCacheDir()
     {
-        return $this->getSampleAppPath() . "/app/views/_cache";
+        return "/app/views/_cache";
     }
 
     private function getHtmlUrl()

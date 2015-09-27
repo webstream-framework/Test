@@ -21,7 +21,6 @@ class UtilityTest extends TestBase
 
     public function setUp()
     {
-        Logger::init($this->getLogConfigPath() . "/log.test.debug.ok.ini");
         parent::setUp();
     }
 
@@ -32,7 +31,7 @@ class UtilityTest extends TestBase
      */
     public function okGetProjectRoot()
     {
-        $this->assertEquals($this->getProjectRootPath(), $this->getRoot());
+        $this->assertEquals($this->getProjectRootPath() . "/TestApp", $this->getRoot());
     }
 
     /**
@@ -75,7 +74,9 @@ class UtilityTest extends TestBase
      */
     public function okReadNoNamespace($filepath)
     {
-        $path = $this->getNamespace($this->getProjectRootPath() . $filepath);
+        $filepath = $this->getProjectRootPath() . $filepath;
+        $this->assertFileExists($filepath);
+        $path = $this->getNamespace($filepath);
         $this->assertNull($path);
     }
 
