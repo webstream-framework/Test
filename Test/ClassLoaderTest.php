@@ -19,7 +19,6 @@ class ClassLoaderTest extends TestBase
 
     public function setUp()
     {
-        Logger::init($this->getLogConfigPath() . "/log.test.debug.ok.ini");
         parent::setUp();
     }
 
@@ -64,7 +63,6 @@ class ClassLoaderTest extends TestBase
     public function okLoadClass()
     {
         $classLoader = new ClassLoader();
-        $classLoader->test();
         $list = $classLoader->load("ClassLoaderTestClassStaticLoad");
         $instance = new \WebStream\Test\TestData\ClassLoaderTestClassStaticLoad();
         $this->assertTrue($instance instanceof \WebStream\Test\TestData\ClassLoaderTestClassStaticLoad);
@@ -80,7 +78,6 @@ class ClassLoaderTest extends TestBase
     {
         $classLoader = new ClassLoader();
         $list = $classLoader->load(["ClassLoaderTestClassStaticLoadMultiple1", "ClassLoaderTestClassStaticLoadMultiple2"]);
-        $classLoader->test();
         $instance1 = new \WebStream\Test\TestData\ClassLoaderTestClassStaticLoadMultiple1();
         $instance2 = new \WebStream\Test\TestData\ClassLoaderTestClassStaticLoadMultiple2();
         $this->assertTrue($instance1 instanceof \WebStream\Test\TestData\ClassLoaderTestClassStaticLoadMultiple1);
@@ -96,7 +93,6 @@ class ClassLoaderTest extends TestBase
     public function okSearchMultipleFile()
     {
         $classLoader = new ClassLoader();
-        $classLoader->test();
         $list = $classLoader->load("UtilityFileSearch");
         $instance1 = new \WebStream\Test\TestData\UtilityFileSearch1();
         $instance2 = new \WebStream\Test\TestData\UtilityFileSearch2();
@@ -112,7 +108,6 @@ class ClassLoaderTest extends TestBase
     public function okImportFile()
     {
         $classLoader = new ClassLoader();
-        $classLoader->test();
         $classLoader->import("core/WebStream/Test/TestData/ClassLoaderTestImport.php");
         $this->assertTrue(function_exists("testImport"));
     }
@@ -125,7 +120,6 @@ class ClassLoaderTest extends TestBase
     public function okImportAllFile()
     {
         $classLoader = new ClassLoader();
-        $classLoader->test();
         $classLoader->importAll("core/WebStream/Test/TestData/ClassLoaderTest");
         $this->assertTrue(function_exists("testImportAll1"));
         $this->assertTrue(function_exists("testImportAll2"));
@@ -139,7 +133,6 @@ class ClassLoaderTest extends TestBase
     public function okImportAllWithFilter()
     {
         $classLoader = new ClassLoader();
-        $classLoader->test();
         $classLoader->importAll("core/WebStream/Test/TestData/ClassLoaderFilterTest", function ($filepath) {
             return strpos($filepath, "ClassLoaderTestFilter1") !== false;
         });
@@ -156,7 +149,6 @@ class ClassLoaderTest extends TestBase
     public function okLoadMultipleClassWithNotExistClass()
     {
         $classLoader = new ClassLoader();
-        $classLoader->test();
         $list = $classLoader->load(["ClassLoaderTestClassStaticLoadMultiple3", "DummyClass"]);
         $instance = new \WebStream\Test\TestData\ClassLoaderTestClassStaticLoadMultiple3();
         $this->assertTrue($instance instanceof \WebStream\Test\TestData\ClassLoaderTestClassStaticLoadMultiple3);

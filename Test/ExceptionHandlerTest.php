@@ -21,7 +21,6 @@ class ExceptionHandlerTest extends TestBase
 
     public function setUp()
     {
-        Logger::init($this->getLogConfigPath() . "/log.test.debug.ok.ini");
         parent::setUp();
     }
 

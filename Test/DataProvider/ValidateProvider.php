@@ -132,7 +132,7 @@ trait ValidateProvider
     public function invalidRuleProvider()
     {
         return [
-            ["/test_validate/invalid_rule/unknown", "WebStream\Exception\Extend\AnnotationException"],
+            ["/test_validate/invalid_rule/unknown", "WebStream\Exception\Extend\ValidateException"],
             ["/test_validate/invalid_rule/required", "WebStream\Exception\Extend\ValidateException"],
             ["/test_validate/invalid_rule/equal", "WebStream\Exception\Extend\ValidateException"],
             ["/test_validate/invalid_rule/length1", "WebStream\Exception\Extend\ValidateException"],

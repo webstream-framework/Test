@@ -26,7 +26,6 @@ class AutowiredTest extends TestBase
 
     public function setUp()
     {
-        Logger::init($this->getLogConfigPath() . "/log.test.debug.ok.ini");
         parent::setUp();
     }
 
@@ -38,7 +37,6 @@ class AutowiredTest extends TestBase
      */
     public function okAutowired($mail, $age)
     {
-        ServiceLocator::test();
         $container = ServiceLocator::getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest1($container);
@@ -57,7 +55,6 @@ class AutowiredTest extends TestBase
      */
     public function okAutowiredForConstantValueProvider($name, $num)
     {
-        ServiceLocator::test();
         $container = ServiceLocator::getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest3($container);
@@ -75,7 +72,6 @@ class AutowiredTest extends TestBase
      */
     public function okAutowiredSuperClass()
     {
-        ServiceLocator::test();
         $container = ServiceLocator::getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest7($container);
@@ -114,7 +110,6 @@ class AutowiredTest extends TestBase
      */
     public function ngAutowiredInvalidType()
     {
-        ServiceLocator::test();
         $container = ServiceLocator::getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest2($container);
@@ -133,7 +128,6 @@ class AutowiredTest extends TestBase
      */
     public function ngAutowiredAnnotationDefinition()
     {
-        ServiceLocator::test();
         $container = ServiceLocator::getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest6($container);

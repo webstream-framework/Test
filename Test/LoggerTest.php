@@ -232,7 +232,7 @@ class LoggerTest extends TestBase
     public function okRotateCycleWithinDay($configPath, $hour)
     {
         // 既存のステータスファイルは削除
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.status";
+        $statusPath = $this->getRoot() . "/log/webstream.test.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -242,7 +242,7 @@ class LoggerTest extends TestBase
         $created_at_date = date("YmdHis", $created_at);
         $now_date = date("YmdHis", $now);
         // ローテートファイル名(作成されないが)
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // テスト用のステータスファイルを作成
         file_put_contents($statusPath, $created_at);
         // ログ書き出し
@@ -263,7 +263,7 @@ class LoggerTest extends TestBase
     public function okRotateCycleDay($configPath, $hour)
     {
         // 既存のステータスファイルは削除
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.status";
+        $statusPath = $this->getRoot() . "/log/webstream.test.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -273,7 +273,7 @@ class LoggerTest extends TestBase
         $created_at_date = date("YmdHis", $created_at);
         $now_date = date("YmdHis", $now);
         // ローテートファイル名(作成されないが)
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // テスト用のステータスファイルを作成
         file_put_contents($statusPath, $created_at);
         // ログ書き出し
@@ -298,7 +298,7 @@ class LoggerTest extends TestBase
     public function okRotateCycleWithinWeek($configPath, $hour)
     {
         // 既存のステータスファイルは削除
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.status";
+        $statusPath = $this->getRoot() . "/log/webstream.test.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -308,7 +308,7 @@ class LoggerTest extends TestBase
         $created_at_date = date("YmdHis", $created_at);
         $now_date = date("YmdHis", $now);
         // ローテートファイル名(作成されないが)
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // テスト用のステータスファイルを作成
         file_put_contents($statusPath, $created_at);
         // ログ書き出し
@@ -329,7 +329,7 @@ class LoggerTest extends TestBase
     public function okRotateCycleWeek($configPath, $hour)
     {
         // 既存のステータスファイルは削除
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.status";
+        $statusPath = $this->getRoot() . "/log/webstream.test.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -339,7 +339,7 @@ class LoggerTest extends TestBase
         $created_at_date = date("YmdHis", $created_at);
         $now_date = date("YmdHis", $now);
         // ローテートファイル名(作成されないが)
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // テスト用のステータスファイルを作成
         file_put_contents($statusPath, $created_at);
         // ログ書き出し
@@ -364,7 +364,7 @@ class LoggerTest extends TestBase
     public function okRotateCycleWithinMonth($configPath, $hour)
     {
         // 既存のステータスファイルは削除
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.status";
+        $statusPath = $this->getRoot() . "/log/webstream.test.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -374,7 +374,7 @@ class LoggerTest extends TestBase
         $created_at_date = date("YmdHis", $created_at);
         $now_date = date("YmdHis", $now);
         // ローテートファイル名(作成されないが)
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // テスト用のステータスファイルを作成
         file_put_contents($statusPath, $created_at);
         // ログ書き出し
@@ -395,7 +395,7 @@ class LoggerTest extends TestBase
     public function okRotateCycleMonth($configPath, $hour)
     {
         // 既存のステータスファイルは削除
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.status";
+        $statusPath = $this->getRoot() . "/log/webstream.test.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -405,7 +405,7 @@ class LoggerTest extends TestBase
         $created_at_date = date("YmdHis", $created_at);
         $now_date = date("YmdHis", $now);
         // ローテートファイル名(作成されないが)
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // テスト用のステータスファイルを作成
         file_put_contents($statusPath, $created_at);
         // ログ書き出し
@@ -430,7 +430,7 @@ class LoggerTest extends TestBase
     public function okRotateCycleWithinYear($configPath, $hour)
     {
         // 既存のステータスファイルは削除
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.status";
+        $statusPath = $this->getRoot() . "/log/webstream.test.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -440,7 +440,7 @@ class LoggerTest extends TestBase
         $created_at_date = date("YmdHis", $created_at);
         $now_date = date("YmdHis", $now);
         // ローテートファイル名(作成されないが)
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // テスト用のステータスファイルを作成
         file_put_contents($statusPath, $created_at);
         // ログ書き出し
@@ -461,7 +461,7 @@ class LoggerTest extends TestBase
     public function testOkRotateCycleYear($configPath, $hour)
     {
         // 既存のステータスファイルは削除
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.status";
+        $statusPath = $this->getRoot() . "/log/webstream.test.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -471,7 +471,7 @@ class LoggerTest extends TestBase
         $created_at_date = date("YmdHis", $created_at);
         $now_date = date("YmdHis", $now);
         // ローテートファイル名(作成されないが)
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // テスト用のステータスファイルを作成
         file_put_contents($statusPath, $created_at);
         // ログ書き出し
@@ -509,7 +509,7 @@ class LoggerTest extends TestBase
         $now = intval(preg_replace('/^.*\s/', '', microtime()));
         $now_date = $created_at_date = date("YmdHis", $now);
         // ローテートファイル名
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // ローテートされていればローテートしたログファイルが存在する
         $this->assertFileExists($rotatedLogPath);
         // ローテートしたログファイルを削除
@@ -542,7 +542,7 @@ class LoggerTest extends TestBase
         $now = intval(preg_replace('/^.*\s/', '', microtime()));
         $now_date = $created_at_date = date("YmdHis", $now);
         // ローテートファイル名
-        $rotatedLogPath = $this->getRoot() . $this->getSampleAppPath() . "/log/webstream.test.${created_at_date}-${now_date}.log";
+        $rotatedLogPath = $this->getRoot() . "/log/webstream.test.${created_at_date}-${now_date}.log";
         // ローテートされたかチェック
         $this->assertFalse(file_exists($rotatedLogPath));
     }
@@ -632,7 +632,7 @@ class LoggerTest extends TestBase
      */
     public function ngNotFoundRotateCycleConfig($configPath)
     {
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/stream.status";
+        $statusPath = $this->getRoot() . "/log/stream.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
@@ -667,7 +667,7 @@ class LoggerTest extends TestBase
      */
     public function ngNotFoundRotateSizeConfig($configPath)
     {
-        $statusPath = $this->getRoot() . $this->getSampleAppPath() . "/log/stream.status";
+        $statusPath = $this->getRoot() . "/log/stream.status";
         if (file_exists($statusPath)) {
             unlink($statusPath);
         }
