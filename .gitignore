@@ -1,4 +1,13 @@
-!.gitkeep
-.svn
 .DS_Store
-sandbox/
+vendor
+composer.lock
+reports/*.xml
+TestApp/vendor
+TestApp/composer.phar
+TestApp/composer.lock
+TestApp/app/views/_cache/
+TestApp/cache777/*.cache
+TestApp/cache000/*.cache
+TestApp/log/*.log
+TestApp/log/*.status
+!TestApp/app/views/_cache/.htaccess

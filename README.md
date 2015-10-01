@@ -1,24 +1,33 @@
-# WebStream
-WebStreamはMVCアーキテクチャをベースとしたWebアプリケーションフレームワークです。  
-さらにS(Service)層を追加した4層構造のアーキテクチャとなっています。  
-***
+# Test
+## 準備
 
-## ドキュメント
-http://mapserver2007.github.io/WebStream/
+* データベース作成
+```sh
+$> vagrant up
+```
 
-## チケット
-[mapserver2007.tracpath.com](https://mapserver2007.tracpath.com/-/dashboard)
+* ライブラリインストール
+```sh
+$> composer install
+```
 
-## ブランチ
-* master - 本流
-* feature-0.3 - 0.3.x系(PHP5.3)
-* feature-0.4 - 0.4.x系(PHP5.4)
+* コンソールからMySQL接続
+```sh
+$> mysql -h 192.168.0.205 --port 3306 -u mysql -p
+```
 
-## タグ
-* 0.1.10
-* 0.2.0
-* 0.3.17
+* コンソールからPostgreSQL接続
+```sh
+TODO
+```
 
-## License
-Licensed under the MIT
-http://www.opensource.org/licenses/mit-license.php
+## PHPUnit
+```sh
+$> vendor/phpunit/phpunit/phpunit Test/hoge.php
+
+```
+
+## Phing
+```sh
+$> vendor/phing/phing/bin/phing -f Test/build.xml
+```
