@@ -11,7 +11,7 @@ trait TestConstant
     private function getProjectRootPath()
     {
         if (preg_match('/(.+webstream-framework\/Test)/', dirname(__FILE__), $matches)) {
-            return $matches[1];
+            return $matches[1] . "/TestApp";
         }
     }
 

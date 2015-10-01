@@ -108,7 +108,7 @@ class ClassLoaderTest extends TestBase
     public function okImportFile()
     {
         $classLoader = new ClassLoader();
-        $classLoader->import("core/WebStream/Test/TestData/ClassLoaderTestImport.php");
+        $classLoader->import("app/testdata/ClassLoaderTestImport.php");
         $this->assertTrue(function_exists("testImport"));
     }
 
@@ -120,7 +120,7 @@ class ClassLoaderTest extends TestBase
     public function okImportAllFile()
     {
         $classLoader = new ClassLoader();
-        $classLoader->importAll("core/WebStream/Test/TestData/ClassLoaderTest");
+        $classLoader->importAll("app/testdata/ClassLoaderTest");
         $this->assertTrue(function_exists("testImportAll1"));
         $this->assertTrue(function_exists("testImportAll2"));
     }
@@ -133,7 +133,7 @@ class ClassLoaderTest extends TestBase
     public function okImportAllWithFilter()
     {
         $classLoader = new ClassLoader();
-        $classLoader->importAll("core/WebStream/Test/TestData/ClassLoaderFilterTest", function ($filepath) {
+        $classLoader->importAll("app/testdata/ClassLoaderFilterTest", function ($filepath) {
             return strpos($filepath, "ClassLoaderTestFilter1") !== false;
         });
         $this->assertTrue(function_exists("testImportAllFilter1"));

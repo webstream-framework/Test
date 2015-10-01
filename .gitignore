@@ -1,6 +1,7 @@
 .DS_Store
 vendor
 composer.lock
+reports/*.xml
 TestApp/vendor
 TestApp/composer.phar
 TestApp/composer.lock

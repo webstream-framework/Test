@@ -103,7 +103,7 @@ class TemplateTest extends TestBase
         $cache = new Cache($dir);
         $data = $cache->get("webstream-cache-test_basic_template-index12");
         $this->assertEquals($data, $responseText);
-        sleep(10);
+        sleep(11);
         $data = $cache->get("webstream-cache-test_basic_template-index12");
         $this->assertEquals($data, null);
     }
