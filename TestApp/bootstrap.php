@@ -1,5 +1,5 @@
 <?php
-namespace WebStream\Test\Sample;
+namespace WebStream\Test\TestApp;
 
 use WebStream\Module\Logger;
 use WebStream\Module\ClassLoader;
