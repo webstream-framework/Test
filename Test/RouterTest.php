@@ -137,10 +137,13 @@ class RouterTest extends TestBase
         $http = new HttpClient();
         $url = $this->getDocumentRootURL() . $path;
         $http->get($url);
-        $header = $http->getResponseHeader();
+        $headers = $http->getResponseHeader();
         $responseContentType = null;
-        if (preg_match("/^Content-Type:\s(.+?);/", $header[13], $matches)) {
-            $responseContentType = $matches[1];
+        foreach ($headers as $header) {
+            if (preg_match("/^Content-Type:\s(.+?);/", $header, $matches)) {
+                $responseContentType = $matches[1];
+                break;
+            }
         }
 
         $this->assertEquals($contentType, $responseContentType);
@@ -157,14 +160,24 @@ class RouterTest extends TestBase
         $http = new HttpClient();
         $url = $this->getDocumentRootURL() . $path;
         $http->get($url);
-        $header = $http->getResponseHeader();
+        $headers = $http->getResponseHeader();
         $responseContentType = null;
-        if (preg_match("/^Content-Type:\s(.+?);/", $header[15], $matches)) {
-            $responseContentType = $matches[1];
+        $isContentDisposition = false;
+        foreach ($headers as $header) {
+            if (preg_match("/^Content-Type:\s(.+?);/", $header, $matches)) {
+                $responseContentType = $matches[1];
+                break;
+            }
+        }
+        foreach ($headers as $header) {
+            if (preg_match("/^Content-Disposition: attachement;/", $header, $matches)) {
+                $isContentDisposition = true;
+                break;
+            }
         }
 
         $this->assertEquals($contentType, $responseContentType);
-        $this->assertRegExp("/^Content-Disposition: attachement;/", $header[10]);
+        $this->assertTrue($isContentDisposition);
     }
 
     /**
@@ -178,10 +191,13 @@ class RouterTest extends TestBase
         $http = new HttpClient();
         $url = $this->getDocumentRootURL() . $path;
         $http->get($url);
-        $header = $http->getResponseHeader();
+        $headers = $http->getResponseHeader();
         $responseContentType = null;
-        if (preg_match("/^Content-Type:\s(.+?);/", $header[13], $matches)) {
-            $responseContentType = $matches[1];
+        foreach ($headers as $header) {
+            if (preg_match("/^Content-Type:\s(.+?);/", $header, $matches)) {
+                $responseContentType = $matches[1];
+                break;
+            }
         }
 
         $this->assertEquals($contentType, $responseContentType);
