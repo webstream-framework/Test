@@ -79,10 +79,13 @@ class TemplateTest extends TestBase
         $http = new HttpClient();
         $url = $this->getDocumentRootURL() . $path;
         $http->get($url);
-        $header = $http->getResponseHeader();
+        $headers = $http->getResponseHeader();
         $responseContentType = null;
-        if (preg_match("/^Content-Type:\s(.+?);/", $header[13], $matches)) {
-            $responseContentType = $matches[1];
+        foreach ($headers as $header) {
+            if (preg_match("/^Content-Type:\s(.+?);/", $header, $matches)) {
+                $responseContentType = $matches[1];
+                break;
+            }
         }
 
         $this->assertEquals($response, $responseContentType);
