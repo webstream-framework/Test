@@ -31,7 +31,7 @@ class UtilityTest extends TestBase
      */
     public function okGetProjectRoot()
     {
-        $this->assertEquals($this->getProjectRootPath() . "/TestApp", $this->getRoot());
+        $this->assertEquals($this->getProjectRootPath(), $this->getRoot());
     }
 
     /**

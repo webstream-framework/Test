@@ -21,7 +21,7 @@ trait UtilityProvider
     {
         return [
             [
-                '/Test/TestData/UtilityReadNamespace.php',
+                '/app/testdata/UtilityReadNamespace.php',
                 '\WebStream\Test\TestData'
             ]
         ];
@@ -31,7 +31,7 @@ trait UtilityProvider
     {
         return [
             [
-                '/Test/TestData/UtilityReadNoNamespace.php'
+                '/app/testdata/UtilityReadNoNamespace.php'
             ]
         ];
     }
