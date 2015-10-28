@@ -76,16 +76,36 @@ class SecurityTest extends TestBase
      */
     public function okCsrfTokenMatch()
     {
-        $html = file_get_contents($this->getDocumentRootURL() . "/csrf_get");
+        $http = new HttpClient();
+        $response = $http->get($this->getDocumentRootURL() . "/csrf_get");
+        $headers = $http->getResponseHeader();
+        $cookieHeaderList = [];
+        if (preg_match("/(WSSESS\=.+?;)/", $headers[4], $matches)) {
+            $cookieHeaderList[] .= $matches[1] . " ";
+        }
+        if (preg_match("/(WSSESS_STARTED\=.+?;)/", $headers[8], $matches)) {
+            $cookieHeaderList[] .= $matches[1] . " ";
+        }
+
+        $cookieHeader = "Cookie: " . implode(" ", $cookieHeaderList);
+
         $doc = new \DOMDocument();
-        @$doc->loadHTML($html);
+        @$doc->loadHTML($response);
         $token = null;
         $nodeList = $doc->getElementsByTagName("input");
         for ($i = 0; $i < $nodeList->length; $i++) {
             $node = $nodeList->item($i);
             $token = $node->getAttribute("value");
         }
-        // SESSION_ID
+
+        $requestHeaders = [
+            "Cookie: " . implode(" ", $cookieHeaderList),
+            "X-CSRF-Token:" . $token
+        ];
+
+        $html = $http->get($this->getDocumentRootURL() . "/csrf_get", [], $requestHeaders);
+        $doc = new \DOMDocument();
+        @$doc->loadHTML($html);
         $nodeList = $doc->getElementsByTagName("div");
         $session_id = $nodeList->item(0)->nodeValue;
 
