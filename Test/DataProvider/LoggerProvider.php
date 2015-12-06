@@ -418,4 +418,14 @@ trait LoggerProvider
             ["log.test.ng4.rotate.ini"]
         ];
     }
+
+    public function loggerAdapterInMvscLayerProvider()
+    {
+        return [
+            ['/test_logger_adapter1', "controller logger"],
+            ['/test_logger_adapter2', "service logger"],
+            ['/test_logger_adapter3', "model logger"],
+            ['/test_logger_adapter4', "helper logger"]
+        ];
+    }
 }

@@ -11,6 +11,8 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/ClassLoader.
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Logger.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/LoggerAdapter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/HttpClient.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/SystemException.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/Extend/LoggerException.php';
 
 /**
@@ -32,6 +34,7 @@ class TestBase extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        Logger::finalize();
     }
 
     protected function autoLoad()

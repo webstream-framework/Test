@@ -4,6 +4,7 @@ namespace WebStream\Test;
 use WebStream\Module\Logger;
 use WebStream\Module\LoggerAdapter;
 use WebStream\Module\Utility;
+use WebStream\Module\HttpClient;
 use WebStream\Test\DataProvider\LoggerProvider;
 
 require_once 'TestBase.php';
@@ -694,6 +695,21 @@ class LoggerTest extends TestBase
     }
 
     /**
+     * 正常系
+     * 各MVSCレイヤ内でロガーが使用できること
+     * @test
+     * @dataProvider loggerAdapterInMvscLayerProvider
+     */
+    public function okLoggerAdapterInMvscLayer($path, $response)
+    {
+        $http = new HttpClient();
+        $url = $this->getDocumentRootURL() . $path;
+        $html = $http->get($url);
+        $this->assertEquals($http->getStatusCode(), 200);
+        $this->assertNotFalse(strstr($html, $response));
+    }
+
+    /**
      * 異常系
      * Loggerを初期化していない場合、例外が発生すること
      * @test
@@ -773,13 +789,30 @@ class LoggerTest extends TestBase
      * 異常系
      * 存在しないログレベルのメソッドアクセスがあった場合、例外が発生すること
      * @test
+     * @expectedException WebStream\Exception\Extend\LoggerException
      */
     public function ngUndefinedLogLevel()
     {
-        // TODO 存在しないログレベルのメソッドにアクセスするテスト
         $configPath = $this->getLogConfigPath() . "/log.test.debug.ok.ini";
         Logger::init($configPath);
         Logger::undefined("test");
+        $this->assertTrue(false);
+    }
+
+    /**
+     * 異常系
+     * 存在しないログレベルのメソッドアクセスがあった場合、例外が発生すること(LoggerAdapter使用)
+     * @test
+     * @expectedException WebStream\Exception\Extend\LoggerException
+     */
+    public function ngUndefinedLogLevelLoggerAdapter()
+    {
+        Logger::finalize();
+        $configPath = $this->getLogConfigPath() . "/log.test.debug.ok.ini";
+        Logger::init($configPath);
+        $logger = new LoggerAdapter(Logger::getInstance());
+        $logger->undefined("test");
+        $this->assertTrue(false);
     }
 
     /**
