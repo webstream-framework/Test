@@ -336,5 +336,6 @@ Router::setRule([
     '/test_view_model_in_service/service1' => "test_view_model_in_service#service1",
     '/test_view_model_in_service/service2' => "test_view_model_in_service#service2",
     '/test_view_model_in_model/model1' => "test_view_model_in_model#model1",
-    '/test_view_model_in_model/model2' => "test_view_model_in_model#model2"
+    '/test_view_model_in_model/model2' => "test_view_model_in_model#model2",
+    '/test_logger_adapter' => "test_with_psr_log#logger_adapter_test"
 ]);

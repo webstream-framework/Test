@@ -10,6 +10,8 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Functions.ph
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/ClassLoader.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Logger.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/LoggerAdapter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/Extend/LoggerException.php';
 
 /**
  * ユニットテスト基底クラス

@@ -2,6 +2,7 @@
 namespace WebStream\Test;
 
 use WebStream\Module\Logger;
+use WebStream\Module\LoggerAdapter;
 use WebStream\Module\Utility;
 use WebStream\Test\DataProvider\LoggerProvider;
 
@@ -40,34 +41,82 @@ class LoggerTest extends TestBase
         return array_pop($file);
     }
 
-    private function write($level, $config_path, $msg, $stacktrace = null)
+    private function write($level, $configPath, $msg, $stacktrace = null)
     {
-        Logger::init($config_path);
-        if ($level === "DEBUG") {
-            Logger::debug($msg, $stacktrace);
-        } elseif ($level === "INFO") {
-            Logger::info($msg, $stacktrace);
-        } elseif ($level === "WARN") {
-            Logger::warn($msg, $stacktrace);
-        } elseif ($level === "ERROR") {
-            Logger::error($msg, $stacktrace);
-        } elseif ($level === "FATAL") {
-            Logger::fatal($msg, $stacktrace);
+        Logger::init($configPath);
+
+        switch ($level) {
+            case "DEBUG":
+                Logger::debug($msg, $stacktrace);
+                break;
+            case "INFO":
+                Logger::info($msg, $stacktrace);
+                break;
+            case "WARN":
+                Logger::warn($msg, $stacktrace);
+                break;
+            case "ERROR":
+                Logger::error($msg, $stacktrace);
+                break;
+            case "FATAL":
+                Logger::fatal($msg, $stacktrace);
+                break;
+            case "NOTICE":
+                Logger::notice($msg, $stacktrace);
+                break;
+            case "WARNING":
+                Logger::warning($msg, $stacktrace);
+                break;
+            case "CRITICAL":
+                Logger::critical($msg, $stacktrace);
+                break;
+            case "ALERT":
+                Logger::alert($msg, $stacktrace);
+                break;
+            case "EMERGENCY":
+                Logger::emergency($msg, $stacktrace);
+                break;
         }
     }
 
-    /**
-     * 正常系
-     * ログレベルが「debug」のとき、
-     * 「debug」「info」「warn」「error」「fatal」レベルのログが書き出せること
-     * @test
-     * @dataProvider logLevelDebugProvider
-     */
-    public function okWriteDebug($level, $configPath, $msg, $stacktrace = null)
+    private function writeAdapter($logger, $level, $msg, array $context = [])
     {
-        $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        $this->write($level, $configPath, $msg, $stacktrace);
-        $lineTail = $this->logTail($configPath);
+        switch ($level) {
+            case "DEBUG":
+                $logger->debug($msg, $context);
+                break;
+            case "INFO":
+                $logger->info($msg, $context);
+                break;
+            case "WARN":
+                $logger->warn($msg, $context);
+                break;
+            case "ERROR":
+                $logger->error($msg, $context);
+                break;
+            case "FATAL":
+                $logger->fatal($msg, $context);
+                break;
+            case "NOTICE":
+                $logger->notice($msg, $context);
+                break;
+            case "WARNING":
+                $logger->warning($msg, $context);
+                break;
+            case "CRITICAL":
+                $logger->critical($msg, $context);
+                break;
+            case "ALERT":
+                $logger->alert($msg, $context);
+                break;
+            case "EMERGENCY":
+                $logger->emergency($msg, $context);
+                break;
+        }
+    }
+
+    private function assertLog($level, $msg, $stacktrace, $lineTail)
+    {
         if ($stacktrace === null) {
             if (preg_match('/^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},.{1,2}\]\s\[(.+?)\]\s(.*)$/', $lineTail, $matches)) {
                 $target = [$level, $msg];
@@ -87,8 +136,57 @@ class LoggerTest extends TestBase
 
     /**
      * 正常系
+     * LoggerAdapter経由でログが書き込めること
+     * @test
+     * @dataProvider logAdapterProvider
+     */
+    public function okLoggerAdapter($level, $configPath, $msg)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        Logger::init($configPath);
+        $logger = new LoggerAdapter(Logger::getInstance());
+        $this->writeAdapter($logger, $level, $msg);
+        $lineTail = $this->logTail($configPath);
+        $this->assertLog($level, $msg, null, $lineTail);
+        Logger::finalize();
+    }
+
+    /**
+     * 正常系
+     * LoggerAdapter経由でログが書き込め、プレースホルダーで値を埋め込めること
+     * @test
+     * @dataProvider logAdapterWithPlaceholderProvider
+     */
+    public function okLoggerAdapterWithPlaceholder($level, $configPath, $msg1, $msg2, array $placeholder)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        Logger::init($configPath);
+        $logger = new LoggerAdapter(Logger::getInstance());
+        $this->writeAdapter($logger, $level, $msg2, $placeholder);
+        $lineTail = $this->logTail($configPath);
+        $this->assertLog($level, $msg1, null, $lineTail);
+        Logger::finalize();
+    }
+
+    /**
+     * 正常系
+     * ログレベルが「debug」のとき、
+     * 「debug」「info」「notice」「warn」「warning」「error」「critical」「alert」「emergency」「fatal」レベルのログが書き出せること
+     * @test
+     * @dataProvider logLevelDebugProvider
+     */
+    public function okWriteDebug($level, $configPath, $msg, $stacktrace = null)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        $this->write($level, $configPath, $msg, $stacktrace);
+        $lineTail = $this->logTail($configPath);
+        $this->assertLog($level, $msg, $stacktrace, $lineTail);
+    }
+
+    /**
+     * 正常系
      * ログレベルが「info」のとき、
-     * 「info」「warn」「error」「fatal」レベルのログが書き出せること
+     * 「info」「notice」「warn」「warning」「error」「critical」「alert」「emergency」「fatal」レベルのログが書き出せること
      * @test
      * @dataProvider logLevelInfoProvider
      */
@@ -101,28 +199,34 @@ class LoggerTest extends TestBase
         if ($level === "DEBUG") {
             $this->assertNull($lineTail);
         } else {
-            if ($stacktrace === null) {
-                if (preg_match('/^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},.{1,2}\]\s\[(.+?)\]\s(.*)$/', $lineTail, $matches)) {
-                    $target = [$level, $msg];
-                    $result = [$matches[1], $matches[2]];
-                    $this->assertEquals($target, $result);
-                } else {
-                    $this->assertTrue(false);
-                }
-            } else {
-                if (preg_match('/^(\t#\d.*)/', $lineTail, $matches)) {
-                    $this->assertEquals($lineTail, $matches[1]);
-                } else {
-                    $this->assertTrue(false);
-                }
-            }
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
+        }
+    }
+
+    /**
+     * 正常系
+     * ログレベルが「notice」のとき、
+     * 「notice」「warn」「warning」「error」「critical」「alert」「emergency」「fatal」レベルのログが書き出せること
+     * @test
+     * @dataProvider logLevelNoticeProvider
+     */
+    public function testOkWriteNotice($level, $configPath, $msg, $stacktrace = null)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        $this->write($level, $configPath, $msg, $stacktrace);
+        $lineTail = $this->logTail($configPath);
+
+        if ($level === "DEBUG" || $level === "INFO") {
+            $this->assertNull($lineTail);
+        } else {
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
         }
     }
 
     /**
      * 正常系
      * ログレベルが「warn」のとき、
-     * 「warn」「error」「fatal」レベルのログが書き出せること
+     * 「warn」「warning」「error」「critical」「alert」「emergency」「fatal」レベルのログが書き出せること
      * @test
      * @dataProvider logLevelWarnProvider
      */
@@ -132,31 +236,37 @@ class LoggerTest extends TestBase
         $this->write($level, $configPath, $msg, $stacktrace);
         $lineTail = $this->logTail($configPath);
 
-        if ($level === "DEBUG" || $level === "INFO") {
+        if ($level === "DEBUG" || $level === "INFO" || $level === "NOTICE") {
             $this->assertNull($lineTail);
         } else {
-            if ($stacktrace === null) {
-                if (preg_match('/^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},.{1,2}\]\s\[(.+?)\]\s(.*)$/', $lineTail, $matches)) {
-                    $target = [$level, $msg];
-                    $result = [$matches[1], $matches[2]];
-                    $this->assertEquals($target, $result);
-                } else {
-                    $this->assertTrue(false);
-                }
-            } else {
-                if (preg_match('/^(\t#\d.*)/', $lineTail, $matches)) {
-                    $this->assertEquals($lineTail, $matches[1]);
-                } else {
-                    $this->assertTrue(false);
-                }
-            }
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
+        }
+    }
+
+    /**
+     * 正常系
+     * ログレベルが「warning」のとき、
+     * 「warn」「warning」「error」「critical」「alert」「emergency」「fatal」レベルのログが書き出せること
+     * @test
+     * @dataProvider logLevelWarningProvider
+     */
+    public function testOkWriteWarning($level, $configPath, $msg, $stacktrace = null)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        $this->write($level, $configPath, $msg, $stacktrace);
+        $lineTail = $this->logTail($configPath);
+
+        if ($level === "DEBUG" || $level === "INFO" || $level === "NOTICE") {
+            $this->assertNull($lineTail);
+        } else {
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
         }
     }
 
     /**
      * 正常系
      * ログレベルが「error」のとき、
-     * 「error」「fatal」レベルのログが書き出せること
+     * 「error」「critical」「alert」「emergency」「fatal」レベルのログが書き出せること
      * @test
      * @dataProvider logLevelErrorProvider
      */
@@ -166,24 +276,73 @@ class LoggerTest extends TestBase
         $this->write($level, $configPath, $msg, $stacktrace);
         $lineTail = $this->logTail($configPath);
 
-        if ($level === "DEBUG" || $level === "INFO" || $level === "WARN") {
+        if ($level === "DEBUG" || $level === "INFO" || $level === "NOTICE" || $level === "WARN" || $level === "WARNING") {
             $this->assertNull($lineTail);
         } else {
-            if ($stacktrace === null) {
-                if (preg_match('/^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},.{1,2}\]\s\[(.+?)\]\s(.*)$/', $lineTail, $matches)) {
-                    $target = [$level, $msg];
-                    $result = [$matches[1], $matches[2]];
-                    $this->assertEquals($target, $result);
-                } else {
-                    $this->assertTrue(false);
-                }
-            } else {
-                if (preg_match('/^(\t#\d.*)/', $lineTail, $matches)) {
-                    $this->assertEquals($lineTail, $matches[1]);
-                } else {
-                    $this->assertTrue(false);
-                }
-            }
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
+        }
+    }
+
+    /**
+     * 正常系
+     * ログレベルが「critical」のとき、
+     * 「critical」「alert」「emergency」「fatal」レベルのログが書き出せること
+     * @test
+     * @dataProvider logLevelCriticalProvider
+     */
+    public function testOkWriteCritical($level, $configPath, $msg, $stacktrace = null)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        $this->write($level, $configPath, $msg, $stacktrace);
+        $lineTail = $this->logTail($configPath);
+
+        if ($level === "DEBUG" || $level === "INFO" || $level === "NOTICE" || $level === "WARN" || $level === "WARNING" ||
+            $level === "ERROR") {
+            $this->assertNull($lineTail);
+        } else {
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
+        }
+    }
+
+    /**
+     * 正常系
+     * ログレベルが「alert」のとき、
+     * 「alert」「emergency」「fatal」レベルのログが書き出せること
+     * @test
+     * @dataProvider logLevelAlertProvider
+     */
+    public function testOkWriteAlert($level, $configPath, $msg, $stacktrace = null)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        $this->write($level, $configPath, $msg, $stacktrace);
+        $lineTail = $this->logTail($configPath);
+
+        if ($level === "DEBUG" || $level === "INFO" || $level === "NOTICE" || $level === "WARN" || $level === "WARNING" ||
+            $level === "ERROR" || $level === "CRITICAL") {
+            $this->assertNull($lineTail);
+        } else {
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
+        }
+    }
+
+    /**
+     * 正常系
+     * ログレベルが「emergency」のとき、
+     * 「emergency」「fatal」レベルのログが書き出せること
+     * @test
+     * @dataProvider logLevelEmergencyProvider
+     */
+    public function testOkWriteEmergency($level, $configPath, $msg, $stacktrace = null)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        $this->write($level, $configPath, $msg, $stacktrace);
+        $lineTail = $this->logTail($configPath);
+
+        if ($level === "DEBUG" || $level === "INFO" || $level === "NOTICE" || $level === "WARN" || $level === "WARNING" ||
+            $level === "ERROR" || $level === "CRITICAL" || $level === "ALERT") {
+            $this->assertNull($lineTail);
+        } else {
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
         }
     }
 
@@ -200,24 +359,11 @@ class LoggerTest extends TestBase
         $this->write($level, $configPath, $msg, $stacktrace);
         $lineTail = $this->logTail($configPath);
 
-        if ($level === "DEBUG" || $level === "INFO" || $level === "WARN" || $level === "ERROR") {
+        if ($level === "DEBUG" || $level === "INFO" || $level === "NOTICE" || $level === "WARN" || $level === "WARNING" ||
+            $level === "ERROR" || $level === "CRITICAL" || $level === "ALERT" || $level === "EMERGENCY") {
             $this->assertNull($lineTail);
         } else {
-            if ($stacktrace === null) {
-                if (preg_match('/^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},.{1,2}\]\s\[(.+?)\]\s(.*)$/', $lineTail, $matches)) {
-                    $target = [$level, $msg];
-                    $result = [$matches[1], $matches[2]];
-                    $this->assertEquals($target, $result);
-                } else {
-                    $this->assertTrue(false);
-                }
-            } else {
-                if (preg_match('/^(\t#\d.*)/', $lineTail, $matches)) {
-                    $this->assertEquals($lineTail, $matches[1]);
-                } else {
-                    $this->assertTrue(false);
-                }
-            }
+            $this->assertLog($level, $msg, $stacktrace, $lineTail);
         }
     }
 
@@ -591,8 +737,8 @@ class LoggerTest extends TestBase
      */
     public function ngInvalidConfigPath()
     {
-        $comfigPath = $this->getLogConfigPath() . "/log.test.ng1.ini";
-        Logger::init($comfigPath);
+        $configPath = $this->getLogConfigPath() . "/log.test.ng1.ini";
+        Logger::init($configPath);
         $this->assertTrue(false);
     }
 
@@ -604,8 +750,8 @@ class LoggerTest extends TestBase
      */
     public function ngInvalidLogLevel()
     {
-        $comfigPath = $this->getLogConfigPath() . "/log.test.ng2.ini";
-        Logger::init($comfigPath);
+        $configPath = $this->getLogConfigPath() . "/log.test.ng2.ini";
+        Logger::init($configPath);
         $this->assertTrue(false);
     }
 
@@ -617,10 +763,23 @@ class LoggerTest extends TestBase
      */
     public function ngNotPermittedWriteLog()
     {
-        $comfigPath = $this->getLogConfigPath() . "/log.test.ng3.ini";
-        Logger::init($comfigPath);
+        $configPath = $this->getLogConfigPath() . "/log.test.ng3.ini";
+        Logger::init($configPath);
         Logger::info("test");
         $this->assertTrue(false);
+    }
+
+    /**
+     * 異常系
+     * 存在しないログレベルのメソッドアクセスがあった場合、例外が発生すること
+     * @test
+     */
+    public function ngUndefinedLogLevel()
+    {
+        // TODO 存在しないログレベルのメソッドにアクセスするテスト
+        $configPath = $this->getLogConfigPath() . "/log.test.debug.ok.ini";
+        Logger::init($configPath);
+        Logger::undefined("test");
     }
 
     /**

@@ -13,6 +13,7 @@ require_once dirname(__FILE__) . '/core/WebStream/Module/Container.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Functions.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/HttpClient.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Logger.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/PropertyProxy.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Security.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Singleton.php';
