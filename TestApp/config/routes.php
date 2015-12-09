@@ -340,5 +340,13 @@ Router::setRule([
     '/test_logger_adapter1' => "test_logger_adapter#controller_test",
     '/test_logger_adapter2' => "test_logger_adapter#service_test",
     '/test_logger_adapter3' => "test_logger_adapter#model_test",
-    '/test_logger_adapter4' => "test_logger_adapter#helper_test"
+    '/test_logger_adapter4' => "test_logger_adapter#helper_test",
+    '/test_alias_method1' => "test_alias_method#alias_method1",
+    '/test_alias_method2' => "test_alias_method#alias_method2",
+    '/test_alias_method3' => "test_alias_method#alias_method3",
+    '/test_alias_method4' => "test_alias_method#alias_method4",
+    '/test_alias_method5' => "test_alias_method#alias_method5",
+    '/test_alias_method6' => "test_alias_method#alias_method6",
+    '/test_alias_method7' => "test_alias_method#alias_method7",
+    '/test_alias_method8' => "test_alias_method#alias_method8"
 ]);

@@ -57,6 +57,7 @@ class TestBase extends \PHPUnit_Framework_TestCase
             "WebStream\Annotation\ExceptionHandler",
             "WebStream\Annotation\Database",
             "WebStream\Annotation\Validate",
+            "WebStream\Annotation\Alias",
             "Doctrine\Common\Annotations\AnnotationException"
         ]);
     }

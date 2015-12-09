@@ -37,6 +37,7 @@ require_once dirname(__FILE__) . '/core/WebStream/Annotation/Container/Annotatio
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Container/ContainerFactory.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Reader/AnnotationReader.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Inject.php';
+require_once dirname(__FILE__) . '/core/WebStream/Annotation/Alias.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Autowired.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/CsrfProtection.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Database.php';
