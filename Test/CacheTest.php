@@ -2,8 +2,8 @@
 namespace WebStream\Test;
 
 use WebStream\Module\Cache;
-use WebStream\Module\Logger;
 use WebStream\Module\Utility;
+use WebStream\Log\Logger;
 use WebStream\Test\DataProvider\CacheProvider;
 
 require_once 'TestBase.php';

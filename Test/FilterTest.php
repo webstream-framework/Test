@@ -2,7 +2,7 @@
 namespace WebStream\Test;
 
 use WebStream\Module\HttpClient;
-use WebStream\Module\Logger;
+use WebStream\Log\Logger;
 use WebStream\Test\DataProvider\FilterProvider;
 
 require_once 'TestBase.php';

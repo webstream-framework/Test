@@ -3,8 +3,8 @@ namespace WebStream\Test;
 
 use WebStream\Annotation\Reader\AnnotationReader;
 use WebStream\Module\Utility;
-use WebStream\Module\Logger;
 use WebStream\Module\HttpClient;
+use WebStream\Log\Logger;
 use WebStream\DI\ServiceLocator;
 use WebStream\Test\DataProvider\AutowiredProvider;
 

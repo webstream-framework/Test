@@ -2,15 +2,15 @@
 namespace WebStream\Test;
 
 use WebStream\Module\Utility;
-use WebStream\Module\Logger;
+use WebStream\Log\Logger;
 
 require_once dirname(__FILE__) . '/TestConstant.php';
 require_once dirname(__FILE__) . '/../TestApp/vendor/autoload.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Logger.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Functions.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/ClassLoader.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Logger.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/HttpClient.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/SystemException.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/Extend/LoggerException.php';

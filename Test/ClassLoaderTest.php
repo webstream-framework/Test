@@ -2,7 +2,7 @@
 namespace WebStream\Test;
 
 use WebStream\Module\ClassLoader;
-use WebStream\Module\Logger;
+use WebStream\Log\Logger;
 
 require_once 'TestBase.php';
 require_once 'TestConstant.php';

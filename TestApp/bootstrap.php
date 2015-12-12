@@ -1,31 +1,25 @@
 <?php
 namespace WebStream\Test\TestApp;
 
-use WebStream\Module\Logger;
+use WebStream\Log\Logger;
 use WebStream\Module\ClassLoader;
 use WebStream\DI\ServiceLocator;
 
 require_once dirname(__FILE__) . "/vendor/autoload.php";
 require_once dirname(__FILE__) . '/core/WebStream/Module/Utility.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/Logger.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/ClassLoader.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Cache.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Container.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Functions.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/HttpClient.php';
-require_once dirname(__FILE__) . '/core/WebStream/Module/Logger.php';
-require_once dirname(__FILE__) . '/core/WebStream/Module/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/PropertyProxy.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Security.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/ValueProxy.php';
 require_once dirname(__FILE__) . '/core/WebStream/DI/ServiceLocator.php';
-require_once dirname(__FILE__) . '/core/WebStream/Core/Application.php';
-require_once dirname(__FILE__) . '/core/WebStream/Core/CoreInterface.php';
-require_once dirname(__FILE__) . '/core/WebStream/Core/CoreController.php';
-require_once dirname(__FILE__) . '/core/WebStream/Core/CoreHelper.php';
-require_once dirname(__FILE__) . '/core/WebStream/Core/CoreModel.php';
-require_once dirname(__FILE__) . '/core/WebStream/Core/CoreService.php';
-require_once dirname(__FILE__) . '/core/WebStream/Core/CoreView.php';
+require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IAnnotatable.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IClass.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IMethod.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IMethods.php';
@@ -104,6 +98,13 @@ require_once dirname(__FILE__) . '/core/WebStream/Http/Method/Put.php';
 require_once dirname(__FILE__) . '/core/WebStream/Http/Request.php';
 require_once dirname(__FILE__) . '/core/WebStream/Http/Response.php';
 require_once dirname(__FILE__) . '/core/WebStream/Http/Session.php';
+require_once dirname(__FILE__) . '/core/WebStream/Core/Application.php';
+require_once dirname(__FILE__) . '/core/WebStream/Core/CoreInterface.php';
+require_once dirname(__FILE__) . '/core/WebStream/Core/CoreController.php';
+require_once dirname(__FILE__) . '/core/WebStream/Core/CoreHelper.php';
+require_once dirname(__FILE__) . '/core/WebStream/Core/CoreModel.php';
+require_once dirname(__FILE__) . '/core/WebStream/Core/CoreService.php';
+require_once dirname(__FILE__) . '/core/WebStream/Core/CoreView.php';
 require_once dirname(__FILE__) . '/config/routes.php';
 
 // デフォルトタイムゾーン

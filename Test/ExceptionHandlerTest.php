@@ -1,7 +1,7 @@
 <?php
 namespace WebStream\Test;
 
-use WebStream\Module\Logger;
+use WebStream\Log\Logger;
 use WebStream\Module\HttpClient;
 use WebStream\Test\DataProvider\ExceptionHandlerProvider;
 

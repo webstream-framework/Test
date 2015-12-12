@@ -1,8 +1,8 @@
 <?php
 namespace WebStream\Test;
 
-use WebStream\Module\Logger;
-use WebStream\Module\LoggerAdapter;
+use WebStream\Log\Logger;
+use WebStream\Log\LoggerAdapter;
 use WebStream\Module\Utility;
 use WebStream\Module\HttpClient;
 use WebStream\Test\DataProvider\LoggerProvider;
@@ -721,7 +721,7 @@ class LoggerTest extends TestBase
         // オートロード有効
         $this->autoLoad();
         // 初期化を再現
-        $refClass = new \ReflectionClass("\WebStream\Module\Logger");
+        $refClass = new \ReflectionClass("\WebStream\Log\Logger");
         $refProp = $refClass->getProperty("logger");
         $refProp->setAccessible(true);
         $refProp->setValue(null);

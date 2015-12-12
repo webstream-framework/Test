@@ -2,7 +2,7 @@
 namespace WebStream\Test;
 
 use WebStream\Module\Utility;
-use WebStream\Module\Logger;
+use WebStream\Log\Logger;
 use WebStream\Test\DataProvider\UtilityProvider;
 
 require_once 'TestBase.php';

@@ -3,7 +3,7 @@ namespace WebStream\Test;
 
 use WebStream\Module\Security;
 use WebStream\Module\HttpClient;
-use WebStream\Module\Logger;
+use WebStream\Log\Logger;
 use WebStream\Test\DataProvider\SecurityProvider;
 
 require_once 'TestBase.php';
