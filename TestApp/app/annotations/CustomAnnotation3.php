@@ -1,8 +1,8 @@
 <?php
 namespace WebStream\Test\TestData\Sample\App\Annotation;
 
-use WebStream\Core\CoreInterface;
 use WebStream\Annotation\Base\Annotation;
+use WebStream\Annotation\Base\IAnnotatable;
 use WebStream\Annotation\Base\IMethods;
 use WebStream\Annotation\Container\AnnotationContainer;
 use WebStream\Module\Container;
@@ -29,7 +29,7 @@ class CustomAnnotation3 extends Annotation implements IMethods
     /**
      * {@inheritdoc}
      */
-    public function onMethodInject(CoreInterface &$instance, Container $container, \ReflectionMethod $method)
+    public function onMethodInject(IAnnotatable &$instance, Container $container, \ReflectionMethod $method)
     {
         echo "nico";
     }

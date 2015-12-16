@@ -8,6 +8,7 @@ require_once dirname(__FILE__) . '/TestConstant.php';
 require_once dirname(__FILE__) . '/../TestApp/vendor/autoload.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Logger.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerFormatter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Functions.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/ClassLoader.php';

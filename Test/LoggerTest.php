@@ -119,9 +119,9 @@ class LoggerTest extends TestBase
     private function assertLog($level, $msg, $stacktrace, $lineTail)
     {
         if ($stacktrace === null) {
-            if (preg_match('/^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},.{1,2}\]\s\[(.+?)\]\s(.*)$/', $lineTail, $matches)) {
+            if (preg_match('/^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\..{3}\]\[(.+?)\]\s(.*)$/', $lineTail, $matches)) {
                 $target = [$level, $msg];
-                $result = [$matches[1], $matches[2]];
+                $result = [trim($matches[1]), $matches[2]];
                 $this->assertEquals($target, $result);
             } else {
                 $this->assertTrue(false);

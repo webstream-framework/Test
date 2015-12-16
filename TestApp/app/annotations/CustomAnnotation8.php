@@ -1,8 +1,8 @@
 <?php
 namespace WebStream\Test\TestData\Sample\App\Annotation;
 
-use WebStream\Core\CoreInterface;
 use WebStream\Annotation\Base\Annotation;
+use WebStream\Annotation\Base\IAnnotatable;
 use WebStream\Annotation\Base\IProperty;
 use WebStream\Annotation\Base\IRead;
 use WebStream\Annotation\Container\AnnotationContainer;
@@ -40,7 +40,7 @@ class CustomAnnotation8 extends Annotation implements IProperty, IRead
     /**
      * {@inheritdoc}
      */
-    public function onPropertyInject(CoreInterface &$instance, Container $container, \ReflectionProperty $property)
+    public function onPropertyInject(IAnnotatable &$instance, Container $container, \ReflectionProperty $property)
     {
         $this->data = "sanchou attack";
     }

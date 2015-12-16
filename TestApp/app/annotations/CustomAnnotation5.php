@@ -1,8 +1,8 @@
 <?php
 namespace WebStream\Test\TestData\Sample\App\Annotation;
 
-use WebStream\Core\CoreInterface;
 use WebStream\Annotation\Base\Annotation;
+use WebStream\Annotation\Base\IAnnotatable;
 use WebStream\Annotation\Base\IClass;
 use WebStream\Annotation\Base\IRead;
 use WebStream\Annotation\Container\AnnotationContainer;
@@ -40,7 +40,7 @@ class CustomAnnotation5 extends Annotation implements IClass, IRead
     /**
      * {@inheritdoc}
      */
-    public function onClassInject(CoreInterface &$instance, Container $container, \ReflectionClass $class)
+    public function onClassInject(IAnnotatable &$instance, Container $container, \ReflectionClass $class)
     {
         $this->data = "kashikoi";
     }

@@ -1,8 +1,8 @@
 <?php
 namespace WebStream\Test\TestData\Sample\App\Annotation;
 
-use WebStream\Core\CoreInterface;
 use WebStream\Annotation\Base\Annotation;
+use WebStream\Annotation\Base\IAnnotatable;
 use WebStream\Annotation\Base\IProperty;
 use WebStream\Annotation\Container\AnnotationContainer;
 use WebStream\Module\Container;
@@ -29,7 +29,7 @@ class CustomAnnotation6 extends Annotation implements IProperty
     /**
      * {@inheritdoc}
      */
-    public function onPropertyInject(CoreInterface &$instance, Container $container, \ReflectionProperty $property)
+    public function onPropertyInject(IAnnotatable &$instance, Container $container, \ReflectionProperty $property)
     {
         echo "spiritualyane";
     }

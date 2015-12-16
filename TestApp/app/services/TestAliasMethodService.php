@@ -9,7 +9,7 @@ class TestAliasMethodService extends CoreService
 {
     /**
      * @Inject
-     * @Alias(name="aliasMethod2");
+     * @Alias(name="aliasMethod2")
      */
     public function originMethod2()
     {
@@ -18,7 +18,7 @@ class TestAliasMethodService extends CoreService
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod6");
+     * @Alias(name="aliasMethod6")
      */
     public function originMethod6()
     {

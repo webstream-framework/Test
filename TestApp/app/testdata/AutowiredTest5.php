@@ -2,11 +2,12 @@
 namespace WebStream\Test\TestData;
 
 use WebStream\Core\CoreInterface;
+use WebStream\Annotation\Base\IAnnotatable;
 use WebStream\Annotation\Inject;
 use WebStream\Annotation\Autowired;
 use WebStream\Module\Container;
 
-class AutowiredTest5 implements CoreInterface
+class AutowiredTest5 implements CoreInterface, IAnnotatable
 {
     /**
      * @Inject

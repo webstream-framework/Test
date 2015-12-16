@@ -10,7 +10,7 @@ class TestAliasMethodController extends CoreController
 {
     /**
      * @Inject
-     * @Alias(name="aliasMethod1");
+     * @Alias(name="aliasMethod1")
      */
     public function originMethod1()
     {
@@ -19,7 +19,7 @@ class TestAliasMethodController extends CoreController
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod2");
+     * @Alias(name="aliasMethod2")
      */
     public function originMethod2()
     {
@@ -28,7 +28,7 @@ class TestAliasMethodController extends CoreController
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod3");
+     * @Alias(name="aliasMethod3")
      */
     public function originMethod3()
     {
@@ -37,7 +37,7 @@ class TestAliasMethodController extends CoreController
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod4");
+     * @Alias(name="aliasMethod4")
      * @Template("alias_method.tmpl")
      */
     public function originMethod4()
@@ -46,7 +46,7 @@ class TestAliasMethodController extends CoreController
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod5");
+     * @Alias(name="aliasMethod5")
      */
     public function originMethod5()
     {
@@ -60,7 +60,7 @@ class TestAliasMethodController extends CoreController
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod6");
+     * @Alias(name="aliasMethod6")
      */
     public function originMethod6()
     {
@@ -69,7 +69,7 @@ class TestAliasMethodController extends CoreController
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod7");
+     * @Alias(name="aliasMethod7")
      */
     public function originMethod7()
     {

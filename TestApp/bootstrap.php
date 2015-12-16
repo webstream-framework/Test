@@ -2,13 +2,16 @@
 namespace WebStream\Test\TestApp;
 
 use WebStream\Log\Logger;
+use WebStream\Log\LoggerFormatter;
 use WebStream\Module\ClassLoader;
 use WebStream\DI\ServiceLocator;
 
 require_once dirname(__FILE__) . "/vendor/autoload.php";
 require_once dirname(__FILE__) . '/core/WebStream/Module/Utility.php';
+require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IAnnotatable.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/Logger.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerAdapter.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerFormatter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/ClassLoader.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Cache.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Container.php';
@@ -19,7 +22,6 @@ require_once dirname(__FILE__) . '/core/WebStream/Module/Security.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/ValueProxy.php';
 require_once dirname(__FILE__) . '/core/WebStream/DI/ServiceLocator.php';
-require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IAnnotatable.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IClass.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IMethod.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IMethods.php';
@@ -54,6 +56,7 @@ require_once dirname(__FILE__) . '/core/WebStream/Database/ResultEntity.php';
 require_once dirname(__FILE__) . '/core/WebStream/Delegate/CoreDelegator.php';
 require_once dirname(__FILE__) . '/core/WebStream/Delegate/CoreExecuteDelegator.php';
 require_once dirname(__FILE__) . '/core/WebStream/Delegate/CoreExceptionDelegator.php';
+require_once dirname(__FILE__) . '/core/WebStream/Delegate/AnnotationDelegator.php';
 require_once dirname(__FILE__) . '/core/WebStream/Delegate/AnnotationDelegatorFactory.php';
 require_once dirname(__FILE__) . '/core/WebStream/Delegate/ExceptionDelegator.php';
 require_once dirname(__FILE__) . '/core/WebStream/Delegate/Resolver.php';
@@ -110,18 +113,15 @@ require_once dirname(__FILE__) . '/config/routes.php';
 // デフォルトタイムゾーン
 date_default_timezone_set('Asia/Tokyo');
 
+// サービスロケータをロード
+$container = ServiceLocator::getContainer();
+
 // ログ出力ディレクトリ、ログレベルをテスト用に変更
 Logger::init("config/log.ini");
 
-$isXhprof = false;
-
-// xhprof
-if ($isXhprof) {
-    xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
-}
-
 $classLoader = new ClassLoader();
 spl_autoload_register([$classLoader, "load"]);
+
 // app以下をすべて読み込む
 $classLoader->importAll("app", function ($filepath) {
     // MVCレイヤのクラスとview配下のphpファイルは除外
@@ -129,20 +129,6 @@ $classLoader->importAll("app", function ($filepath) {
 });
 register_shutdown_function('shutdownHandler');
 
-// サービスロケータをロード
-$container = ServiceLocator::getContainer();
-
 // アプリケーションを起動
 $application = new \WebStream\Core\Application($container);
 $application->run();
-
-if ($isXhprof) {
-    // TODO Vendor以下にもっていきたい。
-    $xhprofData = xhprof_disable();
-    $xhprofRoot = '/Users/mapserver2007/Dropbox/workspace/xhprof';
-    $projectName = 'WebStream';
-    include_once $xhprofRoot . '/xhprof_lib/utils/xhprof_lib.php';
-    include_once $xhprofRoot . '/xhprof_lib/utils/xhprof_runs.php';
-    $xhprof_runs = new \XHProfRuns_Default();
-    $xhprof_runs->save_run($xhprofData, $projectName);
-}

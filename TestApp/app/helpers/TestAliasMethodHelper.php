@@ -9,7 +9,7 @@ class TestAliasMethodHelper extends CoreHelper
 {
     /**
      * @Inject
-     * @Alias(name="aliasMethod4");
+     * @Alias(name="aliasMethod4")
      */
     public function originMethod4()
     {
@@ -18,7 +18,7 @@ class TestAliasMethodHelper extends CoreHelper
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod8");
+     * @Alias(name="aliasMethod8")
      */
     public function originMethod8()
     {

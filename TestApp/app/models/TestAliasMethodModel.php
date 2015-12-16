@@ -9,7 +9,7 @@ class TestAliasMethodModel extends CoreModel
 {
     /**
      * @Inject
-     * @Alias(name="aliasMethod3");
+     * @Alias(name="aliasMethod3")
      */
     public function originMethod3()
     {
@@ -18,7 +18,7 @@ class TestAliasMethodModel extends CoreModel
 
     /**
      * @Inject
-     * @Alias(name="aliasMethod7");
+     * @Alias(name="aliasMethod7")
      */
     public function originMethod7()
     {
