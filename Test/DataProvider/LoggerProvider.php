@@ -428,4 +428,26 @@ trait LoggerProvider
             ['/test_logger_adapter4', "helper logger"]
         ];
     }
+
+    public function loggerFormatterProvider()
+    {
+        return [
+            ["log.test.ok1.format.ini", "message", "message"],
+            ["log.test.ok2.format.ini", "message", "[debug] message"],
+            ["log.test.ok3.format.ini", "message", "[DEBUG] message"],
+            ["log.test.ok4.format.ini", "message", "[debug     ] message"],
+            ["log.test.ok5.format.ini", "message", "[DEBUG     ] message"],
+            ["log.test.ok6.format.ini", "message", "[webstream] message"]
+        ];
+    }
+
+    public function loggerFormatterDateTimeProvider()
+    {
+        return [
+            ["log.test.ok7.format.ini", "/(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})/", "message", "message"],
+            ["log.test.ok8.format.ini", "/(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3})/", "message", "message"],
+            ["log.test.ok9.format.ini", "/(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})/", "message", "           message"],
+            ["log.test.ok10.format.ini", "/(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3})/", "message", "       message"]
+        ];
+    }
 }

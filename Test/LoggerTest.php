@@ -710,6 +710,40 @@ class LoggerTest extends TestBase
     }
 
     /**
+     * 正常系
+     * 指定されたフォーマットでログ出力されること
+     * @test
+     * @dataProvider loggerFormatterProvider
+     */
+    public function okLoggerFormatter($configPath, $message, $formattedMessage)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        Logger::init($configPath);
+        Logger::debug($message);
+        $lineTail = $this->logTail($configPath);
+        $this->assertEquals($lineTail, $formattedMessage);
+    }
+
+    /**
+     * 正常系
+     * DateTimeフォーマットでログ出力されること
+     * @test
+     * @dataProvider loggerFormatterDateTimeProvider
+     */
+    public function okLoggerDateTimeFormatter($configPath, $dateTimeRegexp, $message, $messageWithSpace)
+    {
+        $configPath = $this->getLogConfigPath() . "/" . $configPath;
+        Logger::init($configPath);
+        Logger::debug($message);
+        $lineTail = $this->logTail($configPath);
+        if (preg_match($dateTimeRegexp, $lineTail, $matches)) {
+            $this->assertEquals($lineTail, $matches[1] . $messageWithSpace);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    /**
      * 異常系
      * Loggerを初期化していない場合、例外が発生すること
      * @test
