@@ -2,7 +2,6 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Test\TestData\Sample\App\Annotation\CustomAnnotation3;
 
 class TestCustomMethodsAnnotationController extends CoreController
@@ -23,7 +22,6 @@ class TestCustomMethodsAnnotationController extends CoreController
     }
 
     /**
-     * @Inject
      * @CustomAnnotation3
      */
     public function read1()
@@ -31,7 +29,6 @@ class TestCustomMethodsAnnotationController extends CoreController
     }
 
     /**
-     * @Inject
      * @CustomAnnotation3
      */
     public function read2()

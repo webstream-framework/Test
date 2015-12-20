@@ -2,13 +2,11 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Template;
 
 class TestTwigTemplateController extends CoreController
 {
     /**
-     * @Inject
      * @Template("index1.twig", engine="twig")
      */
     public function index1()
@@ -17,7 +15,6 @@ class TestTwigTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index2.twig", engine="twig")
      */
     public function index2()
@@ -26,7 +23,6 @@ class TestTwigTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index3.twig", engine="twig")
      */
     public function index3()
@@ -35,7 +31,6 @@ class TestTwigTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index4.twig", engine="twig")
      */
     public function index4()
@@ -44,7 +39,6 @@ class TestTwigTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index5.twig", engine="twig")
      */
     public function index5()
@@ -53,7 +47,6 @@ class TestTwigTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index6.twig", engine="twig")
      */
     public function index6()
@@ -62,7 +55,6 @@ class TestTwigTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("undefined.twig", engine="twig")
      */
     public function error1()

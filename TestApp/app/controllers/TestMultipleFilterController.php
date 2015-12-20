@@ -2,13 +2,11 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Filter;
 
 class TestParentFilterController extends CoreController
 {
     /**
-     * @Inject
      * @Filter(type="before")
      */
     public function before2()
@@ -17,7 +15,6 @@ class TestParentFilterController extends CoreController
     }
 
     /**
-     * @Inject
      * @Filter(type="after")
      */
     public function after2()
@@ -29,7 +26,6 @@ class TestParentFilterController extends CoreController
 class TestMultipleFilterController extends TestParentFilterController
 {
     /**
-     * @Inject
      * @Filter(type="before")
      */
     public function before()
@@ -38,7 +34,6 @@ class TestMultipleFilterController extends TestParentFilterController
     }
 
     /**
-     * @Inject
      * @Filter(type="after")
      */
     public function after()

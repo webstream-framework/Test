@@ -2,13 +2,11 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Template;
 
 class TestHelperController extends CoreController
 {
     /**
-     * @Inject
      * @Template("base1.tmpl")
      */
     public function help1()
@@ -16,7 +14,6 @@ class TestHelperController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("base2.tmpl")
      */
     public function help2()
@@ -25,7 +22,6 @@ class TestHelperController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("base3.tmpl")
      */
     public function help3()
@@ -34,7 +30,6 @@ class TestHelperController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("base4.tmpl")
      */
     public function help4()
@@ -43,7 +38,6 @@ class TestHelperController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("base5.tmpl")
      */
     public function help5()
@@ -51,7 +45,6 @@ class TestHelperController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("base6.tmpl")
      */
     public function help6()
@@ -63,7 +56,6 @@ class TestHelperController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("base7.tmpl")
      */
     public function help7()
@@ -71,7 +63,6 @@ class TestHelperController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("base8.tmpl")
      */
     public function help8()

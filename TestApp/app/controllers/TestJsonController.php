@@ -2,13 +2,11 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Header;
 
 class TestJsonController extends CoreController
 {
     /**
-     * @Inject
      * @Header(contentType="json")
      */
     public function json1()
@@ -17,7 +15,6 @@ class TestJsonController extends CoreController
     }
 
     /**
-     * @Inject
      * @Header(contentType="json")
      */
     public function json2()
@@ -26,7 +23,6 @@ class TestJsonController extends CoreController
     }
 
     /**
-     * @Inject
      * @Header(contentType="jsonp")
      */
     public function jsonp1()
@@ -35,7 +31,6 @@ class TestJsonController extends CoreController
     }
 
     /**
-     * @Inject
      * @Header(contentType="jsonp")
      */
     public function jsonp2()

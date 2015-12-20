@@ -2,12 +2,10 @@
 namespace WebStream\Test\TestData\Sample\App\Model;
 
 use WebStream\Core\CoreModel;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Query;
 use WebStream\Annotation\Database;
 
 /**
- * @Inject
  * @Database(driver="WebStream\Database\Driver\Sqlite", config="config/database.sqlite.ini")
  */
 class TestSqliteModel extends CoreModel
@@ -21,7 +19,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function model2()
@@ -32,7 +29,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/dummy.xml")
      */
     public function model3()
@@ -47,7 +43,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-innercall.xml")
      */
     public function model4_2()
@@ -58,7 +53,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model5()
@@ -67,7 +61,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model6()
@@ -76,7 +69,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model7()
@@ -85,7 +77,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model8()
@@ -94,7 +85,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model9()
@@ -103,7 +93,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
@@ -116,7 +105,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file={"query/webstream-model-mapper-sample.xml", "query/webstream-model-mapper-sample-entity.xml"})
      */
     public function model11()
@@ -128,7 +116,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-trait-entity.xml")
      */
     public function model12()
@@ -139,7 +126,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function prepare()
@@ -151,7 +137,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function prepare2()
@@ -171,7 +156,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function prepare3()
@@ -191,7 +175,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function clear()
@@ -200,7 +183,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function clear2()
@@ -218,7 +200,6 @@ class TestSqliteModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function clear3()

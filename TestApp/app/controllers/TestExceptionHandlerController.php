@@ -2,7 +2,6 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\ExceptionHandler;
 use WebStream\Exception\ApplicationException;
 use WebStream\Exception\Extend\ValidateException;
@@ -74,7 +73,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\ValidateException")
      */
     public function validateError($params)
@@ -83,7 +81,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\ForbiddenAccessException")
      */
     public function forbiddenAccessError($params)
@@ -92,7 +89,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\SessionTimeoutException")
      */
     public function sessionTimeoutError($params)
@@ -101,7 +97,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\InvalidRequestException")
      */
     public function invalidRequestError($params)
@@ -110,7 +105,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\CsrfException")
      */
     public function csrfError($params)
@@ -119,7 +113,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\ResourceNotFoundException")
      */
     public function resourceNotfoundError($params)
@@ -128,7 +121,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\ClassNotFoundException")
      */
     public function uncatchedError2($params)
@@ -137,7 +129,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\MethodNotFoundException")
      */
     public function uncatchedError3($params)
@@ -146,7 +137,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\AnnotationException")
      */
     public function uncatchedError4($params)
@@ -155,7 +145,6 @@ class TestExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\RouterException")
      */
     public function uncatchedError5($params)

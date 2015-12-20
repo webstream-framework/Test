@@ -2,7 +2,6 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Template;
 
 class TestLoggerAdapterController extends CoreController
@@ -26,7 +25,6 @@ class TestLoggerAdapterController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("logger_adapter.tmpl")
      */
     public function helperTest()

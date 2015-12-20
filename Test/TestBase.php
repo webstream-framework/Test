@@ -50,7 +50,6 @@ class TestBase extends \PHPUnit_Framework_TestCase
         $classLoader = new \WebStream\Module\ClassLoader();
         $classLoader->load([
             "WebStream\Annotation\Autowired",
-            "WebStream\Annotation\Inject",
             "WebStream\Annotation\Filter",
             "WebStream\Annotation\Template",
             "WebStream\Annotation\Header",

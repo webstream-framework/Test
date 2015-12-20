@@ -2,14 +2,12 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Header;
 use WebStream\Annotation\Template;
 
 class TestBasicTemplateController extends CoreController
 {
     /**
-     * @Inject
      * @Template("index1.tmpl")
      */
     public function index1()
@@ -18,7 +16,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index2.tmpl", engine="basic")
      */
     public function index2()
@@ -27,7 +24,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index3.tmpl")
      */
     public function index3()
@@ -36,7 +32,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("shared1.tmpl")
      */
     public function index4()
@@ -45,7 +40,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("shared_index5.tmpl")
      */
     public function index5()
@@ -54,7 +48,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index6.tmpl")
      */
     public function index6()
@@ -63,7 +56,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index7.tmpl")
      */
     public function index7()
@@ -72,7 +64,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index8.tmpl")
      */
     public function index8()
@@ -81,7 +72,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index9.tmpl")
      */
     public function index9()
@@ -90,7 +80,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("sub/index10.tmpl")
      */
     public function index10()
@@ -99,7 +88,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("sub/index11.tmpl")
      */
     public function index11()
@@ -108,7 +96,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index12.tmpl", cacheTime=10)
      */
     public function index12()
@@ -117,7 +104,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index1.tmpl", engine="unknown")
      */
     public function error1()
@@ -126,7 +112,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("error2.tmpl")
      */
     public function error2()
@@ -135,7 +120,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("error3.tmpl")
      */
     public function error3()
@@ -144,7 +128,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("error4.tmpl")
      */
     public function error4()
@@ -153,7 +136,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("error5.tmpl", cacheTime="hoge")
      */
     public function error5()
@@ -162,7 +144,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("error6.tmpl", cacheTime=-1)
      */
     public function error6()
@@ -171,7 +152,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("undefined.tmpl",)
      */
     public function errror7()
@@ -180,7 +160,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("../shared/shared1.tmpl",)
      */
     public function error8()
@@ -189,7 +168,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Header(contentType="xml")
      * @Template("xml.tmpl")
      */
@@ -199,7 +177,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("javascript1.tmpl")
      */
     public function javascript1()
@@ -209,7 +186,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("javascript2.tmpl")
      */
     public function javascript2()
@@ -219,7 +195,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("javascript3.tmpl")
      */
     public function javascript3()
@@ -229,7 +204,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("javascript4.tmpl")
      */
     public function javascript4()
@@ -239,7 +213,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("javascript5.tmpl")
      */
     public function javascript5()
@@ -249,7 +222,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("javascript6.tmpl")
      */
     public function javascript6()
@@ -259,7 +231,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("javascript7.tmpl")
      */
     public function javascript7()
@@ -269,7 +240,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("javascript8.tmpl")
      */
     public function javascript8()
@@ -279,7 +249,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("html1.tmpl")
      */
     public function html1()
@@ -288,7 +257,6 @@ class TestBasicTemplateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("html2.tmpl")
      */
     public function html2()

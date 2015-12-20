@@ -2,7 +2,6 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Template;
 
 class TestCustomDirController extends CoreController
@@ -25,7 +24,6 @@ class TestCustomDirController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index.tmpl")
      */
     public function fromView()
@@ -33,7 +31,6 @@ class TestCustomDirController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("helper.tmpl")
      */
     public function fromHelper()

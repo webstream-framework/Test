@@ -2,7 +2,6 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\ExceptionHandler;
 use WebStream\Test\TestData\Sample\App\Annotation\CustomAnnotation1;
 use WebStream\Test\TestData\Sample\App\Annotation\CustomAnnotation2;
@@ -10,7 +9,6 @@ use WebStream\Test\TestData\Sample\App\Annotation\CustomAnnotation2;
 class TestCustomMethodAnnotationController extends CoreController
 {
     /**
-     * @Inject
      * @CustomAnnotation1(exception=false)
      */
     public function index1()
@@ -19,7 +17,6 @@ class TestCustomMethodAnnotationController extends CoreController
     }
 
     /**
-     * @Inject
      * @CustomAnnotation1(exception=true)
      */
     public function index2()
@@ -27,7 +24,6 @@ class TestCustomMethodAnnotationController extends CoreController
     }
 
     /**
-     * @Inject
      * @CustomAnnotation2
      */
     public function index3()
@@ -66,7 +62,6 @@ class TestCustomMethodAnnotationController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("\Exception")
      */
     public function exceptionHandler($params)

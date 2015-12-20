@@ -2,13 +2,11 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Filter;
 
 class TestMultipleOnlyFilterController extends CoreController
 {
     /**
-     * @Inject
      * @Filter(type="before", only={"index", "index2"})
      */
     public function before()
@@ -17,7 +15,6 @@ class TestMultipleOnlyFilterController extends CoreController
     }
 
     /**
-     * @Inject
      * @Filter(type="after", only={"index3", "index4"})
      */
     public function after()

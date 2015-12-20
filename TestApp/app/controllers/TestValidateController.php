@@ -2,14 +2,12 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Validate;
 use WebStream\Annotation\ExceptionHandler;
 
 class TestValidateController extends CoreController
 {
     /**
-     * @Inject
      * @Validate(key="test", rule="required", method="get")
      */
     public function getRequired()
@@ -18,7 +16,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="required", method="post")
      */
     public function postRequired()
@@ -27,7 +24,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="required", method="put")
      */
     public function putRequired()
@@ -36,7 +32,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="required")
      */
     public function allRequired()
@@ -45,7 +40,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="equal[honoka]", method="get")
      */
     public function getEqual()
@@ -54,7 +48,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="equal[honoka]", method="post")
      */
     public function postEqual()
@@ -63,7 +56,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="equal[honoka]", method="put")
      */
     public function putEqual()
@@ -72,7 +64,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="equal[honoka]")
      */
     public function allEqual()
@@ -81,7 +72,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="length[6]", method="get")
      */
     public function getLength()
@@ -90,7 +80,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="length[6]", method="post")
      */
     public function postLength()
@@ -99,7 +88,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="length[6]", method="put")
      */
     public function putLength()
@@ -108,7 +96,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="length[6]")
      */
     public function allLength()
@@ -117,7 +104,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max[3]", method="get")
      */
     public function getMax()
@@ -126,7 +112,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max[3]", method="post")
      */
     public function postMax()
@@ -135,7 +120,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max[3]", method="put")
      */
     public function putMax()
@@ -144,7 +128,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max[3]")
      */
     public function allMax()
@@ -153,7 +136,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min[1]", method="get")
      */
     public function getMin()
@@ -162,7 +144,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min[1]", method="post")
      */
     public function postMin()
@@ -171,7 +152,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min[1]", method="put")
      */
     public function putMin()
@@ -180,7 +160,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min[1]")
      */
     public function allMin()
@@ -189,7 +168,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max_length[6]", method="get")
      */
     public function getMaxLength()
@@ -198,7 +176,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max_length[6]", method="post")
      */
     public function postMaxLength()
@@ -207,7 +184,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max_length[6]", method="put")
      */
     public function putMaxLength()
@@ -216,7 +192,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max_length[6]")
      */
     public function allMaxLength()
@@ -225,7 +200,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min_length[6]", method="get")
      */
     public function getMinLength()
@@ -234,7 +208,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min_length[6]", method="post")
      */
     public function postMinLength()
@@ -243,7 +216,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min_length[6]", method="put")
      */
     public function putMinLength()
@@ -252,7 +224,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min_length[6]")
      */
     public function allMinLength()
@@ -261,7 +232,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="number", method="get")
      */
     public function getNumber()
@@ -270,7 +240,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="number", method="post")
      */
     public function postNumber()
@@ -279,7 +248,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="number", method="put")
      */
     public function putNumber()
@@ -288,7 +256,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="number")
      */
     public function allNumber()
@@ -297,7 +264,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="range[1..10]", method="get")
      */
     public function getRange()
@@ -306,7 +272,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="range[1..10]", method="post")
      */
     public function postRange()
@@ -315,7 +280,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="range[1..10]", method="put")
      */
     public function putRange()
@@ -324,7 +288,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="range[1..10]")
      */
     public function allRange()
@@ -333,7 +296,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="regexp[/^\d+$/]", method="get")
      */
     public function getRegexp()
@@ -342,7 +304,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="regexp[/^\d+$/]", method="post")
      */
     public function postRegexp()
@@ -351,7 +312,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="regexp[/^\d+$/]", method="put")
      */
     public function putRegexp()
@@ -360,7 +320,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="regexp[/^\d+$/]")
      */
     public function allRegexp()
@@ -369,7 +328,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="mail", method="get")
      */
     public function getMail()
@@ -378,7 +336,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="mail", method="post")
      */
     public function postMail()
@@ -387,7 +344,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="mail", method="put")
      */
     public function putMail()
@@ -396,7 +352,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="mail")
      */
     public function allMail()
@@ -407,7 +362,6 @@ class TestValidateController extends CoreController
     // 異常系
 
     /**
-     * @Inject
      * @Validate(key="test", rule="unknown")
      */
     public function invalidRuleUnknown()
@@ -415,7 +369,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="required[]")
      */
     public function invalidRuleRequired()
@@ -423,7 +376,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="equal[]")
      */
     public function invalidRuleEqual()
@@ -431,7 +383,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="length[-1]")
      */
     public function invalidRuleLength1()
@@ -439,7 +390,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="length[hoge]")
      */
     public function invalidRuleLength2()
@@ -447,7 +397,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="length")
      */
     public function invalidRuleLength3()
@@ -455,7 +404,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max[hoge]")
      */
     public function invalidRuleMax()
@@ -463,7 +411,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min[hoge]")
      */
     public function invalidRuleMin()
@@ -471,7 +418,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="max_length[hoge]")
      */
     public function invalidRuleMaxLength()
@@ -479,7 +425,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="min_length[hoge]")
      */
     public function invalidRuleMinLength()
@@ -487,7 +432,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="number[]")
      */
     public function invalidRuleNumber()
@@ -495,7 +439,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="range[hoge..hoge]")
      */
     public function invalidRuleRange1()
@@ -503,7 +446,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="range[1...10]")
      */
     public function invalidRuleRange2()
@@ -511,7 +453,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="regexp[hoge]")
      */
     public function invalidRuleRegexp()
@@ -519,7 +460,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(rule="required")
      */
     public function invalidValidateAnnotation1()
@@ -528,7 +468,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test")
      */
     public function invalidValidateAnnotation2()
@@ -537,7 +476,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @Validate(key="test", rule="invalid")
      */
     public function duplicateValidateRule()
@@ -546,7 +484,6 @@ class TestValidateController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("\Exception")
      */
     public function error($params)

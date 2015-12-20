@@ -2,7 +2,6 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\ExceptionHandler;
 use WebStream\Exception\Extend\ValidateException;
 use WebStream\Exception\Extend\InvalidRequestException;
@@ -38,7 +37,6 @@ class TestMultipleExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\ValidateException")
      */
     public function subException($params)
@@ -47,7 +45,6 @@ class TestMultipleExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("\Exception")
      */
     public function superException($params)
@@ -56,7 +53,6 @@ class TestMultipleExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler({"WebStream\Exception\Extend\InvalidRequestException", "WebStream\Exception\Extend\ForbiddenAccessException"})
      */
     public function multiHandleException($params)
@@ -65,7 +61,6 @@ class TestMultipleExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler({"WebStream\Exception\Extend\CsrfException", "WebStream\Exception\Extend\CsrfException"})
      */
     public function sameHandleException($params)
@@ -74,7 +69,6 @@ class TestMultipleExceptionHandlerController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler({"WebStream\Exception\Extend\ResourceNotFoundException", "\Exception"})
      */
     public function ancestorHandleException($params)

@@ -2,14 +2,12 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Autowired;
 use WebStream\Annotation\Template;
 
 class TestAutowiredController extends CoreController
 {
     /**
-     * @Inject
      * @Autowired(value="honoka");
      */
     private $name;
@@ -30,7 +28,6 @@ class TestAutowiredController extends CoreController
     }
 
     /**
-     * @Inject
      * @Template("index.tmpl")
      */
     public function index4()

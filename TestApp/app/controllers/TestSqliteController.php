@@ -2,7 +2,6 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\ExceptionHandler;
 
 class TestSqliteController extends CoreController
@@ -120,7 +119,6 @@ class TestSqliteController extends CoreController
     }
 
     /**
-     * @Inject
      * @ExceptionHandler("WebStream\Exception\Extend\DatabaseException")
      */
     public function handle($params)

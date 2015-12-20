@@ -2,11 +2,9 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Test\TestData\Sample\App\Annotation\CustomAnnotation5;
 
 /**
- * @Inject
  * @CustomAnnotation5
  */
 class TestCustomClass2AnnotationController extends CoreController

@@ -2,13 +2,11 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Filter;
 
 class TestSkipFilterController extends CoreController
 {
     /**
-     * @Inject
      * @Filter(type="before")
      */
     public function before1()
@@ -17,7 +15,6 @@ class TestSkipFilterController extends CoreController
     }
 
     /**
-     * @Inject
      * @Filter(type="before")
      */
     public function before2()
@@ -26,7 +23,6 @@ class TestSkipFilterController extends CoreController
     }
 
     /**
-     * @Inject
      * @Filter(type="skip", except="before1")
      */
     public function index1()
@@ -35,7 +31,6 @@ class TestSkipFilterController extends CoreController
     }
 
     /**
-     * @Inject
      * @Filter(type="skip", except={"before1","before2"})
      */
     public function index2()

@@ -2,14 +2,12 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Header;
 use WebStream\Annotation\Template;
 
 class TestHeaderController extends TestParentHeaderController
 {
     /**
-     * @Inject
      * @Template("html.tmpl")
      * @Header(contentType="html")
      */
@@ -18,7 +16,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Template("xml.tmpl")
      * @Header(contentType="xml")
      */
@@ -27,7 +24,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Template("atom.tmpl")
      * @Header(contentType="atom")
      */
@@ -36,7 +32,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Template("rss.tmpl")
      * @Header(contentType="rss")
      */
@@ -45,7 +40,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Template("rdf.tmpl")
      * @Header(contentType="rdf")
      */
@@ -54,7 +48,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(allowMethod="get")
      */
     public function test6()
@@ -62,7 +55,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(allowMethod="GET")
      */
     public function test7()
@@ -70,7 +62,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(allowMethod="post")
      */
     public function test8()
@@ -78,7 +69,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(allowMethod="POST")
      */
     public function test9()
@@ -86,7 +76,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(allowMethod={"GET","POST"})
      */
     public function test10()
@@ -94,7 +83,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(allowMethod={"POST","PUT"})
      */
     public function test11()
@@ -102,7 +90,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(contentType="html", allowMethod="GET")
      */
     public function test12()
@@ -110,7 +97,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(contentType="xml", allowMethod="POST")
      */
     public function test13()
@@ -118,7 +104,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(contentType="dummy")
      */
     public function test14()
@@ -126,7 +111,6 @@ class TestHeaderController extends TestParentHeaderController
     }
 
     /**
-     * @Inject
      * @Header(allowMethod="dummy")
      */
     public function test15()

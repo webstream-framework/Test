@@ -2,12 +2,10 @@
 namespace WebStream\Test\TestData\Sample\App\Model;
 
 use WebStream\Core\CoreModel;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Query;
 use WebStream\Annotation\Database;
 
 /**
- * @Inject
  * @Database(driver="WebStream\Database\Driver\Mysql", config="config/database.mysql.ini")
  */
 class TestMysqlModel extends CoreModel
@@ -21,7 +19,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function model2($bind = [])
@@ -32,7 +29,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function model3()
@@ -48,7 +44,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function model4()
@@ -62,7 +57,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/dummy.xml")
      */
     public function model5()
@@ -71,7 +65,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function model6()
@@ -89,7 +82,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-innercall.xml")
      */
     public function model7_2()
@@ -100,7 +92,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model8()
@@ -109,7 +100,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model9()
@@ -118,7 +108,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model10()
@@ -127,7 +116,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model11()
@@ -136,7 +124,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function model12()
@@ -145,7 +132,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
@@ -158,7 +144,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file={"query/webstream-model-mapper-sample.xml", "query/webstream-model-mapper-sample-entity.xml"})
      */
     public function model14()
@@ -170,7 +155,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-trait-entity.xml")
      */
     public function model15()
@@ -181,7 +165,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function prepare()
@@ -201,7 +184,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function prepare2()
@@ -221,7 +203,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function prepare3()
@@ -241,7 +222,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample.xml")
      */
     public function clear()
@@ -259,7 +239,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function clear2()
@@ -277,7 +256,6 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-entity.xml")
      */
     public function clear3()

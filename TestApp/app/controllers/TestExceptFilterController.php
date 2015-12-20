@@ -2,13 +2,11 @@
 namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Filter;
 
 class TestExceptFilterController extends CoreController
 {
     /**
-     * @Inject
      * @Filter(type="before", except="index")
      */
     public function before()
@@ -17,7 +15,6 @@ class TestExceptFilterController extends CoreController
     }
 
     /**
-     * @Inject
      * @Filter(type="after", except="index3")
      */
     public function after()

@@ -1,18 +1,15 @@
 <?php
 namespace WebStream\Test\TestData\Sample\App\Model;
 
-use WebStream\Annotation\Inject;
 use WebStream\Annotation\Query;
 use WebStream\Annotation\Database;
 
 /**
- * @Inject
  * @Database(driver="WebStream\Database\Driver\Mysql", config="config/database.mysql.ini")
  */
 class TestMultipleDatabaseModel extends TestSuperMultipleDatabaseModel
 {
     /**
-     * @Inject
      * @Query(file="query/webstream-model-mapper-sample-multipledb.xml")
      */
     public function model1()
