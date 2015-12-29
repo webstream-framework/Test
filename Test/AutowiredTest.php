@@ -2,7 +2,6 @@
 namespace WebStream\Test;
 
 use WebStream\Annotation\Reader\AnnotationReader;
-use WebStream\Module\Utility;
 use WebStream\Module\HttpClient;
 use WebStream\Log\Logger;
 use WebStream\DI\ServiceLocator;
@@ -20,7 +19,7 @@ require_once 'DataProvider/AutowiredProvider.php';
  */
 class AutowiredTest extends TestBase
 {
-    use Utility, TestConstant, AutowiredProvider;
+    use TestConstant, AutowiredProvider;
 
     private $reader;
 
@@ -37,7 +36,7 @@ class AutowiredTest extends TestBase
      */
     public function okAutowired($mail, $age)
     {
-        $container = ServiceLocator::getContainer();
+        $container = ServiceLocator::getInstance()->getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest1($container);
         $reader = new AnnotationReader($instance, $container);
@@ -55,7 +54,7 @@ class AutowiredTest extends TestBase
      */
     public function okAutowiredForConstantValueProvider($name, $num)
     {
-        $container = ServiceLocator::getContainer();
+        $container = ServiceLocator::getInstance()->getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest3($container);
         $reader = new AnnotationReader($instance, $container);
@@ -72,7 +71,7 @@ class AutowiredTest extends TestBase
      */
     public function okAutowiredSuperClass()
     {
-        $container = ServiceLocator::getContainer();
+        $container = ServiceLocator::getInstance()->getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest7($container);
         $reader = new AnnotationReader($instance, $container);
@@ -110,7 +109,7 @@ class AutowiredTest extends TestBase
      */
     public function ngAutowiredInvalidType()
     {
-        $container = ServiceLocator::getContainer();
+        $container = ServiceLocator::getInstance()->getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest2($container);
         $reader = new AnnotationReader($instance, $container);
@@ -128,7 +127,7 @@ class AutowiredTest extends TestBase
      */
     public function ngAutowiredAnnotationDefinition()
     {
-        $container = ServiceLocator::getContainer();
+        $container = ServiceLocator::getInstance()->getContainer();
         $container->executeMethod = "";
         $instance = new \WebStream\Test\TestData\AutowiredTest6($container);
         $reader = new AnnotationReader($instance, $container);

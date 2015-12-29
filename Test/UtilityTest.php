@@ -1,7 +1,10 @@
 <?php
 namespace WebStream\Test;
 
-use WebStream\Module\Utility;
+use WebStream\Module\Utility\ApplicationUtils;
+use WebStream\Module\Utility\CommonUtils;
+use WebStream\Module\Utility\FileUtils;
+use WebStream\Module\Utility\SecurityUtils;
 use WebStream\Log\Logger;
 use WebStream\Test\DataProvider\UtilityProvider;
 
@@ -17,7 +20,8 @@ require_once 'DataProvider/UtilityProvider.php';
  */
 class UtilityTest extends TestBase
 {
-    use Utility, UtilityProvider, TestConstant;
+    use CommonUtils, FileUtils;
+    use UtilityProvider, TestConstant;
 
     public function setUp()
     {
@@ -31,7 +35,7 @@ class UtilityTest extends TestBase
      */
     public function okGetProjectRoot()
     {
-        $this->assertEquals($this->getProjectRootPath(), $this->getRoot());
+        $this->assertEquals($this->getProjectRootPath(), $this->getApplicationRoot());
     }
 
     /**
@@ -42,8 +46,8 @@ class UtilityTest extends TestBase
      */
     public function okFileSearch($path)
     {
-        $classpath = $this->getRoot() . $path;
-        $iterator = $this->getFileSearchIterator($this->getRoot());
+        $classpath = $this->getApplicationRoot() . $path;
+        $iterator = $this->getFileSearchIterator($this->getApplicationRoot());
         $isOk = false;
         foreach ($iterator as $filepath => $fileObject) {
             if ($filepath === $classpath) {

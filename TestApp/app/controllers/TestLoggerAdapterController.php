@@ -3,9 +3,13 @@ namespace WebStream\Test\TestData\Sample\App\Controller;
 
 use WebStream\Core\CoreController;
 use WebStream\Annotation\Template;
+use WebStream\Module\Utility\FileUtils;
+use WebStream\DI\ServiceLocator;
 
 class TestLoggerAdapterController extends CoreController
 {
+    use FileUtils;
+
     public function controllerTest()
     {
         $this->logger->debug("controller logger");
@@ -34,7 +38,8 @@ class TestLoggerAdapterController extends CoreController
     private function logTail()
     {
         $log = $this->parseConfig("config/log_config/log.test.debug.ok.ini");
-        $logPath = $this->getRoot() . "/" . $log["path"];
+        $root = ServiceLocator::getInstance()->getContainer()->applicationInfo->applicationRoot;
+        $logPath = $root . "/" . $log["path"];
         $file = file($logPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         return array_pop($file);

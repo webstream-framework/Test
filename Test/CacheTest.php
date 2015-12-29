@@ -1,9 +1,10 @@
 <?php
 namespace WebStream\Test;
 
+use WebStream\Module\Utility\CommonUtils;
 use WebStream\Module\Cache;
-use WebStream\Module\Utility;
 use WebStream\Log\Logger;
+use WebStream\DI\ServiceLocator;
 use WebStream\Test\DataProvider\CacheProvider;
 
 require_once 'TestBase.php';
@@ -18,7 +19,7 @@ require_once 'DataProvider/CacheProvider.php';
  */
 class CacheTest extends TestBase
 {
-    use CacheProvider, Utility, TestConstant;
+    use CacheProvider, TestConstant, CommonUtils;
 
     private $cacheId = "cache_test";
     private $save_data_str = "abcde";
@@ -50,7 +51,8 @@ class CacheTest extends TestBase
      */
     public function testOkCreateCacheCustomDir()
     {
-        $cacheDir = $this->getRoot() . "/" . $this->getCacheDir777();
+        $root = ServiceLocator::getInstance()->getContainer()->applicationInfo->applicationRoot;
+        $cacheDir = $root . "/" . $this->getCacheDir777();
         $cache = new Cache($cacheDir);
         $cache->save($this->cacheId, $this->save_data_str);
         $this->assertFileExists($cacheDir . "/" . $this->cacheId . ".cache");
