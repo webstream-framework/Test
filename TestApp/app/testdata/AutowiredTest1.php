@@ -4,25 +4,21 @@ namespace WebStream\Test\TestData;
 use WebStream\Core\CoreInterface;
 use WebStream\Annotation\Base\IAnnotatable;
 use WebStream\Annotation\Autowired;
-use WebStream\Annotation\Inject;
 use WebStream\Module\Container;
 
 class AutowiredTest1 implements CoreInterface, IAnnotatable
 {
     /**
-     * @Inject
      * @Autowired(type="\WebStream\Test\TestData\AutowiredTestType")
      */
     private $instance;
 
     /**
-     * @Inject
      * @Autowired(value="kotori@lovelive.com")
      */
     private $mail;
 
     /**
-     * @Inject
      * @Autowired(value=17)
      */
     private $age;

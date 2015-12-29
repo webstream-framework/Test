@@ -2,18 +2,15 @@
 namespace WebStream\Test\TestData;
 
 use WebStream\Annotation\Autowired;
-use WebStream\Annotation\Inject;
 
 class AutowiredTest7 extends AutowiredTest8
 {
     /**
-     * @Inject
      * @Autowired(value="name1")
      */
     private $name = "default1";
 
     /**
-     * @Inject
      * @Autowired(value="name2")
      */
     private $name2;
