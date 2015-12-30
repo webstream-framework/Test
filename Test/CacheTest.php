@@ -15,7 +15,7 @@ require_once 'DataProvider/CacheProvider.php';
  * CacheTest
  * @author Ryuichi TANAKA.
  * @since 2011/10/08
- * @version 0.4
+ * @version 0.7
  */
 class CacheTest extends TestBase
 {
@@ -40,6 +40,7 @@ class CacheTest extends TestBase
     public function okCreateCache()
     {
         $cache = new Cache();
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $cache->save($this->cacheId, $this->save_data_str);
         $this->assertFileExists($this->cacheDir . $this->cacheId . ".cache");
     }
@@ -54,6 +55,7 @@ class CacheTest extends TestBase
         $root = ServiceLocator::getInstance()->getContainer()->applicationInfo->applicationRoot;
         $cacheDir = $root . "/" . $this->getCacheDir777();
         $cache = new Cache($cacheDir);
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $cache->save($this->cacheId, $this->save_data_str);
         $this->assertFileExists($cacheDir . "/" . $this->cacheId . ".cache");
     }
@@ -67,6 +69,7 @@ class CacheTest extends TestBase
     public function okSave($cacheId, $data)
     {
         $cache = new Cache();
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $cache->delete($cacheId);
         $cache->save($cacheId, $data);
         $this->assertEquals($cache->get($cacheId), $data);
@@ -81,6 +84,7 @@ class CacheTest extends TestBase
     public function okMetaData($cacheId, $ttl = 60)
     {
         $cache = new Cache();
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $cache->save($cacheId, $this->save_data_str, $ttl, true);
         $meta = $cache->meta($cacheId);
         $this->assertEquals($meta["ttl"], $ttl);
@@ -95,6 +99,7 @@ class CacheTest extends TestBase
     public function okDeleteCache($cacheId)
     {
         $cache = new Cache();
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $cache->save($cacheId, $this->save_data_str);
         $this->assertFileExists($this->cacheDir . $cacheId . ".cache");
         $this->assertTrue($cache->delete($cacheId));
@@ -110,6 +115,7 @@ class CacheTest extends TestBase
     public function okOverwriteSave($cacheId, $beforeData, $afterData)
     {
         $cache = new Cache();
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $cache->delete($cacheId);
         $cache->save($cacheId, $beforeData);
         $this->assertEquals($cache->get($cacheId), $beforeData);
@@ -126,6 +132,7 @@ class CacheTest extends TestBase
     public function okWriteArrayData($cacheId, $data)
     {
         $cache = new Cache();
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $cache->delete($cacheId);
         $cache->save($cacheId, $data);
         $this->assertEquals($cache->get($cacheId), $data);
@@ -140,6 +147,7 @@ class CacheTest extends TestBase
     public function ngInvalidSaveDir($dir)
     {
         $cache = new Cache($dir);
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $this->assertFalse($cache->save($this->cacheId, $this->save_data_str));
     }
 
@@ -167,6 +175,7 @@ class CacheTest extends TestBase
     public function ngInvalidDeletePath($cacheId)
     {
         $cache = new Cache();
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $this->assertFalse($cache->delete($cacheId));
     }
 
@@ -179,6 +188,7 @@ class CacheTest extends TestBase
     public function ngTimeOverCache($cacheId, $ttl)
     {
         $cache = new Cache();
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $cache->save($cacheId, $this->save_data_str, $ttl);
         $this->assertFileExists($this->cacheDir . $cacheId . ".cache");
         sleep($ttl + 1);

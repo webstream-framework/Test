@@ -58,6 +58,7 @@ class CoreDelegator
     {
         $classLoader = new ClassLoader();
         $container = $this->container;
+        $applicationInfo = $container->applicationInfo;
         $pageName = $this->getPageName();
         $serviceClassName = $pageName . "Service";
         $modelClassName   = $pageName . "Model";
@@ -86,7 +87,7 @@ class CoreDelegator
         if ($serviceNamespace !== null) {
             $serviceClassPath = $serviceNamespace . "\\" . $serviceClassName;
             $this->coreContainer->service = function () use ($container, $classLoader, $serviceClassPath, $serviceClassName) {
-                if ($classLoader->import(STREAM_APP_DIR . "/services/" . $serviceClassName . ".php")) {
+                if ($classLoader->import($applicationInfo->applicationDir . "/services/" . $serviceClassName . ".php")) {
                     return new $serviceClassPath($container);
                 }
             };
@@ -98,7 +99,7 @@ class CoreDelegator
         if ($modelNamespace !== null) {
             $modelClassPath = $modelNamespace . "\\" . $modelClassName;
             $this->coreContainer->model = function () use ($container, $classLoader, $modelClassPath, $modelClassName) {
-                if ($classLoader->import(STREAM_APP_DIR . "/models/" . $modelClassName . ".php")) {
+                if ($classLoader->import($applicationInfo->applicationDir . "/models/" . $modelClassName . ".php")) {
                     return new $modelClassPath($container);
                 }
             };
@@ -112,7 +113,7 @@ class CoreDelegator
         if ($helperNamespace !== null) {
             $helperClassPath = $helperNamespace . "\\" . $helperClassName;
             $this->coreContainer->helper = function () use ($container, $classLoader, $helperClassPath, $helperClassName) {
-                if ($classLoader->import(STREAM_APP_DIR . "/helpers/" . $helperClassName . ".php")) {
+                if ($classLoader->import($applicationInfo->applicationDir . "/helpers/" . $helperClassName . ".php")) {
                     return new $helperClassPath($container);
                 }
             };

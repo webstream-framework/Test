@@ -4,6 +4,7 @@ namespace WebStream\Test;
 use WebStream\Module\Cache;
 use WebStream\Module\HttpClient;
 use WebStream\Log\Logger;
+use WebStream\DI\ServiceLocator;
 use WebStream\Test\DataProvider\TemplateProvider;
 
 require_once 'TestBase.php';
@@ -104,6 +105,7 @@ class TemplateTest extends TestBase
 
         $dir = $this->getProjectRootPath() . $this->getCacheDir();
         $cache = new Cache($dir);
+        $cache->inject('logger', ServiceLocator::getInstance()->getContainer()->logger);
         $data = $cache->get("webstream-cache-test_basic_template-index12");
         $this->assertEquals($data, $responseText);
         sleep(11);

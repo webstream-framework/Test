@@ -5,23 +5,29 @@ use WebStream\Log\Logger;
 use WebStream\Log\LoggerFormatter;
 use WebStream\Module\ClassLoader;
 use WebStream\DI\ServiceLocator;
+use WebStream\DI\Injector;
 
 require_once dirname(__FILE__) . "/vendor/autoload.php";
-require_once dirname(__FILE__) . '/core/WebStream/Module/Utility.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/Utility/CommonUtils.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/Utility/ApplicationUtils.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/Utility/FileUtils.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/Utility/LoggerUtils.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/Utility/SecurityUtils.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IAnnotatable.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/Logger.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerFormatter.php';
-require_once dirname(__FILE__) . '/core/WebStream/Module/ClassLoader.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/Singleton.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/PropertyProxy.php';
+require_once dirname(__FILE__) . '/core/WebStream/DI/ServiceLocator.php';
+require_once dirname(__FILE__) . '/core/WebStream/DI/Injector.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Cache.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Container.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Functions.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/HttpClient.php';
-require_once dirname(__FILE__) . '/core/WebStream/Module/PropertyProxy.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Security.php';
-require_once dirname(__FILE__) . '/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/ValueProxy.php';
-require_once dirname(__FILE__) . '/core/WebStream/DI/ServiceLocator.php';
+require_once dirname(__FILE__) . '/core/WebStream/Module/ClassLoader.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IClass.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IMethod.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IMethods.php';
@@ -107,13 +113,12 @@ require_once dirname(__FILE__) . '/core/WebStream/Core/CoreHelper.php';
 require_once dirname(__FILE__) . '/core/WebStream/Core/CoreModel.php';
 require_once dirname(__FILE__) . '/core/WebStream/Core/CoreService.php';
 require_once dirname(__FILE__) . '/core/WebStream/Core/CoreView.php';
-require_once dirname(__FILE__) . '/config/routes.php';
 
 // デフォルトタイムゾーン
 date_default_timezone_set('Asia/Tokyo');
 
 // サービスロケータをロード
-$container = ServiceLocator::getContainer();
+$container = ServiceLocator::getInstance()->getContainer();
 
 // ログ出力ディレクトリ、ログレベルをテスト用に変更
 Logger::init("config/log.ini");
