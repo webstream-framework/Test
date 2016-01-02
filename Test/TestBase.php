@@ -1,7 +1,6 @@
 <?php
 namespace WebStream\Test;
 
-// use WebStream\Module\Utility;
 use WebStream\Log\Logger;
 
 require_once dirname(__FILE__) . '/TestConstant.php';
@@ -97,10 +96,6 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/Extend/Re
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/Extend/RouterException.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/Extend/SessionTimeoutException.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Exception/Extend/ValidateException.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Http/Method/MethodInterface.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Http/Method/Get.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Http/Method/Post.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Http/Method/Put.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Http/Request.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Http/Response.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Http/Session.php';

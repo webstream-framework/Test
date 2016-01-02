@@ -99,10 +99,6 @@ require_once dirname(__FILE__) . '/core/WebStream/Exception/Extend/ResourceNotFo
 require_once dirname(__FILE__) . '/core/WebStream/Exception/Extend/RouterException.php';
 require_once dirname(__FILE__) . '/core/WebStream/Exception/Extend/SessionTimeoutException.php';
 require_once dirname(__FILE__) . '/core/WebStream/Exception/Extend/ValidateException.php';
-require_once dirname(__FILE__) . '/core/WebStream/Http/Method/MethodInterface.php';
-require_once dirname(__FILE__) . '/core/WebStream/Http/Method/Get.php';
-require_once dirname(__FILE__) . '/core/WebStream/Http/Method/Post.php';
-require_once dirname(__FILE__) . '/core/WebStream/Http/Method/Put.php';
 require_once dirname(__FILE__) . '/core/WebStream/Http/Request.php';
 require_once dirname(__FILE__) . '/core/WebStream/Http/Response.php';
 require_once dirname(__FILE__) . '/core/WebStream/Http/Session.php';

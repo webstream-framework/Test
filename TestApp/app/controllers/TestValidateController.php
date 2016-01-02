@@ -12,7 +12,7 @@ class TestValidateController extends CoreController
      */
     public function getRequired()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -20,7 +20,7 @@ class TestValidateController extends CoreController
      */
     public function postRequired()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -28,7 +28,7 @@ class TestValidateController extends CoreController
      */
     public function putRequired()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -36,7 +36,14 @@ class TestValidateController extends CoreController
      */
     public function allRequired()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -44,7 +51,7 @@ class TestValidateController extends CoreController
      */
     public function getEqual()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -52,7 +59,7 @@ class TestValidateController extends CoreController
      */
     public function postEqual()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -60,7 +67,7 @@ class TestValidateController extends CoreController
      */
     public function putEqual()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -68,7 +75,14 @@ class TestValidateController extends CoreController
      */
     public function allEqual()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -76,7 +90,7 @@ class TestValidateController extends CoreController
      */
     public function getLength()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -84,7 +98,7 @@ class TestValidateController extends CoreController
      */
     public function postLength()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -92,7 +106,7 @@ class TestValidateController extends CoreController
      */
     public function putLength()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -100,7 +114,14 @@ class TestValidateController extends CoreController
      */
     public function allLength()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -108,7 +129,7 @@ class TestValidateController extends CoreController
      */
     public function getMax()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -116,7 +137,7 @@ class TestValidateController extends CoreController
      */
     public function postMax()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -124,7 +145,7 @@ class TestValidateController extends CoreController
      */
     public function putMax()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -132,7 +153,14 @@ class TestValidateController extends CoreController
      */
     public function allMax()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -140,7 +168,7 @@ class TestValidateController extends CoreController
      */
     public function getMin()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -148,7 +176,7 @@ class TestValidateController extends CoreController
      */
     public function postMin()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -156,7 +184,7 @@ class TestValidateController extends CoreController
      */
     public function putMin()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -164,7 +192,14 @@ class TestValidateController extends CoreController
      */
     public function allMin()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -172,7 +207,7 @@ class TestValidateController extends CoreController
      */
     public function getMaxLength()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -180,7 +215,7 @@ class TestValidateController extends CoreController
      */
     public function postMaxLength()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -188,7 +223,7 @@ class TestValidateController extends CoreController
      */
     public function putMaxLength()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -196,7 +231,14 @@ class TestValidateController extends CoreController
      */
     public function allMaxLength()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -204,7 +246,7 @@ class TestValidateController extends CoreController
      */
     public function getMinLength()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -212,7 +254,7 @@ class TestValidateController extends CoreController
      */
     public function postMinLength()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -220,7 +262,7 @@ class TestValidateController extends CoreController
      */
     public function putMinLength()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -228,7 +270,14 @@ class TestValidateController extends CoreController
      */
     public function allMinLength()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -236,7 +285,7 @@ class TestValidateController extends CoreController
      */
     public function getNumber()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -244,7 +293,7 @@ class TestValidateController extends CoreController
      */
     public function postNumber()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -252,7 +301,7 @@ class TestValidateController extends CoreController
      */
     public function putNumber()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -260,7 +309,14 @@ class TestValidateController extends CoreController
      */
     public function allNumber()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -268,7 +324,7 @@ class TestValidateController extends CoreController
      */
     public function getRange()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -276,7 +332,7 @@ class TestValidateController extends CoreController
      */
     public function postRange()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -284,7 +340,7 @@ class TestValidateController extends CoreController
      */
     public function putRange()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -292,7 +348,14 @@ class TestValidateController extends CoreController
      */
     public function allRange()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -300,7 +363,7 @@ class TestValidateController extends CoreController
      */
     public function getRegexp()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -308,7 +371,7 @@ class TestValidateController extends CoreController
      */
     public function postRegexp()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -316,7 +379,7 @@ class TestValidateController extends CoreController
      */
     public function putRegexp()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -324,7 +387,14 @@ class TestValidateController extends CoreController
      */
     public function allRegexp()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     /**
@@ -332,7 +402,7 @@ class TestValidateController extends CoreController
      */
     public function getMail()
     {
-        echo $this->request->get("test");
+        echo $this->request->get["test"];
     }
 
     /**
@@ -340,7 +410,7 @@ class TestValidateController extends CoreController
      */
     public function postMail()
     {
-        echo $this->request->post("test");
+        echo $this->request->post["test"];
     }
 
     /**
@@ -348,7 +418,7 @@ class TestValidateController extends CoreController
      */
     public function putMail()
     {
-        echo $this->request->put("test");
+        echo $this->request->put["test"];
     }
 
     /**
@@ -356,7 +426,14 @@ class TestValidateController extends CoreController
      */
     public function allMail()
     {
-        echo $this->request->get("test") ?: $this->request->post("test") ?: $this->request->put("test");
+        $key = "test";
+        if (array_key_exists($key, $this->request->get)) {
+            echo $this->request->get[$key];
+        } elseif (array_key_exists($key, $this->request->post)) {
+            echo $this->request->post[$key];
+        } elseif (array_key_exists($key, $this->request->put)) {
+            echo $this->request->put[$key];
+        }
     }
 
     // 異常系

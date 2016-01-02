@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="WebStream" basedir="." default="main">
-    <target name="main" depends="init,test"></target>
+    <target name="main" depends="init,it"></target>
 
     <!-- init -->
     <target name="init">
@@ -16,7 +16,17 @@
     </target>
 
     <!-- PHPUnit -->
-    <target name="test">
+    <target name="ut">
+        <phpunit haltonfailure="false" printsummary="true">
+            <formatter type="xml" outfile="reports/phpunit.xml"/>
+            <batchtest>
+                <fileset dir="Test">
+                    <include name="UnitTest/*Test.php" />
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+    <target name="it">
         <phpunit haltonfailure="false" printsummary="true">
             <formatter type="xml" outfile="reports/phpunit.xml"/>
             <batchtest>
