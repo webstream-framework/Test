@@ -1,11 +1,11 @@
 <?php
-namespace WebStream\Test;
+namespace WebStream\Test\UnitTest;
 
+use WebStream\Test\TestBase;
+use WebStream\Test\TestConstant;
 use WebStream\Module\ClassLoader;
-use WebStream\Log\Logger;
 
-require_once 'TestBase.php';
-require_once 'TestConstant.php';
+require_once dirname(__FILE__) . '/../TestBase.php';
 
 /**
  * ClassLoaderクラスのテストクラス
