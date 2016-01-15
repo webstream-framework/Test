@@ -1,17 +1,14 @@
 <?php
 namespace WebStream\Test\UnitTest;
 
-use WebStream\Test\TestBase;
-use WebStream\Test\TestConstant;
 use WebStream\Delegate\Router;
 use WebStream\Module\Utility\ApplicationUtils;
 use WebStream\Module\Container;
 use WebStream\Http\Request;
-use WebStream\Test\DataProvider\RouterProvider;
-use WebStream\Test\DataProvider\RouterProvider2;
+use WebStream\Test\UnitTest\DataProvider\RouterProvider;
 
-require_once dirname(__FILE__) . '/../TestBase.php';
-require_once 'DataProvider/RouterProvider.php';
+require_once dirname(__FILE__) . '/TestBase.php';
+require_once dirname(__FILE__) . '/DataProvider/RouterProvider.php';
 
 /**
  * Routerクラスのテストクラス
@@ -19,18 +16,14 @@ require_once 'DataProvider/RouterProvider.php';
  * @since 2011/09/21
  * @version 0.7
  */
-class RouterTest extends TestBase
+class RouterTest extends \PHPUnit_Framework_TestCase
 {
-    use RouterProvider, TestConstant;
+    use RouterProvider;
     use ApplicationUtils;
 
     public function setUp()
     {
         parent::setUp();
-    }
-
-    public function tearDown()
-    {
     }
 
     private function getRequestContainer($pathInfo)
@@ -96,6 +89,34 @@ class RouterTest extends TestBase
         $this->assertEquals($routerContainer->controller, $controller);
         $this->assertEquals($routerContainer->action, $action);
         $this->assertEquals($routerContainer->params[$placeholderKey], $paramValue);
+    }
+
+    /**
+     * 正常系
+     * ルーティング定義の前半部分一致が起きる場合でも正常にパスの解決ができること
+     * @test
+     * @dataProvider resolveRoutingSimilarUrlProvider
+     */
+    public function okResolveRoutingSimilarUrl($pathList, $actualUri, $controller, $action)
+    {
+        $requestContainer = $this->getRequestContainer($actualUri);
+        $routerContainer = $this->getRouterContainer($pathList, $requestContainer);
+
+        $this->assertEquals($routerContainer->controller, $controller);
+        $this->assertEquals($routerContainer->action, $action);
+    }
+
+    /**
+     * 正常系
+     * ルーティング定義に存在しないパスにアクセスがあった場合、ルーティングできず結果が空になること
+     * @test
+     * @dataProvider undefinedRoutingAccessProvider
+     */
+    public function ngUndefinedRoutingAccess($uri, $ca, $accessUri)
+    {
+        $requestContainer = $this->getRequestContainer($accessUri);
+        $routerContainer = $this->getRouterContainer([$uri => $ca], $requestContainer);
+        $this->assertEquals($routerContainer->length(), 0);
     }
 
     /**

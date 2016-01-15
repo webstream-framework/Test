@@ -1,11 +1,9 @@
 <?php
 namespace WebStream\Test\UnitTest;
 
-use WebStream\Test\TestBase;
-use WebStream\Test\TestConstant;
 use WebStream\Module\ClassLoader;
 
-require_once dirname(__FILE__) . '/../TestBase.php';
+require_once dirname(__FILE__) . '/TestBase.php';
 
 /**
  * ClassLoaderクラスのテストクラス
@@ -13,10 +11,8 @@ require_once dirname(__FILE__) . '/../TestBase.php';
  * @since 2013/09/02
  * @version 0.4
  */
-class ClassLoaderTest extends TestBase
+class ClassLoaderTest extends \PHPUnit_Framework_TestCase
 {
-    use TestConstant;
-
     public function setUp()
     {
         parent::setUp();

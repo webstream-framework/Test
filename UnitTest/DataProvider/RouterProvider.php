@@ -9,17 +9,15 @@ namespace WebStream\Test\UnitTest\DataProvider;
  */
 trait RouterProvider
 {
-    // 正常系
     public function resolveRoutingProvider()
     {
         return [
             ["/test", "test#test_action", "TestController", "testAction"],
             ["/snakecase1", "test_snake#test_action", "TestSnakeController", "testAction"],
-            ["/snakecase2", "test_snake_hoge_hoge#test_action", "TestSnakeHogeHogeController", "testAction"],
+            ["/snakecase2", "test_snake_hoge_hoge#test_action", "TestSnakeHogeHogeController", "testAction"]
         ];
     }
 
-    // 正常系
     public function resolveRoutingPlaceholderProvider()
     {
         return [
@@ -28,10 +26,29 @@ trait RouterProvider
             ["/test/:_snake_id", "/test/1", "test#test_action", "TestController", "testAction", "_snake_id", "1"],
             ["/test/:snake_id_", "/test/1", "test#test_action", "TestController", "testAction", "snake_id_", "1"],
             ["/test/file.:format", "/test/file.xml", "test#test_action", "TestController", "testAction", "format", "xml"],
+            ["/test/:urlencode", "/test/%E3%81%A6%E3%81%99%E3%81%A8", "test#test_encode", "TestController", "testEncode", "urlencode", 'てすと']
         ];
     }
 
-    // 異常系
+    public function resolveRoutingSimilarUrlProvider()
+    {
+        return [
+            [
+                ["/test/similar" => "test#test_action", "/test/similar/:id" => "test#test_action2"],
+                "/test/similar/1",
+                "TestController",
+                "testAction2"
+            ]
+        ];
+    }
+
+    public function undefinedRoutingAccessProvider()
+    {
+        return [
+            ["/test", "test#test_action", "/undefined"]
+        ];
+    }
+
     public function unResolveRoutingProvider()
     {
         return [

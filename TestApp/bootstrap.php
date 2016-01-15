@@ -2,7 +2,6 @@
 namespace WebStream\Test\TestApp;
 
 use WebStream\Log\Logger;
-use WebStream\Log\LoggerFormatter;
 use WebStream\Module\ClassLoader;
 use WebStream\DI\ServiceLocator;
 use WebStream\DI\Injector;
@@ -113,13 +112,15 @@ require_once dirname(__FILE__) . '/core/WebStream/Core/CoreView.php';
 // デフォルトタイムゾーン
 date_default_timezone_set('Asia/Tokyo');
 
-// サービスロケータをロード
-$container = ServiceLocator::getInstance()->getContainer();
-
 // ログ出力ディレクトリ、ログレベルをテスト用に変更
 Logger::init("config/log.ini");
 
+// サービスロケータをロード
+$container = ServiceLocator::getInstance()->getContainer();
+
 $classLoader = new ClassLoader();
+$classLoader->inject('logger', $container->logger)
+            ->inject('applicationInfo', $container->applicationInfo);
 spl_autoload_register([$classLoader, "load"]);
 
 // app以下をすべて読み込む
