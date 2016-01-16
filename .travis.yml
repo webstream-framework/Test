@@ -5,7 +5,7 @@ before_script:
   - cd TestApp && composer install
 
 script:
-  - phpunit --configuration ./phpunit.xml UnitTest
+  - phpunit --configuration phpunit.xml UnitTest
 
 php:
   - 7.0
