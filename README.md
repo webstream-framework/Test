@@ -1,33 +1,11 @@
 # Test
-## 準備
+[![Build Status](https://travis-ci.org/webstream-framework/Test.svg?branch=master)](https://travis-ci.org/webstream-framework/Test)
+## UnitTest
+Run unit tests in [Travis CI](https://travis-ci.org/)
 
-* データベース作成
-```sh
-$> vagrant up
-```
+## IntegrationTest
+Run integration tests in [webstream-framework/infrastructure](https://github.com/webstream-framework/infrastructure)
 
-* ライブラリインストール
-```sh
-$> composer install
-```
-
-* コンソールからMySQL接続
-```sh
-$> mysql -h 192.168.0.206 --port 3306 -u mysql -p
-```
-
-* コンソールからPostgreSQL接続
-```sh
-$> psql -h 192.168.0.206 -U postgres sandbox
-```
-
-## PHPUnit
-```sh
-$> vendor/bin/phpunit Test/hoge.php
-
-```
-
-## Phing
-```sh
-$> vendor/bin/phing -f Test/build.xml
-```
+## License
+Licensed under the MIT
+http://www.opensource.org/licenses/mit-license.php
