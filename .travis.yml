@@ -2,11 +2,10 @@ language: php
 
 before_script:
   - composer install
-  - cd TestApp && composer install
+  - cd TestApp && composer install && cd ..
 
 script:
-  - ls -la
-  - vender/bin/phpunit --configuration phpunit.xml UnitTest
+  - phpunit --configuration phpunit.xml UnitTest
 
 php:
   - 7.0
