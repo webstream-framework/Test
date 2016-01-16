@@ -17,4 +17,13 @@ trait AliasProvider
             ["/test", "unit_test#alias_method3", "originMethod3"]
         ];
     }
+
+    public function originAccessProvider()
+    {
+        return [
+            ["/test", "unit_test#alias_method1", "originMethod1"],
+            ["/test", "unit_test#alias_method2", "originMethod2"],
+            ["/test", "unit_test#alias_method3", "originMethod3"]
+        ];
+    }
 }

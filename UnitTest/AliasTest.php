@@ -191,12 +191,113 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                     }
                 };
 
-                $manager = new class([]) extends DatabaseManager
-                {
-                    public function __call($name, $args) {}
-                };
+                return $model;
+            }
+        };
 
-                $model->inject('manager', $manager);
+        $app = new Application($container);
+        $app->run();
+
+        $this->expectOutputString($response);
+    }
+
+    /**
+     * 正常系
+     * エイリアス定義されたメソッドが実メソッドとしてすでに存在する場合、実メソッドアクセスになること
+     * @test
+     * @dataProvider originAccessProvider
+     */
+    public function okOriginAccess($path, $ca, $response)
+    {
+        $container = new Container();
+        $container->request = $this->getRequest($path);
+        $container->router = $this->getRouter([$path => $ca], $container->request);
+        $container->response = $this->getResponse();
+        $container->session = $this->getSession();
+        $container->logger = $this->getLogger();
+        $container->applicationInfo = $this->getApplicationInfo();
+        $container->annotationDelegator = $this->getAnnotationDelegator($container);
+
+        $container->coreDelegator = new class($container) extends CoreDelegator
+        {
+            private $container;
+            public function __construct($container)
+            {
+                parent::__construct($container);
+                $this->container = $container;
+            }
+
+            public function getController()
+            {
+                return new class($this->container) extends CoreController
+                {
+                    /**
+                     * @Alias(name="aliasMethod1")
+                     */
+                    public function originMethod1()
+                    {
+                        // 決して呼ばれない
+                    }
+
+                    public function aliasMethod1()
+                    {
+                        echo "originMethod1";
+                    }
+
+                    /**
+                     * @Alias(name="aliasMethod2")
+                     */
+                    public function originMethod2()
+                    {
+                        $this->UnitTest->aliasMethod2();
+                    }
+
+                    /**
+                     * @Alias(name="aliasMethod3")
+                     */
+                    public function originMethod3()
+                    {
+                        $this->UnitTest->aliasMethod3();
+                    }
+                };
+            }
+
+            public function getService()
+            {
+                return new class($this->container) extends CoreService
+                {
+                    /**
+                     * @Alias(name="aliasMethod2")
+                     */
+                    public function originMethod2()
+                    {
+                        // 決して呼ばれない
+                    }
+
+                    public function aliasMethod2()
+                    {
+                        echo "originMethod2";
+                    }
+                };
+            }
+
+            public function getModel()
+            {
+                $model = new class($this->container) extends CoreModel
+                {
+                    /**
+                     * @Alias(name="aliasMethod3")
+                     */
+                    public function originMethod3()
+                    {
+                        // 決して呼ばれない
+                    }
+
+                    public function aliasMethod3()
+                    {
+                        echo "originMethod3";
+                    }
+                };
 
                 return $model;
             }
