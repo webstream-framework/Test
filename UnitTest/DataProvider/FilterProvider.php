@@ -74,7 +74,7 @@ trait FilterProvider
     public function initializeFilterProvider()
     {
         return [
-            ["/test", "unit_test#action"]
+            ["/test", "unit_test#action", 500]
         ];
     }
 }

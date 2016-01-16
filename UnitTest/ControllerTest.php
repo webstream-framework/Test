@@ -264,7 +264,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider notRunControllerProvider
      */
-    public function ngNotRunController($path, $ca, $notfoundPath)
+    public function ngNotRunController($path, $ca, $notfoundPath, $response)
     {
         $container = new Container();
         $container->request = $this->getRequest($notfoundPath);
@@ -276,9 +276,11 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
         $container->coreDelegator = $this->getCoreDelegator($container);
         $container->annotationDelegator = $this->getAnnotationDelegator($container);
 
+        ob_start();
         $app = new Application($container);
         $app->run();
+        $actual = ob_get_clean();
 
-        $this->expectOutputString(404);
+        $this->assertEquals($actual, $response);
     }
 }

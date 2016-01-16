@@ -1,0 +1,11 @@
+language: php
+
+before_script:
+    - composer install
+    - cd TestApp && composer install
+
+script:
+  - phpunit
+
+php:
+  - 7.0

@@ -601,7 +601,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider initializeFilterProvider
      */
-    public function ngInitializeFilter($path, $ca)
+    public function ngInitializeFilter($path, $ca, $response)
     {
         $container = new Container();
         $container->request = $this->getRequest($path);
@@ -639,9 +639,11 @@ class FilterTest extends \PHPUnit_Framework_TestCase
             }
         };
 
+        ob_start();
         $app = new Application($container);
         $app->run();
+        $actual = ob_get_clean();
 
-        $this->expectOutputString(500);
+        $this->assertEquals($actual, $response);
     }
 }

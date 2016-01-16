@@ -49,7 +49,7 @@ trait ControllerProvider
     public function notRunControllerProvider()
     {
         return [
-            ["/test", "unit_test#test", "/notfound"]
+            ["/test", "unit_test#test", "/notfound", 404]
         ];
     }
 }
