@@ -64,7 +64,8 @@ class AliasTest extends \PHPUnit_Framework_TestCase
     {
         return new class() {
             public function __call($name, $args) {}
-            public function move($statusCode) {
+            public function move($statusCode)
+            {
                 echo $statusCode;
             }
         };
@@ -74,7 +75,8 @@ class AliasTest extends \PHPUnit_Framework_TestCase
     {
         return new class() {
             public function __call($name, $args) {}
-            public function displayFile($filename) {
+            public function displayFile($filename)
+            {
                 echo $filename;
             }
         };
