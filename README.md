@@ -1,5 +1,5 @@
 # Test
-[![Build Status](https://travis-ci.org/webstream-framework/Test.svg?branch=master)](https://travis-ci.org/webstream-framework/Test)
+
 ## UnitTest
 Run unit tests in [Travis CI](https://travis-ci.org/)
 
