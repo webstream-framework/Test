@@ -7,5 +7,13 @@ before_script:
 script:
   - phpunit --configuration phpunit.xml --coverage-clover reports/clover.xml UnitTest
 
+after_script:
+  - vendor/bin/test-reporter
+
 php:
   - 7.0
+
+addons:
+  code_climate:
+    repo_token:
+      secure: "XXApNH4cUVWDB/45Fz2tzceKM1RHWVj6BCCDgOYMpw58WWlfQyzakQMsg8kLd5qxxVqv89NlgWNPsjCSI2loxxWstQbdpT9uzs/zYRWe3s/HpPmRasmOYLc+wR7uMmdMFHBrdRO9FMY99g7YNSnhDyriG8VT+kdbDHvComF2N/YYC2IO2iFrqQ441wWyVLvv1Fh7vjMjDB+hiwfyDnEJ+ghUZeKzygM665hCebAXcHEEwCjqYsjDYF6sSqeP69AwI7uzIcG8gNW2Kn31p58MN+7f192nqsY7zdcrUUlAKPq2/x2GEn3KcttBzL2+kH+aG2QoHlMFjvn2px8guqY/+09P/B1B48HPTwLp3BejyDb615Ih24MGRKcy9adWQ5zrlQCztG3dZkKgWGg5SbIDAn8dS5kx3i1mpM1nfFgUoPzIb8MZxTB9vHO2nSgrR6Zl+O3uPplkJmHejqyCEFVGI55NLXL6HuFfTP7ZkDA7lHJHrknCrkY0bp8hU8cpHB3R8bZan0B/4ElvXxeJbCWi27SBPDMdBI7PS17pEVhmI0jVJK2hWYYov38Y82Il2RiTuwt4Y9ALuF+WcT9rmTtKPOZtbYLc1eD+QhmS0w1wrraGtMjmni4pfS+edrsGM4lkAJvMi2n78hqHUMmF5k9odi7gFZmMhzJTX3AFSPphNhU="
