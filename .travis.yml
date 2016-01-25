@@ -5,7 +5,7 @@ before_script:
   - cd TestApp && composer install && cd ..
 
 script:
-  - phpunit --configuration phpunit.xml --coverage-clover reports/clover.xml UnitTest
+  - phpunit --configuration phpunit.xml --coverage-clover build/logs/clover.xml UnitTest
 
 after_script:
   - vendor/bin/test-reporter
