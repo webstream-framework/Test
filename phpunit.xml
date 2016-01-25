@@ -5,4 +5,12 @@
       <directory suffix="Test.php">UnitTest</directory>
     </testsuite>
   </testsuites>
+  <filter>
+    <whitelist>
+      <directory>TestApp/core</directory>
+    </whitelist>
+  </filter>
+  <logging>
+    <log type="coverage-clover" target="reports/clover.xml"/>
+  </logging>
 </phpunit>
