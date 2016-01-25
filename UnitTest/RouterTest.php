@@ -18,8 +18,7 @@ require_once dirname(__FILE__) . '/DataProvider/RouterProvider.php';
  */
 class RouterTest extends \PHPUnit_Framework_TestCase
 {
-    use RouterProvider;
-    use ApplicationUtils;
+    use RouterProvider, ApplicationUtils;
 
     public function setUp()
     {
