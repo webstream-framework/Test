@@ -8,6 +8,17 @@
   <filter>
     <whitelist>
       <directory>TestApp/core</directory>
+      <exclude>
+        <file>TestApp/core/WebStream/Annotation/Base/IAnnotatable.php</file>
+        <file>TestApp/core/WebStream/Annotation/Base/IClass.php</file>
+        <file>TestApp/core/WebStream/Annotation/Base/IMethod.php</file>
+        <file>TestApp/core/WebStream/Annotation/Base/IMethods.php</file>
+        <file>TestApp/core/WebStream/Annotation/Base/IProperty.php</file>
+        <file>TestApp/core/WebStream/Annotation/Base/IRead.php</file>
+        <file>TestApp/core/WebStream/Core/CoreInterface.php</file>
+        <file>TestApp/core/WebStream/Template/ITemplateEngine.php</file>
+        <file>TestApp/core/WebStream/Validate/Rule/IValidate.php</file>
+      </exclude>
     </whitelist>
   </filter>
   <logging>
