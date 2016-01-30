@@ -2,6 +2,7 @@
 namespace WebStream\Test\TestApp;
 
 use WebStream\Log\Logger;
+use WebStream\Log\LoggerConfigurationManager;
 use WebStream\Module\ClassLoader;
 use WebStream\DI\ServiceLocator;
 use WebStream\DI\Injector;
@@ -13,9 +14,15 @@ require_once dirname(__FILE__) . '/core/WebStream/Module/Utility/FileUtils.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Utility/LoggerUtils.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Utility/SecurityUtils.php';
 require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IAnnotatable.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerConfigurationManager.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/Logger.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerFormatter.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/Outputter/IOutputter.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/Outputter/ILazyWriter.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/Outputter/BrowserOutputter.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/Outputter/ConsoleOutputter.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/Outputter/FileOutputter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/PropertyProxy.php';
 require_once dirname(__FILE__) . '/core/WebStream/DI/ServiceLocator.php';
@@ -112,15 +119,18 @@ require_once dirname(__FILE__) . '/core/WebStream/Core/CoreView.php';
 // デフォルトタイムゾーン
 date_default_timezone_set('Asia/Tokyo');
 
-// ログ出力ディレクトリ、ログレベルをテスト用に変更
-Logger::init("config/log.ini");
+// ロガー設定を読み込む
+$manager = new LoggerConfigurationManager();
+$manager->load('config/log.ini');
+
+// ロガーを初期化
+Logger::init($manager->getConfig());
 
 // サービスロケータをロード
 $container = ServiceLocator::getInstance()->getContainer();
 
 $classLoader = new ClassLoader();
-$classLoader->inject('logger', $container->logger)
-            ->inject('applicationInfo', $container->applicationInfo);
+$classLoader->inject('logger', $container->logger);
 spl_autoload_register([$classLoader, "load"]);
 
 // app以下をすべて読み込む

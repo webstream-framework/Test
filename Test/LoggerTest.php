@@ -3,6 +3,7 @@ namespace WebStream\Test;
 
 use WebStream\Log\Logger;
 use WebStream\Log\LoggerAdapter;
+use WebStream\Log\LoggerConfigurationManager;
 use WebStream\Module\Utility\FileUtils;
 use WebStream\Module\Utility\LoggerUtils;
 use WebStream\Module\HttpClient;
@@ -46,9 +47,17 @@ class LoggerTest extends TestBase
         return array_pop($file);
     }
 
+    private function getConfig($filepath)
+    {
+        $manager = new LoggerConfigurationManager();
+        $manager->load($filepath);
+
+        return $manager->getConfig();
+    }
+
     private function write($level, $configPath, $msg, $stacktrace = null)
     {
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
 
         switch ($level) {
             case "DEBUG":
@@ -148,7 +157,7 @@ class LoggerTest extends TestBase
     public function okLoggerAdapter($level, $configPath, $msg)
     {
         $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         $logger = new LoggerAdapter(Logger::getInstance());
         $this->writeAdapter($logger, $level, $msg);
         $lineTail = $this->logTail($configPath);
@@ -165,7 +174,7 @@ class LoggerTest extends TestBase
     public function okLoggerAdapterWithPlaceholder($level, $configPath, $msg1, $msg2, array $placeholder)
     {
         $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         $logger = new LoggerAdapter(Logger::getInstance());
         $this->writeAdapter($logger, $level, $msg2, $placeholder);
         $lineTail = $this->logTail($configPath);
@@ -732,7 +741,7 @@ class LoggerTest extends TestBase
     public function okLoggerFormatter($configPath, $message, $formattedMessage)
     {
         $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         Logger::debug($message);
         $lineTail = $this->logTail($configPath);
         $this->assertEquals($lineTail, $formattedMessage);
@@ -747,7 +756,7 @@ class LoggerTest extends TestBase
     public function okLoggerDateTimeFormatter($configPath, $dateTimeRegexp, $message, $messageWithSpace)
     {
         $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         Logger::debug($message);
         $lineTail = $this->logTail($configPath);
         if (preg_match($dateTimeRegexp, $lineTail, $matches)) {
@@ -773,7 +782,7 @@ class LoggerTest extends TestBase
         $refProp = $refClass->getProperty("logger");
         $refProp->setAccessible(true);
         $refProp->setValue(null);
-        $refProp = $refClass->getProperty("configPath");
+        $refProp = $refClass->getProperty("config");
         $refProp->setAccessible(true);
         $refProp->setValue(null);
         $refMethod = $refClass->getMethod("__callStatic");
@@ -789,7 +798,7 @@ class LoggerTest extends TestBase
      */
     public function ngConfigFileNotFound()
     {
-        Logger::init("dummy.ini");
+        Logger::init($this->getConfig("dummy.ini"));
         $this->assertTrue(false);
     }
 
@@ -802,7 +811,7 @@ class LoggerTest extends TestBase
     public function ngInvalidConfigPath()
     {
         $configPath = $this->getLogConfigPath() . "/log.test.ng1.ini";
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         $this->assertTrue(false);
     }
 
@@ -815,7 +824,7 @@ class LoggerTest extends TestBase
     public function ngInvalidLogLevel()
     {
         $configPath = $this->getLogConfigPath() . "/log.test.ng2.ini";
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         $this->assertTrue(false);
     }
 
@@ -828,7 +837,7 @@ class LoggerTest extends TestBase
     public function ngNotPermittedWriteLog()
     {
         $configPath = $this->getLogConfigPath() . "/log.test.ng3.ini";
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         Logger::info("test");
         $this->assertTrue(false);
     }
@@ -842,7 +851,7 @@ class LoggerTest extends TestBase
     public function ngUndefinedLogLevel()
     {
         $configPath = $this->getLogConfigPath() . "/log.test.debug.ok.ini";
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         Logger::undefined("test");
         $this->assertTrue(false);
     }
@@ -857,7 +866,7 @@ class LoggerTest extends TestBase
     {
         Logger::finalize();
         $configPath = $this->getLogConfigPath() . "/log.test.debug.ok.ini";
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         $logger = new LoggerAdapter(Logger::getInstance());
         $logger->undefined("test");
         $this->assertTrue(false);
@@ -878,7 +887,7 @@ class LoggerTest extends TestBase
             unlink($statusPath);
         }
         $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         Logger::info("test");
         $this->assertFalse(file_exists($statusPath));
     }
@@ -895,7 +904,7 @@ class LoggerTest extends TestBase
     public function ngInvalidRotateCycleConfig($configPath)
     {
         $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         Logger::info("test");
     }
 
@@ -914,7 +923,7 @@ class LoggerTest extends TestBase
             unlink($statusPath);
         }
         $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         Logger::info("test");
         $this->assertFalse(file_exists($statusPath));
     }
@@ -931,7 +940,7 @@ class LoggerTest extends TestBase
     public function ngInvalidRotateSizeConfig($configPath)
     {
         $configPath = $this->getLogConfigPath() . "/" . $configPath;
-        Logger::init($configPath);
+        Logger::init($this->getConfig($configPath));
         Logger::info("test");
     }
 }

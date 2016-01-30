@@ -2,6 +2,7 @@
 namespace WebStream\Test;
 
 use WebStream\Log\Logger;
+use WebStream\DI\ServiceLocator;
 
 require_once dirname(__FILE__) . '/TestConstant.php';
 require_once dirname(__FILE__) . '/../TestApp/vendor/autoload.php';
@@ -11,9 +12,15 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/File
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/LoggerUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/SecurityUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Annotation/Base/IAnnotatable.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerConfigurationManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Logger.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerFormatter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/IOutputter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/ILazyWriter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/BrowserOutputter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/ConsoleOutputter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/FileOutputter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/PropertyProxy.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/ServiceLocator.php';
@@ -112,9 +119,10 @@ class TestBase extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $manager = new \WebStream\Log\LoggerConfigurationManager();
+        $manager->load($this->getLogConfigPath() . "/log.test.debug.ok.ini");
+        Logger::init($manager->getConfig());
         $this->autoLoad();
-        Logger::init($this->getLogConfigPath() . "/log.test.debug.ok.ini");
-        $this->preloadClass();
     }
 
     public function tearDown()
@@ -124,14 +132,9 @@ class TestBase extends \PHPUnit_Framework_TestCase
 
     protected function autoLoad()
     {
+        $container = ServiceLocator::getInstance()->getContainer();
         $classLoader = new \WebStream\Module\ClassLoader();
-        spl_autoload_register([$classLoader, "load"]);
-        register_shutdown_function('shutdownHandler');
-    }
-
-    protected function preloadClass()
-    {
-        $classLoader = new \WebStream\Module\ClassLoader();
+        $classLoader->inject('logger', $container->logger);
         $classLoader->load([
             "WebStream\Annotation\Autowired",
             "WebStream\Annotation\Filter",
@@ -144,5 +147,7 @@ class TestBase extends \PHPUnit_Framework_TestCase
             "WebStream\Annotation\Alias",
             "Doctrine\Common\Annotations\AnnotationException"
         ]);
+        spl_autoload_register([$classLoader, "load"]);
+        register_shutdown_function('shutdownHandler');
     }
 }

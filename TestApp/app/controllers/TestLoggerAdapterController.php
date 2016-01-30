@@ -12,18 +12,21 @@ class TestLoggerAdapterController extends CoreController
 
     public function controllerTest()
     {
+        $this->logger->enableDirectWrite();
         $this->logger->debug("controller logger");
         echo $this->logTail();
     }
 
     public function serviceTest()
     {
+        $this->logger->enableDirectWrite();
         $this->TestLoggerAdapter->serviceTest();
         echo $this->logTail();
     }
 
     public function modelTest()
     {
+        $this->logger->enableDirectWrite();
         $this->TestLoggerAdapter->modelTest();
         echo $this->logTail();
     }

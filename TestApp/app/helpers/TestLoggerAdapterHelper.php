@@ -11,6 +11,7 @@ class TestLoggerAdapterHelper extends CoreHelper
 
     public function loggerAdapter()
     {
+        $this->logger->enableDirectWrite();
         $this->logger->debug("helper logger");
         echo $this->logTail();
     }
