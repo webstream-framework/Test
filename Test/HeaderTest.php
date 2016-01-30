@@ -21,7 +21,6 @@ class HeaderTest extends TestBase
 
     public function setUp()
     {
-        parent::setUp();
     }
 
     public function tearDown()

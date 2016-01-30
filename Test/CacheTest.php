@@ -28,7 +28,7 @@ class CacheTest extends TestBase
     public function setUp()
     {
         $this->cacheDir = PHP_OS === "WIN32" || PHP_OS === "WINNT" ? "C:\\Windows\\Temp" : "/tmp/";
-        Logger::init($this->getLogConfigPath() . "/log.test.debug.ok.ini");
+        // Logger::init($this->getLogConfigPath() . "/log.test.debug.ok.ini");
         parent::setUp();
     }
 

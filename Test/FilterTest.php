@@ -21,7 +21,6 @@ class FilterTest extends TestBase
 
     public function setUp()
     {
-        parent::setUp();
     }
 
     /**

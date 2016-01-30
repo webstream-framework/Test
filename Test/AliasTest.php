@@ -20,7 +20,6 @@ class AliasTest extends TestBase
 
     public function setUp()
     {
-        parent::setUp();
     }
 
     public function tearDown()
