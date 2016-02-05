@@ -6,9 +6,15 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/File
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/LoggerUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/SecurityUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Annotation/Base/IAnnotatable.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerConfigurationManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Logger.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerAdapter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerFormatter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/IOutputter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/ILazyWriter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/BrowserOutputter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/ConsoleOutputter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/FileOutputter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/PropertyProxy.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/ServiceLocator.php';

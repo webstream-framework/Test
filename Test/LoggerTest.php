@@ -58,37 +58,38 @@ class LoggerTest extends TestBase
     private function write($level, $configPath, $msg, $stacktrace = null)
     {
         Logger::init($this->getConfig($configPath));
+        $msg = $this->addStackTrace($msg, $stacktrace);
 
         switch ($level) {
             case "DEBUG":
-                Logger::debug($msg, $stacktrace);
+                Logger::debug($msg);
                 break;
             case "INFO":
-                Logger::info($msg, $stacktrace);
+                Logger::info($msg);
                 break;
             case "WARN":
-                Logger::warn($msg, $stacktrace);
+                Logger::warn($msg);
                 break;
             case "ERROR":
-                Logger::error($msg, $stacktrace);
+                Logger::error($msg);
                 break;
             case "FATAL":
-                Logger::fatal($msg, $stacktrace);
+                Logger::fatal($msg);
                 break;
             case "NOTICE":
-                Logger::notice($msg, $stacktrace);
+                Logger::notice($msg);
                 break;
             case "WARNING":
-                Logger::warning($msg, $stacktrace);
+                Logger::warning($msg);
                 break;
             case "CRITICAL":
-                Logger::critical($msg, $stacktrace);
+                Logger::critical($msg);
                 break;
             case "ALERT":
-                Logger::alert($msg, $stacktrace);
+                Logger::alert($msg);
                 break;
             case "EMERGENCY":
-                Logger::emergency($msg, $stacktrace);
+                Logger::emergency($msg);
                 break;
         }
     }
