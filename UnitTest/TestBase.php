@@ -15,6 +15,12 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/ILazy
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/BrowserOutputter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/ConsoleOutputter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/FileOutputter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/File.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/InputStream.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/FileInputStream.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/StringInputStream.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/Reader/InputStreamReader.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/Reader/FileReader.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/PropertyProxy.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/ServiceLocator.php';
