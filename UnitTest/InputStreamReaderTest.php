@@ -19,11 +19,6 @@ class InputStreamReaderTest extends \PHPUnit_Framework_TestCase
 {
     use InputStreamReaderProvider;
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * 正常系
      * バイト単位で読み込みできること
@@ -150,5 +145,34 @@ class InputStreamReaderTest extends \PHPUnit_Framework_TestCase
         $isr = new InputStreamReader($sis);
 
         $this->assertEquals($isr->skip($pos), -1);
+    }
+
+    /**
+     * 正常系
+     * リセットすると初期位置にポインタが移動すること
+     * @test
+     * @dataProvider resetProvider
+     */
+    public function okReset($str)
+    {
+        $sis = new StringInputStream($str);
+        $isr = new InputStreamReader($sis);
+        $isr->skip(10);
+        $isr->reset();
+        $this->assertEquals($str, $isr->read());
+    }
+
+    /**
+     * 異常系
+     * 読み込みサイズに不正値を渡した時、例外が発生すること
+     * @test
+     * @expectedException WebStream\Exception\Extend\InvalidArgumentException
+     */
+    public function ngInvalidLength()
+    {
+        $sis = new StringInputStream("abc");
+        $isr = new InputStreamReader($sis);
+        $isr->read("dummy");
+        $this->assertTrue(false);
     }
 }

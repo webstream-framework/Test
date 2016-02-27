@@ -65,6 +65,13 @@ trait InputStreamReaderProvider
         ];
     }
 
+    public function resetProvider()
+    {
+        return [
+            ["a"]
+        ];
+    }
+
     public function overFrontSkipProvider()
     {
         return [
