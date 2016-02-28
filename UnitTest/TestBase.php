@@ -1,5 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../TestApp/vendor/autoload.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/PropertyProxy.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/Injector.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/CommonUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/ApplicationUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/FileUtils.php';
@@ -28,9 +30,7 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/Writer/OutputStr
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/Writer/FileWriter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/Writer/SimpleFileWriter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Singleton.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/PropertyProxy.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/ServiceLocator.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/Injector.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Cache.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Container.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Functions.php';

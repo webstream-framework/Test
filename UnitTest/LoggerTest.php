@@ -4,6 +4,9 @@ namespace WebStream\Test\UnitTest;
 use WebStream\Log\Logger;
 use WebStream\Log\LoggerAdapter;
 use WebStream\Log\Outputter\ConsoleOutputter;
+use WebStream\IO\File;
+use WebStream\IO\StringInputStream;
+use WebStream\IO\Reader\InputStreamReader;
 use WebStream\Module\Container;
 use WebStream\Module\Utility\LoggerUtils;
 use WebStream\Test\UnitTest\DataProvider\LoggerProvider;
@@ -28,6 +31,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     private function getLogger(Container $config)
     {
+        $config->logPath = "";
+        $config->statusPath = "";
         Logger::init($config);
         $instance = Logger::getInstance();
         $instance->setOutputter([new ConsoleOutputter()]);
@@ -35,13 +40,112 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         return new LoggerAdapter($instance);
     }
 
-    private function getRotatableLogger(Container $container)
+    private function getRotatableLogger(Container $config, int $status, int $size = null)
     {
+        $config->logPath = "dummy.log";
+        $config->statusPath = "dummy.status";
         Logger::init($config);
         $instance = Logger::getInstance();
         $instance->setOutputter([new ConsoleOutputter()]);
 
+        // IO処理をDI
+        $ioContainer = new Container();
+        $ioContainer->statusReader = function () use ($status) {
+            return new class($status)
+            {
+                private $reader;
+                public function __construct($status)
+                {
+                    $this->reader = new InputStreamReader(new StringInputStream($status));
+                }
+
+                public function read()
+                {
+                    $out = "";
+                    while (($data = $this->reader->read()) !== null) {
+                        $out .= $data;
+                    }
+
+                    return $out;
+                }
+            };
+        };
+        $ioContainer->statusWriter = function () {
+            return new OutputStreamWriter(new ConsoleOutputStream());
+        };
+        $ioContainer->logWriter = function () {
+            return new OutputStreamWriter(new ConsoleOutputStream());
+        };
+
+        // テスト用FileオブジェクトをDI
+        $logFile = new class($config->logPath, $size) extends File
+        {
+            private $size;
+            public function __construct($logPath, $size)
+            {
+                $this->size = $size;
+                parent::__construct($logPath);
+            }
+
+            public function renameTo($filepath)
+            {
+                echo $filepath;
+            }
+
+            public function exists()
+            {
+                return true;
+            }
+
+            public function size()
+            {
+                return $this->size;
+            }
+        };
+        $statusFile = new class($config->statusPath) extends File
+        {
+            public function delete()
+            {
+                return true;
+            }
+
+            public function exists()
+            {
+                return true;
+            }
+        };
+
+        $instance->inject('ioContainer', $ioContainer)
+                 ->inject('logFile', $logFile)
+                 ->inject('statusFile', $statusFile);
+
         return new LoggerAdapter($instance);
+    }
+
+    private function cycle2value($cycle)
+    {
+        $day_to_h = 24;
+        $week_to_h = $day_to_h * 7;
+        $month_to_h = $day_to_h * intval(date("t", time()));
+        $year_to_h = $day_to_h * 365;
+
+        $year = date("Y");
+        if (($year % 4 === 0 && $year % 100 !== 0) || $year % 400 === 0) {
+            $year_to_h = $day_to_h * 366;
+        }
+
+        switch (strtolower($cycle)) {
+            case 'day':
+                return $day_to_h;
+            case 'week':
+                return $week_to_h;
+            case 'month':
+                return $month_to_h;
+            case 'year':
+                return $year_to_h;
+            default:
+                return 0;
+        }
     }
 
     private function assertLog($level, $msg, $logLine)
@@ -65,6 +169,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $msg = "log message";
         $config = new Container(false);
+        $config->logPath = "";
         $config->logLevel = $this->toLogLevelValue($level);
         $config->format = "[%d{%Y-%m-%d %H:%M:%S.%f}][%5L] %m";
         $logger = $this->getLogger($config);
@@ -378,44 +483,120 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(trim($actual), $matches[1] . $messageWithSpace);
     }
 
-    // /**
-    //  * 正常系
-    //  * ログ設定ファイルにローテート設定が日単位かつ
-    //  * ログファイル作成日が24時間以内の場合、
-    //  * ログローテートは実行されないこと
-    //  * @test
-    //  * @dataProvider rotateCycleDayWithinProvider
-    //  */
-    // public function okRotateCycleWithinDay($rotateCycle, $hour)
-    // {
-    //     $config = new Container(false);
-    //     $config->logLevel = $this->toLogLevelValue("debug");
-    //     $config->format = "%m";
-    //     $config->rotateCycle = $rotateCycle;
-    //
-    //
-    //
-    //     $logger = $this->getLogger($config);
-    //
-    //     // 既存のステータスファイルは削除
-    //     $root = ServiceLocator::getInstance()->getContainer()->applicationInfo->applicationRoot;
-    //     $statusPath = $root . "/log/webstream.test.status";
-    //     if (file_exists($statusPath)) {
-    //         unlink($statusPath);
-    //     }
-    //     // 現在時刻より$hour時間前のUnixTimeを取得
-    //     $now = intval(preg_replace('/^.*\s/', '', microtime()));
-    //     $created_at = $now - 3600 * $hour;
-    //     $created_at_date = date("YmdHis", $created_at);
-    //     $now_date = date("YmdHis", $now);
-    //     // ローテートファイル名(作成されないが)
-    //     $rotatedLogPath = $root . "/log/webstream.test.${created_at_date}-${now_date}.log";
-    //     // テスト用のステータスファイルを作成
-    //     file_put_contents($statusPath, $created_at);
-    //     // ログ書き出し
-    //     $configPath = $this->getLogConfigPath() . "/" . $configPath;
-    //     $this->write("INFO", $configPath, "test");
-    //     // ローテートされたかチェック
-    //     $this->assertFalse(file_exists($rotatedLogPath));
-    // }
+    /**
+     * 正常系
+     * ローテート設定が
+     * 日単位かつログファイル作成日24時間以内の場合、
+     * 週単位かつログファイル作成日が1週間以内の場合、
+     * 月単位かつログファイル作成日が1ヶ月以内の場合、
+     * 年単位かつログファイル作成日が1年以内の場合、
+     * ログローテートは実行されないこと
+     * @test
+     * @dataProvider unRotateByCycleProvider
+     */
+    public function okUnRotateByCycle($rotateCycle, $hour)
+    {
+        $message = "hoge";
+        $config = new Container(false);
+        $config->logLevel = $this->toLogLevelValue("debug");
+        $config->format = "%m";
+        $config->rotateCycle = $this->cycle2value($rotateCycle);
+
+        // 現在時刻より$hour時間前のUnixTimeを取得
+        $now = intval(preg_replace('/^.*\s/', '', microtime()));
+        $createdAt = $now - 3600 * $hour;
+        $createdAtDate = date("YmdHis", $createdAt);
+        $nowDate = date("YmdHis", $now);
+
+        $logger = $this->getRotatableLogger($config, $createdAt);
+        $logger->info($message);
+
+        $this->expectOutputString($message . PHP_EOL);
+    }
+
+    /**
+     * 正常系
+     * ローテート設定が
+     * 日単位かつログファイル作成日が24時間以上の場合、
+     * 週単位かつログファイル作成日が1週間以上の場合、
+     * 月単位かつログファイル作成日が1ヶ月以上の場合、
+     * 年単位かつログファイル作成日が1年以上の場合、
+     * ログローテートが実行されること
+     * @test
+     * @dataProvider rotateByCycleProvider
+     */
+    public function okRotateByCycle($rotateCycle, $hour)
+    {
+        $message = "hoge";
+        $config = new Container(false);
+        $config->logLevel = $this->toLogLevelValue("debug");
+        $config->format = "%m";
+        $config->rotateCycle = $this->cycle2value($rotateCycle);
+
+        // 現在時刻より$hour時間前のUnixTimeを取得
+        $now = intval(preg_replace('/^.*\s/', '', microtime()));
+        $createdAt = $now - 3600 * $hour;
+        $createdAtDate = date("YmdHis", $createdAt);
+        $nowDate = date("YmdHis", $now);
+
+        $logger = $this->getRotatableLogger($config, $createdAt);
+        $logger->info($message);
+
+        $rotatedLogFile = "dummy.${createdAtDate}-${nowDate}.log";
+        // ログローテートが発生するとファイル名を出力する設定にしている
+        $this->expectOutputString($rotatedLogFile . $message . PHP_EOL);
+    }
+
+    /**
+     * 正常系
+     * ログ設定ファイルにローテート設定(サイズ単位)されていて、現在のログサイズが
+     * 指定値より小さい場合、ログローテートが実行されないこと
+     * @test
+     * @dataProvider unRotateBySizeProvider
+     */
+    public function okUnRotateBySize($rotateSize, $writeSize)
+    {
+        $config = new Container(false);
+        $config->logLevel = $this->toLogLevelValue("debug");
+        $config->format = "%m";
+        $config->rotateSize = $rotateSize; // KB単位
+
+        $now = intval(preg_replace('/^.*\s/', '', microtime()));
+        $logger = $this->getRotatableLogger($config, $now, $writeSize);
+        $message = "";
+        for ($i = 0; $i < $writeSize; $i++) {
+            $message .= "a";
+        }
+        $logger->info($message);
+
+        $this->expectOutputString($message . PHP_EOL);
+    }
+
+    /**
+     * 正常系
+     * ログ設定ファイルにローテート設定(サイズ単位)されていて、現在のログサイズが
+     * 指定値より以上の場合、ログローテートが実行されること
+     * @test
+     * @dataProvider rotateBySizeProvider
+     */
+    public function okRotateBySize($rotateSize, $writeSize)
+    {
+        $config = new Container(false);
+        $config->logLevel = $this->toLogLevelValue("debug");
+        $config->format = "%m";
+        $config->rotateSize = $rotateSize; // KB単位
+
+        $now = intval(preg_replace('/^.*\s/', '', microtime()));
+        $logger = $this->getRotatableLogger($config, $now, $writeSize);
+        $message = "";
+        for ($i = 0; $i < $writeSize; $i++) {
+            $message .= "a";
+        }
+        $logger->info($message);
+
+        $nowDate = date("YmdHis", $now);
+        $rotatedLogFile = "dummy.${nowDate}-${nowDate}.log";
+
+        $this->expectOutputString($rotatedLogFile . $message . PHP_EOL);
+    }
 }

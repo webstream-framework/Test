@@ -217,11 +217,57 @@ trait LoggerProvider
         ];
     }
 
-    public function rotateCycleDayWithinProvider()
+    public function unRotateByCycleProvider()
     {
+        $day_of_year = 24 * 365;
+        $year = date("Y");
+        if (($year % 4 === 0 && $year % 100 !== 0) || $year % 400 === 0) {
+            $day_of_year = 24 * 366;
+        }
+
         return [
             ["day", 1],
-            ["day", 23]
+            ["day", 23],
+            ["week", 24],
+            ["week", 24 * 7 - 1],
+            ["month", 24 * intval(date("t", time())) - 1],
+            ["year", $day_of_year - 1]
+        ];
+    }
+
+    public function rotateByCycleProvider()
+    {
+        $day_of_month = intval(date("t", time()));
+        $day_of_year = 24 * 365;
+        $year = date("Y");
+        if (($year % 4 === 0 && $year % 100 !== 0) || $year % 400 === 0) {
+            $day_of_year = 24 * 366;
+        }
+
+        return [
+            ["day", 24],
+            ["day", 25],
+            ["week", 24 * 7],
+            ["week", 24 * 7 + 1],
+            ["month", 24 * $day_of_month],
+            ["month", 24 * $day_of_month + 1],
+            ["year", $day_of_year],
+            ["year", $day_of_year + 1]
+        ];
+    }
+
+    public function unRotateBySizeProvider()
+    {
+        return [
+            [1, 1023]
+        ];
+    }
+
+    public function rotateBySizeProvider()
+    {
+        return [
+            [1, 1024],
+            [1, 1025]
         ];
     }
 }
