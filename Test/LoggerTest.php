@@ -49,8 +49,8 @@ class LoggerTest extends TestBase
 
     private function getConfig($filepath)
     {
-        $manager = new LoggerConfigurationManager();
-        $manager->load($filepath);
+        $manager = new LoggerConfigurationManager($filepath);
+        $manager->load();
 
         return $manager->getConfig();
     }

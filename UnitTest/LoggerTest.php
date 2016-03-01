@@ -3,6 +3,7 @@ namespace WebStream\Test\UnitTest;
 
 use WebStream\Log\Logger;
 use WebStream\Log\LoggerAdapter;
+use WebStream\Log\LoggerConfigurationManager;
 use WebStream\Log\Outputter\ConsoleOutputter;
 use WebStream\IO\File;
 use WebStream\IO\StringInputStream;
@@ -485,6 +486,42 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * 正常系
+     * ログの書き出しタイミングを制御できること
+     * @test
+     * @dataProvider writeTimingProvider
+     */
+    public function okLoggerWriteTiming($isLazy, $msg1, $msg2, $msg3, $result)
+    {
+        $config = new Container(false);
+        $config->logLevel = $this->toLogLevelValue("debug");
+        $config->format = "%m";
+        $config->logPath = "";
+        $config->statusPath = "";
+        Logger::init($config);
+        $instance = Logger::getInstance();
+        $outputter = new ConsoleOutputter(1);
+        if ($isLazy) {
+            $outputter->enableLazyWrite();
+        } else {
+            $outputter->enableDirectWrite();
+        }
+        $instance->setOutputter([$outputter]);
+
+        $logger = new LoggerAdapter($instance);
+        ob_start();
+        $logger->debug($msg1);
+        echo $msg2 . PHP_EOL;
+        $logger->debug($msg3);
+        if ($isLazy) {
+            $logger->debug(""); // バッファを溢れさせる
+        }
+        $actual = ob_get_clean();
+
+        $this->assertEquals($actual, $result);
+    }
+
+    /**
+     * 正常系
      * ローテート設定が
      * 日単位かつログファイル作成日24時間以内の場合、
      * 週単位かつログファイル作成日が1週間以内の場合、
@@ -598,5 +635,90 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $rotatedLogFile = "dummy.${nowDate}-${nowDate}.log";
 
         $this->expectOutputString($rotatedLogFile . $message . PHP_EOL);
+    }
+
+    /**
+     * 正常系
+     * ログ設定を読み込めること
+     * @test
+     * @dataProvider loggerConfigurationProvider
+     */
+    public function okLoggerConfiguration($config)
+    {
+        $ioContainer = new Container();
+        $ioContainer->file = function () {
+            $filePath = "dummy";
+            return new class($filePath) extends File
+            {
+                public function __construct($filePath)
+                {
+                    parent::__construct($filePath);
+                }
+
+                public function isFile()
+                {
+                    return true;
+                }
+
+                public function exists()
+                {
+                    return true;
+                }
+            };
+        };
+
+        $manager = new LoggerConfigurationManager($config);
+        $manager->inject('ioContainer', $ioContainer);
+        $manager->load();
+
+        $this->assertInstanceOf('\WebStream\Module\Container', $manager->getConfig());
+    }
+
+    /**
+     * 異常系
+     * ログ設定に誤りがある場合、例外が発生すること
+     * @test
+     * @dataProvider loggerConfigurationErrorProvider
+     * @expectedException WebStream\Exception\Extend\LoggerException
+     */
+    public function ngLoggerConfiguration($config, $fileConfig = null)
+    {
+        $ioContainer = new Container();
+        $ioContainer->file = function () use ($fileConfig) {
+            $filePath = "dummy";
+            return new class($filePath, $fileConfig) extends File
+            {
+                private $fileConfig;
+                public function __construct($filePath, $fileConfig)
+                {
+                    $this->fileConfig = $fileConfig;
+                    parent::__construct($filePath);
+                }
+
+                public function isFile()
+                {
+                    if ($this->fileConfig !== null && array_key_exists("isFile", $this->fileConfig)) {
+                        return $this->fileConfig["isFile"];
+                    } else {
+                        return true;
+                    }
+                }
+
+                public function exists()
+                {
+                    if ($this->fileConfig !== null && array_key_exists("exists", $this->fileConfig)) {
+                        return $this->fileConfig["exists"];
+                    } else {
+                        return true;
+                    }
+                }
+            };
+        };
+
+        $manager = new LoggerConfigurationManager($config);
+        $manager->inject('ioContainer', $ioContainer);
+        $manager->load();
+
+        $this->assertTrue(false);
     }
 }

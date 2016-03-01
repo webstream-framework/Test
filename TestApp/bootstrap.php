@@ -132,8 +132,8 @@ require_once dirname(__FILE__) . '/core/WebStream/Core/CoreView.php';
 date_default_timezone_set('Asia/Tokyo');
 
 // ロガー設定を読み込む
-$manager = new LoggerConfigurationManager();
-$manager->load('config/log.ini');
+$manager = new LoggerConfigurationManager('config/log.ini');
+$manager->load();
 
 // ロガーを初期化
 Logger::init($manager->getConfig());

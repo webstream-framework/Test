@@ -217,6 +217,14 @@ trait LoggerProvider
         ];
     }
 
+    public function writeTimingProvider()
+    {
+        return [
+            [true, "b", "a", "a", "a".PHP_EOL."b".PHP_EOL."a".PHP_EOL],
+            [false,"b", "a", "a", "b".PHP_EOL."a".PHP_EOL."a".PHP_EOL]
+        ];
+    }
+
     public function unRotateByCycleProvider()
     {
         $day_of_year = 24 * 365;
@@ -268,6 +276,34 @@ trait LoggerProvider
         return [
             [1, 1024],
             [1, 1025]
+        ];
+    }
+
+    public function loggerConfigurationProvider()
+    {
+        return [
+            [['level' => 'info']],
+            [['level' => 'info', 'rotate_cycle' => 'day']],
+            [['level' => 'info', 'rotate_cycle' => 'week']],
+            [['level' => 'info', 'rotate_cycle' => 'month']],
+            [['level' => 'info', 'rotate_cycle' => 'year']],
+            [['level' => 'info', 'application_name' => 'hoge']],
+            [['level' => 'info', 'format' => 'hoge']] // formatはここでは検査しない
+        ];
+    }
+
+
+    public function loggerConfigurationErrorProvider()
+    {
+        return [
+            [null],
+            [[]], // path notfound
+            [["path" => "dummy"]], // level notfound
+            [["path" => "dummy", "level" => "dummy"]], // invalid level
+            [["path" => "dummy", "level" => "info"], ["isFile" => false]],
+            [["path" => "dummy", "level" => "info"], ["exists" => false]],
+            [["path" => "dummy", "level" => "info", "rotate_cycle" => "dummy"]],
+            [["path" => "dummy", "level" => "info", "rotate_size" => "dummy"]]
         ];
     }
 }
