@@ -82,4 +82,19 @@ class OutputStreamWriterTest extends \PHPUnit_Framework_TestCase
         $osw->flush();
         $osw->close();
     }
+
+    /**
+     * 正常系
+     * 改行を書き出せること
+     * @test
+     */
+    public function okNewLine()
+    {
+        $cos = new ConsoleOutputStream();
+        $osw = new OutputStreamWriter($cos);
+        $osw->newLine();
+        $this->expectOutputString(PHP_EOL);
+        $osw->flush();
+        $osw->close();
+    }
 }
