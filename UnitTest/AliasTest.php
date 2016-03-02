@@ -310,4 +310,90 @@ class AliasTest extends \PHPUnit_Framework_TestCase
 
         $this->expectOutputString($response);
     }
+
+    /**
+     * 異常系
+     * エイリアスメソッド名が不正な場合、例外が発生すること
+     * @test
+     * @dataProvider aliasAccessErrorProvider
+     */
+    public function ngAliasAccess($path, $ca)
+    {
+        $container = new Container();
+        $container->request = $this->getRequest($path);
+        $container->router = $this->getRouter([$path => $ca], $container->request);
+        $container->response = $this->getResponse();
+        $container->session = $this->getSession();
+        $container->logger = $this->getLogger();
+        $container->applicationInfo = $this->getApplicationInfo();
+        $container->annotationDelegator = $this->getAnnotationDelegator($container);
+
+        $container->coreDelegator = new class($container) extends CoreDelegator
+        {
+            private $container;
+            public function __construct($container)
+            {
+                parent::__construct($container);
+                $this->container = $container;
+            }
+
+            public function getController()
+            {
+                return new class($this->container) extends CoreController
+                {
+                    /**
+                     * @Alias(name="12345")
+                     */
+                    public function originMethod1()
+                    {
+                    }
+
+                    public function originMethod2()
+                    {
+                        $this->UnitTest->originMethod2();
+                    }
+                };
+            }
+
+            public function getService()
+            {
+                return new class($this->container) extends CoreService
+                {
+                    /**
+                     * @Alias(name="12345")
+                     */
+                    public function originMethod2()
+                    {
+                    }
+
+                    public function originMethod3()
+                    {
+                        $this->UnitTest->originMethod3();
+                    }
+                };
+            }
+
+            public function getModel()
+            {
+                $model = new class($this->container) extends CoreModel
+                {
+                    /**
+                     * @Alias(name="12345")
+                     */
+                    public function originMethod3()
+                    {
+                    }
+                };
+
+                return $model;
+            }
+        };
+
+        ob_start();
+        $app = new Application($container);
+        $app->run();
+        $actual = ob_get_clean();
+
+        $this->assertEquals($actual, 500);
+    }
 }

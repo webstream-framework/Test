@@ -26,4 +26,13 @@ trait AliasProvider
             ["/test", "unit_test#alias_method3", "originMethod3"]
         ];
     }
+
+    public function aliasAccessErrorProvider()
+    {
+        return [
+            ["/test", "unit_test#origin_method1"],
+            ["/test", "unit_test#origin_method2"],
+            ["/test", "unit_test#origin_method3"]
+        ];
+    }
 }

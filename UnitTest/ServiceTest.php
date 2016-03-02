@@ -296,5 +296,4 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $app = new Application($container);
         $app->run();
     }
-
 }
