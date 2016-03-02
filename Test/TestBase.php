@@ -131,8 +131,8 @@ class TestBase extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $manager = new \WebStream\Log\LoggerConfigurationManager();
-        $manager->load($this->getLogConfigPath() . "/log.test.debug.ok.ini");
+        $manager = new \WebStream\Log\LoggerConfigurationManager($this->getLogConfigPath() . "/log.test.debug.ok.ini");
+        $manager->load();
         Logger::init($manager->getConfig());
         $this->autoLoad();
     }
