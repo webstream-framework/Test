@@ -513,7 +513,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         echo $msg2 . PHP_EOL;
         $logger->debug($msg3);
         if ($isLazy) {
-            $logger->debug(""); // バッファを溢れさせる
+            $logger->enableDirectWrite(); // バッファをクリアする
         }
         $actual = ob_get_clean();
 
