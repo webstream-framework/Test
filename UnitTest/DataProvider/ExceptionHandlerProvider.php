@@ -12,16 +12,12 @@ trait ExceptionHandlerProvider
     public function excecptionProvider()
     {
         return [
-            ["/test", "unit_test#validate_exception", "validator error"],
-            ["/test", "unit_test#forbidden_access_exception", "forbidden access error"],
-            ["/test", "unit_test#session_timeout_exception", "session timeout error"],
-            ["/test", "unit_test#invalid_request_exception", "invalid request error"],
-            ["/test", "unit_test#csrf_exception", "csrf error"],
-            ["/test", "unit_test#resource_not_found_exception", "resource notfound error"],
-            ["/test", "unit_test#class_not_found_exception", "class notfound error"],
-            ["/test", "unit_test#method_not_found_exception", "method notfound error"],
-            ["/test", "unit_test#annotation_exception", "annotation error"],
-            ["/test", "unit_test#router_exception", "router error"],
+            [1, "/test", "unit_test#exception_action", "exceptionAction"],
+            [2, "/test", "unit_test#exception_action", "exceptionAction"],
+            [3, "/test", "unit_test#exception_action1", "exceptionAction1"],
+            [3, "/test", "unit_test#exception_action2", "exceptionAction2"],
+            [4, "/test", "unit_test#exception_action1", "exceptionAction1"],
+            [4, "/test", "unit_test#exception_action2", "exceptionAction2"],
         ];
     }
 }

@@ -31,10 +31,10 @@ trait ServiceProvider
         ];
     }
 
-    public function notRunServiceAndModelProvider()
+    public function notRunModelProvider()
     {
         return [
-            ["/test", "unit_test#test_notfound_service_and_notfound_model"]
+            ["/test", "unit_test#action", "WebStream\Delegate\CoreExceptionDelegator500"]
         ];
     }
 }

@@ -13,15 +13,7 @@ use WebStream\Http\Response;
 use WebStream\Annotation\ExceptionHandler;
 use WebStream\Exception\ApplicationException;
 use WebStream\Exception\Extend\ValidateException;
-use WebStream\Exception\Extend\ForbiddenAccessException;
-use WebStream\Exception\Extend\SessionTimeoutException;
-use WebStream\Exception\Extend\InvalidRequestException;
-use WebStream\Exception\Extend\CsrfException;
-use WebStream\Exception\Extend\ResourceNotFoundException;
-use WebStream\Exception\Extend\ClassNotFoundException;
-use WebStream\Exception\Extend\MethodNotFoundException;
-use WebStream\Exception\Extend\AnnotationException;
-use WebStream\Exception\Extend\RouterException;
+use WebStream\Exception\Extend\IOException;
 use WebStream\Test\UnitTest\DataProvider\ExceptionHandlerProvider;
 
 require_once dirname(__FILE__) . '/TestBase.php';
@@ -111,7 +103,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         return $appContainer;
     }
 
-    private function getCoreDelegator(Container $container)
+    private function getCoreDelegator1(Container $container)
     {
         return new class($container) extends CoreDelegator
         {
@@ -126,147 +118,124 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
             {
                 return new class($this->container) extends CoreController
                 {
-                    public function validateException()
+                    public function exceptionAction()
+                    {
+                        throw new ApplicationException("message");
+                    }
+
+                    /**
+                     * @ExceptionHandler("WebStream\Exception\ApplicationException")
+                     */
+                    public function error($params)
+                    {
+                        echo $params["method"];
+                    }
+                };
+            }
+        };
+    }
+
+    private function getCoreDelegator2(Container $container)
+    {
+        return new class($container) extends CoreDelegator
+        {
+            private $container;
+            public function __construct($container)
+            {
+                parent::__construct($container);
+                $this->container = $container;
+            }
+
+            public function getController()
+            {
+                return new class($this->container) extends CoreController
+                {
+                    public function exceptionAction()
                     {
                         throw new ValidateException();
                     }
 
-                    public function forbiddenAccessException()
+                    /**
+                     * @ExceptionHandler("WebStream\Exception\ApplicationException")
+                     */
+                    public function error($params)
                     {
-                        throw new ForbiddenAccessException();
+                        echo $params["method"];
+                    }
+                };
+            }
+        };
+    }
+
+    private function getCoreDelegator3(Container $container)
+    {
+        return new class($container) extends CoreDelegator
+        {
+            private $container;
+            public function __construct($container)
+            {
+                parent::__construct($container);
+                $this->container = $container;
+            }
+
+            public function getController()
+            {
+                return new class($this->container) extends CoreController
+                {
+                    public function exceptionAction1()
+                    {
+                        throw new ValidateException();
                     }
 
-                    public function sessionTimeoutException()
+                    public function exceptionAction2()
                     {
-                        throw new SessionTimeoutException();
-                    }
-
-                    public function invalidRequestException()
-                    {
-                        throw new InvalidRequestException();
-                    }
-
-                    public function csrfException()
-                    {
-                        throw new CsrfException();
-                    }
-
-                    public function resourceNotFoundException()
-                    {
-                        throw new ResourceNotFoundException();
-                    }
-
-                    public function classNotFoundException()
-                    {
-                        throw new ClassNotFoundException();
-                    }
-
-                    public function methodNotFoundException()
-                    {
-                        throw new MethodNotFoundException();
-                    }
-
-                    public function annotationException()
-                    {
-                        throw new AnnotationException();
-                    }
-
-                    public function routerException()
-                    {
-                        throw new RouterException();
-                    }
-
-                    public function applicationException()
-                    {
-                        throw new ApplicationException();
+                        throw new IOException();
                     }
 
                     /**
                      * @ExceptionHandler("WebStream\Exception\Extend\ValidateException")
+                     * @ExceptionHandler("WebStream\Exception\Extend\IOException")
                      */
-                    public function validateError($params)
+                    public function error($params)
                     {
-                        echo "validator error";
+                        echo $params["method"];
+                    }
+                };
+            }
+        };
+    }
+
+    private function getCoreDelegator4(Container $container)
+    {
+        return new class($container) extends CoreDelegator
+        {
+            private $container;
+            public function __construct($container)
+            {
+                parent::__construct($container);
+                $this->container = $container;
+            }
+
+            public function getController()
+            {
+                return new class($this->container) extends CoreController
+                {
+                    public function exceptionAction1()
+                    {
+                        throw new ValidateException();
+                    }
+
+                    public function exceptionAction2()
+                    {
+                        throw new IOException();
                     }
 
                     /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\ForbiddenAccessException")
+                     * @ExceptionHandler({"WebStream\Exception\Extend\ValidateException", "WebStream\Exception\Extend\IOException"})
                      */
-                    public function forbiddenAccessError($params)
+                    public function error($params)
                     {
-                        echo "forbidden access error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\SessionTimeoutException")
-                     */
-                    public function sessionTimeoutError($params)
-                    {
-                        echo "session timeout error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\InvalidRequestException")
-                     */
-                    public function invalidRequestError($params)
-                    {
-                        echo "invalid request error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\CsrfException")
-                     */
-                    public function csrfError($params)
-                    {
-                        echo "csrf error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\ResourceNotFoundException")
-                     */
-                    public function resourceNotfoundError($params)
-                    {
-                        echo "resource notfound error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\ClassNotFoundException")
-                     */
-                    public function classNotFoundError($params)
-                    {
-                        echo "class notfound error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\MethodNotFoundException")
-                     */
-                    public function methodNotFoundError($params)
-                    {
-                        echo "method notfound error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\AnnotationException")
-                     */
-                    public function annotationError($params)
-                    {
-                        echo "annotation error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\RouterException")
-                     */
-                    public function routerError($params)
-                    {
-                        echo "router error";
-                    }
-
-                    /**
-                     * @ExceptionHandler("WebStream\Exception\Extend\ApplicationException")
-                     */
-                    public function applicationError($params)
-                    {
-                        echo "application error";
+                        echo $params["method"];
                     }
                 };
             }
@@ -280,11 +249,11 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * 正常系
-     *
+     * 発生した例外を捕捉できること
      * @test
      * @dataProvider excecptionProvider
      */
-    public function okExcecptionHandler($path, $ca, $response)
+    public function okExcecptionHandler($no, $path, $ca, $response)
     {
         $container = new Container();
         $container->request = $this->getRequest($path);
@@ -293,7 +262,8 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         $container->session = $this->getSession();
         $container->logger = $this->getLogger();
         $container->applicationInfo = $this->getApplicationInfo();
-        $container->coreDelegator = $this->getCoreDelegator($container);
+        $coreDelegatorMethodName = "getCoreDelegator" . $no;
+        $container->coreDelegator = $this->{$coreDelegatorMethodName}($container);
         $container->annotationDelegator = $this->getAnnotationDelegator($container);
 
         $app = new Application($container);
@@ -301,5 +271,4 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->expectOutputString($response);
     }
-
 }

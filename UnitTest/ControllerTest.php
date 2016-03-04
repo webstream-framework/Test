@@ -139,6 +139,12 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
                         echo $this->request->put['name'];
                     }
 
+                    public function testNotfoundServiceAndNotfoundModel()
+                    {
+                        echo get_class($this->UnitTest);
+                        $this->UnitTest->testNotfoundServiceAndNotfoundModel();
+                    }
+
                     public function __call($name, $args) {}
                 };
             }
@@ -268,6 +274,33 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         $container->request = $this->getRequest($notfoundPath);
+        $container->router = $this->getRouter([$path => $ca], $container->request);
+        $container->response = $this->getResponse();
+        $container->session = $this->getSession();
+        $container->logger = $this->getLogger();
+        $container->applicationInfo = $this->getApplicationInfo();
+        $container->coreDelegator = $this->getCoreDelegator($container);
+        $container->annotationDelegator = $this->getAnnotationDelegator($container);
+
+        ob_start();
+        $app = new Application($container);
+        $app->run();
+        $actual = ob_get_clean();
+
+        $this->assertEquals($actual, $response);
+    }
+
+    /**
+     * 異常系
+     * Controllerから存在しないServiceにアクセスし、Modelも存在しない場合、
+     * ModelオブジェクトはWebStream\Delegate\CoreExceptionDelegatorで、ステータスコードが500になること
+     * @test
+     * @dataProvider notRunServiceAndModelProvider
+     */
+    public function ngNotRunServiceAndModel($path, $ca, $response)
+    {
+        $container = new Container();
+        $container->request = $this->getRequest($path);
         $container->router = $this->getRouter([$path => $ca], $container->request);
         $container->response = $this->getResponse();
         $container->session = $this->getSession();

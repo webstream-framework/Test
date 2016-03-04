@@ -62,7 +62,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         return new class() {
             public function __call($name, $args) {}
             public function move($statusCode) {
-                throw new \Exception($statusCode);
+                echo $statusCode;
             }
         };
     }
@@ -196,6 +196,42 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         };
     }
 
+    private function getCoreDelegator2(Container $container)
+    {
+        return new class($container) extends CoreDelegator
+        {
+            private $container;
+            public function __construct($container)
+            {
+                parent::__construct($container);
+                $this->container = $container;
+            }
+
+            public function getController()
+            {
+                return new class($this->container) extends CoreController
+                {
+                    public function action()
+                    {
+                        $this->UnitTest->serviceAction();
+                    }
+                };
+            }
+
+            public function getService()
+            {
+                return new class($this->container) extends CoreService
+                {
+                    public function serviceAction()
+                    {
+                        echo get_class($this->UnitTest);
+                        $this->UnitTest->modelAction();
+                    }
+                };
+            }
+        };
+    }
+
     private function getAnnotationDelegator(Container $container)
     {
         return new AnnotationDelegator($container);
@@ -275,13 +311,12 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * 異常系
-     * Controllerから存在しないServiceにアクセスし、Modelも存在しない場合、ステータスコードが500になること
+     * Serviceから存在しないModelにアクセスした場合、
+     * ModelオブジェクトはWebStream\Delegate\CoreExceptionDelegatorで、ステータスコードが500になること
      * @test
-     * @dataProvider notRunServiceAndModelProvider
-     * @expectedException \Exception
-     * @expectedExceptionMessage(500)
+     * @dataProvider notRunModelProvider
      */
-    public function ngNotRunServiceAndModel($path, $ca)
+    public function ngNotRunModel($path, $ca, $response)
     {
         $container = new Container();
         $container->request = $this->getRequest($path);
@@ -290,10 +325,14 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $container->session = $this->getSession();
         $container->logger = $this->getLogger();
         $container->applicationInfo = $this->getApplicationInfo();
-        $container->coreDelegator = $this->getCoreDelegator($container);
+        $container->coreDelegator = $this->getCoreDelegator2($container);
         $container->annotationDelegator = $this->getAnnotationDelegator($container);
 
+        ob_start();
         $app = new Application($container);
         $app->run();
+        $actual = ob_get_clean();
+
+        $this->assertEquals($actual, $response);
     }
 }

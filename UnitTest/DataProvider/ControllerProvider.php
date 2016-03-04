@@ -52,4 +52,11 @@ trait ControllerProvider
             ["/test", "unit_test#test", "/notfound", 404]
         ];
     }
+
+    public function notRunServiceAndModelProvider()
+    {
+        return [
+            ["/test", "unit_test#test_notfound_service_and_notfound_model", "WebStream\Delegate\CoreExceptionDelegator500"]
+        ];
+    }
 }
