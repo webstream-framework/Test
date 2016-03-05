@@ -114,27 +114,105 @@ class HelperTest extends \PHPUnit_Framework_TestCase
                     public function testFoundHelper()
                     {
                     }
+
+                    /**
+                     * @Template("test.tmpl")
+                     */
+                    public function testHtmlEscape()
+                    {
+                    }
+
+                    /**
+                     * @Template("test.tmpl")
+                     */
+                    public function testJavascriptEscape()
+                    {
+                    }
                 };
             }
 
             public function getView()
             {
-                return new class($this->container) extends CoreView
-                {
-                    public function draw(array $params)
-                    {
-                        $container = new Container(false);
-                        $templateEngine = new class($container) extends Basic
+                $testNo = $this->container->testNo;
+                switch ($testNo) {
+                    case 1:
+                        return new class($this->container) extends CoreView
                         {
-                            public function render(array $params)
+                            public function draw(array $params)
                             {
-                                $params["helper"]->getName();
+                                $container = new Container(false);
+                                $templateEngine = new class($container) extends Basic
+                                {
+                                    public function render(array $params)
+                                    {
+                                        $params["helper"]->getName();
+                                    }
+                                };
+
+                                $templateEngine->render($params);
                             }
                         };
+                    case 2:
+                        return new class($this->container) extends CoreView
+                        {
+                            private $container;
+                            public function __construct(Container $container)
+                            {
+                                parent::__construct($container);
+                                $this->container = $container;
+                            }
 
-                        $templateEngine->render($params);
-                    }
-                };
+                            public function draw(array $params)
+                            {
+                                $container = $this->container;
+                                $templateEngine = new class($container) extends Basic
+                                {
+                                    private $container;
+                                    public function __construct(Container $container)
+                                    {
+                                        $this->container = $container;
+                                    }
+
+                                    public function render(array $params)
+                                    {
+                                        $params["helper"]->safetyHtml($this->container->testStr);
+                                    }
+                                };
+
+                                $templateEngine->render($params);
+                            }
+                        };
+                    case 3:
+                        return new class($this->container) extends CoreView
+                        {
+                            private $container;
+                            public function __construct(Container $container)
+                            {
+                                parent::__construct($container);
+                                $this->container = $container;
+                            }
+
+                            public function draw(array $params)
+                            {
+                                $container = $this->container;
+                                $templateEngine = new class($container) extends Basic
+                                {
+                                    private $container;
+                                    public function __construct(Container $container)
+                                    {
+                                        $this->container = $container;
+                                    }
+
+                                    public function render(array $params)
+                                    {
+                                        $params["helper"]->safetyJavaScript($this->container->testStr);
+                                    }
+                                };
+
+                                $templateEngine->render($params);
+                            }
+                        };
+                }
             }
 
             public function getHelper()
@@ -144,6 +222,16 @@ class HelperTest extends \PHPUnit_Framework_TestCase
                     public function getName()
                     {
                         echo "h";
+                    }
+
+                    public function safetyHtml($html)
+                    {
+                        echo $this->encodeHtml($html);
+                    }
+
+                    public function safetyJavaScript($js)
+                    {
+                        echo $this->encodeJavaScript($js);
                     }
                 };
             }
@@ -159,11 +247,12 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      * 正常系
      * Helperにアクセスできること
      * @test
-     * @dataProvider runHelperTemplateProvider
+     * @dataProvider helperTemplateProvider
      */
-    public function okRunViewTemplate($path, $ca, $response)
+    public function okHelperTemplate($no, $path, $ca, $response)
     {
         $container = new Container();
+        $container->testNo = $no;
         $container->request = $this->getRequest($path);
         $container->router = $this->getRouter([$path => $ca], $container->request);
         $container->response = $this->getResponse();
@@ -177,5 +266,31 @@ class HelperTest extends \PHPUnit_Framework_TestCase
         $app->run();
 
         $this->expectOutputString($response);
+    }
+
+    /**
+     * 正常系
+     * HelperによりHTML、JavaScriptコードをエスケープできること
+     * @test
+     * @dataProvider helperEncodeProvider
+     */
+    public function okHelperEncode($no, $path, $ca, $str, $escapedStr)
+    {
+        $container = new Container();
+        $container->testNo = $no;
+        $container->testStr = $str;
+        $container->request = $this->getRequest($path);
+        $container->router = $this->getRouter([$path => $ca], $container->request);
+        $container->response = $this->getResponse();
+        $container->session = $this->getSession();
+        $container->logger = $this->getLogger();
+        $container->applicationInfo = $this->getApplicationInfo();
+        $container->coreDelegator = $this->getCoreDelegator($container);
+        $container->annotationDelegator = $this->getAnnotationDelegator($container);
+
+        $app = new Application($container);
+        $app->run();
+
+        $this->expectOutputString($escapedStr);
     }
 }
