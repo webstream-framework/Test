@@ -13,9 +13,19 @@ class AutowiredTest2 implements CoreInterface, IAnnotatable
      */
     private $dummy;
 
-    public function __construct(Container $container) {}
+    public function __construct(Container $container)
+    {
+    }
 
-    public function __destruct() {}
+    public function __destruct()
+    {
+    }
 
-    public function __initialize(Container $container) {}
+    public function __initialize(Container $container)
+    {
+    }
+
+    public function __customAnnotation(array $annotation)
+    {
+    }
 }
