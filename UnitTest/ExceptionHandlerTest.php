@@ -29,11 +29,6 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 {
     use ExceptionHandlerProvider, ApplicationUtils;
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     private function getLogger()
     {
         return new class() { function __call($name, $args) {} };
