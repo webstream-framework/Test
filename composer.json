@@ -2,6 +2,12 @@
     "require": {
         "phpunit/phpunit": "5.*",
         "phing/phing": "2.*",
-        "codeclimate/php-test-reporter": "dev-master"
+        "codeclimate/php-test-reporter": "dev-master",
+        "psr/log": "1.0.0",
+        "doctrine/annotations": "1.2.*",
+        "doctrine/dbal": "2.5.*",
+        "twig/twig": "1.*",
+        "mustangostang/spyc": "*",
+        "leafo/lessphp": "*"
     }
 }
