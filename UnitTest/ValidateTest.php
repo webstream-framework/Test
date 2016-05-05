@@ -33,12 +33,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
     private function getLogger()
     {
-        return new class()
- {
-     function __call($name, $args)
-     {
-     }
- };
+        return new class() { function __call($name, $args) {} };
     }
 
     private function getRequest($pathInfo)
@@ -69,46 +64,35 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
     private function getResponse()
     {
-        return new class()
- {
-     public function __call($name, $args)
-     {
-     }
-     public function move($statusCode)
-     {
-         echo $statusCode;
-     }
- };
+        return new class() {
+            public function __call($name, $args) {}
+            public function move($statusCode)
+            {
+                echo $statusCode;
+            }
+        };
     }
 
     private function getStaticFileResponse()
     {
-        return new class()
- {
-     public function __call($name, $args)
-     {
-     }
-     public function displayFile($filename)
-     {
-         echo $filename;
-     }
- };
+        return new class() {
+            public function __call($name, $args) {}
+            public function displayFile($filename)
+            {
+                echo $filename;
+            }
+        };
     }
 
     private function getSession()
     {
-        return new class()
- {
-     function __call($name, $args)
-     {
-     }
- };
+        return new class() { function __call($name, $args) {} };
     }
 
     private function getApplicationInfo()
     {
         $applicationRoot = $this->getApplicationRoot();
-        $appContainer = function () use ($applicationRoot) {
+        $appContainer = function() use ($applicationRoot) {
             $info = new Container();
             $info->applicationRoot = $applicationRoot;
             $info->applicationDir = "app";
@@ -127,19 +111,19 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     private function getCoreDelegator(Container $container)
     {
         return new class($container) extends CoreDelegator
- {
-     private $container;
-     public function __construct($container)
-     {
-         parent::__construct($container);
-         $this->container = $container;
-     }
+        {
+            private $container;
+            public function __construct($container)
+            {
+                parent::__construct($container);
+                $this->container = $container;
+            }
 
-     public function getController()
-     {
-         return new class($this->container) extends CoreController
- {
-     /**
+            public function getController()
+            {
+                return new class($this->container) extends CoreController
+                {
+                    /**
                      * @Validate(key="test", rule="required", method="get")
                      */
                     public function getRequired()
@@ -751,20 +735,10 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                         // 同一クラス名(クラスパスが異なってもNG)
                     }
 
-                    /**
-                     * @Validate(key="test", rule="required", method="unknown")
-                     */
-                    public function unknownMethod()
-                    {
-                        // 存在しないリクエストメソッド
-                    }
-
-     public function __call($name, $args)
-     {
-     }
- };
-     }
- };
+                    public function __call($name, $args) {}
+                };
+            }
+        };
     }
 
     private function getAnnotationDelegator(Container $container)
@@ -852,32 +826,5 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $actual = ob_get_clean();
 
         $this->assertEquals($actual, 422);
-    }
-
-    /**
-     * 異常系
-     * バリデーション定義サポート外のリクエストメソッドが実行された場合、例外が発生すること
-     * @test
-     * @dataProvider validateInvalidRequestMethodProvider
-     */
-    public function ngValidateInvalidRequestMethod($path, $ca)
-    {
-        $container = new Container();
-        $container->request = $this->getRequest($path);
-        $container->request->requestMethod = "dummy";
-        $container->router = $this->getRouter([$path => $ca], $container->request);
-        $container->response = $this->getResponse();
-        $container->session = $this->getSession();
-        $container->logger = $this->getLogger();
-        $container->applicationInfo = $this->getApplicationInfo();
-        $container->coreDelegator = $this->getCoreDelegator($container);
-        $container->annotationDelegator = $this->getAnnotationDelegator($container);
-
-        ob_start();
-        $app = new Application($container);
-        $app->run();
-        $actual = ob_get_clean();
-
-        $this->assertEquals($actual, 405);
     }
 }
