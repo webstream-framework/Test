@@ -220,7 +220,15 @@ trait ValidateProvider
             ["/test", "unit_test#invalid_rule_regexp"],
             ["/test", "unit_test#invalid_validate_annotation1"],
             ["/test", "unit_test#invalid_validate_annotation2"],
-            ["/test", "unit_test#duplicate_validate_rule"]
+            ["/test", "unit_test#duplicate_validate_rule"],
+            ["/test", "unit_test#unknown_method"]
+        ];
+    }
+
+    public function validateInvalidRequestMethodProvider()
+    {
+        return [
+            ["/test", "unit_test#get_required"]
         ];
     }
 }
