@@ -2,6 +2,7 @@
 vendor
 composer.lock
 reports/*.xml
+sandbox/*
 TestApp/vendor
 TestApp/composer.phar
 TestApp/composer.lock
