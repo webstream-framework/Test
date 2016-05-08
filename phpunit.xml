@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true">
+<phpunit colors="true" bootstrap="vendor/autoload.php">
   <testsuites>
-    <testsuite name="PHPUnit">
+    <testsuite name="UnitTest">
       <directory suffix="Test.php">UnitTest</directory>
+      <exclude>vendor</exclude>
+      <exclude>IntegrationTest/TestApp/vendor</exclude>
+    </testsuite>
+    <testsuite name="IntegrationTest">
+      <directory suffix="Test.php">IntegrationTest</directory>
+      <exclude>vendor</exclude>
+      <exclude>IntegrationTest/TestApp/vendor</exclude>
     </testsuite>
   </testsuites>
   <filter>
     <whitelist>
-      <directory>TestApp/core</directory>
+      <directory>UnitTest/core</directory>
       <exclude>
-        <file>TestApp/core/WebStream/Annotation/Base/IAnnotatable.php</file>
-        <file>TestApp/core/WebStream/Annotation/Base/IClass.php</file>
-        <file>TestApp/core/WebStream/Annotation/Base/IMethod.php</file>
-        <file>TestApp/core/WebStream/Annotation/Base/IMethods.php</file>
-        <file>TestApp/core/WebStream/Annotation/Base/IProperty.php</file>
-        <file>TestApp/core/WebStream/Annotation/Base/IRead.php</file>
-        <file>TestApp/core/WebStream/Core/CoreInterface.php</file>
-        <file>TestApp/core/WebStream/Template/ITemplateEngine.php</file>
-        <file>TestApp/core/WebStream/Validate/Rule/IValidate.php</file>
+        <file>UnitTest/core/WebStream/Annotation/Base/IAnnotatable.php</file>
+        <file>UnitTest/core/WebStream/Annotation/Base/IClass.php</file>
+        <file>UnitTest/core/WebStream/Annotation/Base/IMethod.php</file>
+        <file>UnitTest/core/WebStream/Annotation/Base/IMethods.php</file>
+        <file>UnitTest/core/WebStream/Annotation/Base/IProperty.php</file>
+        <file>UnitTest/core/WebStream/Annotation/Base/IRead.php</file>
+        <file>UnitTest/core/WebStream/Core/CoreInterface.php</file>
+        <file>UnitTest/core/WebStream/Template/ITemplateEngine.php</file>
+        <file>UnitTest/core/WebStream/Validate/Rule/IValidate.php</file>
       </exclude>
     </whitelist>
   </filter>
