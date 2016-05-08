@@ -1,10 +1,13 @@
 # Test
+Testing codes for WebStream.  
+Build on [Travis CI](https://travis-ci.org/).
 
 ## UnitTest
-Run unit tests on [Travis CI](https://travis-ci.org/)
+The testing codes does not include the HTTP and Database processing.
 
 ## IntegrationTest
-Run integration tests on [webstream-framework/infrastructure](https://github.com/webstream-framework/infrastructure)
+The testing codes is included the HTTP and Database processing.  
+Using docker, and then test the results of the access to the docker container.
 
 ## License
 Licensed under the MIT
