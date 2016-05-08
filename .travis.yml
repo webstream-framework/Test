@@ -6,6 +6,8 @@ services:
 language: php
 
 before_script:
+  - docker version
+  - docker-compose --version
   - docker-compose up -d
   - docker ps
   - composer install
