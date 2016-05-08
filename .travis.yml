@@ -12,7 +12,7 @@ before_script:
   - docker ps
   - composer install
   - cd TestApp && composer install && cd ..
-  - chmod 777 -R TestApp/log
+  - touch TestApp/log/webstream.test.log && chmod 777 -R TestApp/log
   - docker exec -it test-php-apache ls -la /var/www/html/log
   - curl http://localhost:8080/controller/test1
 
