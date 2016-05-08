@@ -1,1 +1,2 @@
 '/controller/test1': 'test_controller#test1'
+'/service/test1': 'test_service#test1'

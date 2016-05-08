@@ -2,29 +2,29 @@
 namespace WebStream\Test\IntegrationTest;
 
 use WebStream\Module\HttpClient;
-use WebStream\Test\IntegrationTest\DataProvider\ControllerProvider;
+use WebStream\Test\IntegrationTest\DataProvider\ServiceProvider;
 
 require_once dirname(__FILE__) . '/TestBase.php';
 require_once dirname(__FILE__) . '/TestConstant.php';
-require_once dirname(__FILE__) . '/DataProvider/ControllerProvider.php';
+require_once dirname(__FILE__) . '/DataProvider/ServiceProvider.php';
 
 /**
- * ControllerTest
+ * ServiceTest
  * @author Ryuichi TANAKA.
  * @since 2016/05/07
  * @version 0.7
  */
-class ControllerTest extends \PHPUnit_Framework_TestCase
+class ServiceTest extends \PHPUnit_Framework_TestCase
 {
-    use ControllerProvider, TestConstant;
+    use ServiceProvider, TestConstant;
 
     /**
      * 正常系
-     * Controllerにアクセスできること
+     * Serviceにアクセスできること
      * @test
-     * @dataProvider controllerAccessProvider
+     * @dataProvider serviceAccessProvider
      */
-    public function okControllerAccess($path, $response)
+    public function okServiceAccess($path, $response)
     {
         $http = new HttpClient();
         $html = $http->get($this->getDocumentRootURL() . $path);
