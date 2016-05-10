@@ -9,4 +9,9 @@ class TestServiceController extends CoreController
     {
         $this->TestService->test1();
     }
+
+    public function test2()
+    {
+        $this->TestService->notfound();
+    }
 }

@@ -1,2 +1,7 @@
+# 200
 '/controller/test1': 'test_controller#test1'
 '/service/test1': 'test_service#test1'
+'/service/method_noexist': 'test_service#test2'
+'/service_class_noexist': "test_no_service_class#test1"
+'/model/test1': 'test_model#test1'
+'/model_class_exist_and_service_class_noexist': 'test_no_service_class_exist_model#test1'

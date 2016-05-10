@@ -15,4 +15,12 @@ trait ServiceProvider
             ["/service/test1", "test1"]
         ];
     }
+
+    public function serviceNotAccessProvider()
+    {
+        return [
+            ["/service/method_noexist", 404],
+            ["/service_class_noexist", 500]
+        ];
+    }
 }
