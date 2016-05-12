@@ -6,8 +6,8 @@ services:
 language: php
 
 before_script:
-  - docker run --name test-mysql -p 3306:3306 -e MYSQL_DATABASE=sandbox -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_ROOT_PASSWORD=root -d webstream/mysql
-  - docker run --name test-postgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d webstream/postgres
+  - docker run --name test-mysql -p 13306:3306 -e MYSQL_DATABASE=sandbox -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_ROOT_PASSWORD=root -d webstream/mysql
+  - docker run --name test-postgres -p 15432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d webstream/postgres
   - docker run --name test-php-apache -itd -p 8080:80 --link test-mysql:mysql --link test-postgres:postgres -v /home/travis/build/webstream-framework/Test/TestApp:/var/www/html webstream/php-apache
   - docker ps
   - composer install && cd TestApp && composer install && cd ..
