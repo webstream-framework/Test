@@ -33,7 +33,6 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($statusCode, 200);
     }
 
-
     /**
      * 異常系
      * Serviceにアクセスできず、500エラーになること

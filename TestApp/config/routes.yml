@@ -1,7 +1,9 @@
-# 200
-'/controller/test1': 'test_controller#test1'
-'/service/test1': 'test_service#test1'
-'/service/method_noexist': 'test_service#test2'
-'/service_class_noexist': "test_no_service_class#test1"
-'/model/test1': 'test_model#test1'
-'/model_class_exist_and_service_class_noexist': 'test_no_service_class_exist_model#test1'
+'/controller/ok': 'test_controller#test1'
+'/controller/controller_method_noexist': 'test_controller#notFound'
+'/controller/parent_class_method_access': 'test_child#test1'
+'/service/ok': 'test_service#test1'
+'/service/service_method_noexist': 'test_service#notFound'
+'/service/service_class_noexist_and_model_class_noexist': "test_no_service_class_no_model_class#test1"
+'/model/ok': 'test_model#test1'
+'/model/service_class_noexist_and_model_class_exist': 'test_no_service_class_exist_model#test1'
+'/model/mysql/test1': 'test_mysql#test1'

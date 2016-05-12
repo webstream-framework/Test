@@ -12,8 +12,8 @@ trait ModelProvider
     public function modelAccessProvider()
     {
         return [
-            ["/model/test1", "test1"],
-            ["/model_class_exist_and_service_class_noexist", "exist"]
+            ["/model/ok", "test1"],
+            ["/model/service_class_noexist_and_model_class_exist", "exist"]
         ];
     }
 }

@@ -12,7 +12,15 @@ trait ControllerProvider
     public function controllerAccessProvider()
     {
         return [
-            ["/controller/test1", "test1"]
+            ["/controller/ok", "test1"],
+            ["/controller/parent_class_method_access", "parent"]
+        ];
+    }
+
+    public function controllerNotAccessProvider()
+    {
+        return [
+            ["/controller/controller_method_noexist", 404]
         ];
     }
 }

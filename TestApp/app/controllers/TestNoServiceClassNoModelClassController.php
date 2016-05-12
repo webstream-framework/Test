@@ -3,7 +3,7 @@ namespace WebStream\Test\IntegrationTest\Controller;
 
 use WebStream\Core\CoreController;
 
-class TestNoServiceClassController extends CoreController
+class TestNoServiceClassNoModelClassController extends CoreController
 {
     public function test1()
     {

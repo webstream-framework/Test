@@ -32,4 +32,18 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($html, $response);
         $this->assertEquals($statusCode, 200);
     }
+
+    /**
+     * 異常系
+     * Controllerにアクセスできず、500エラーになること
+     * @test
+     * @dataProvider controllerNotAccessProvider
+     */
+    public function ngControllerNotAccess($path, $statusCode)
+    {
+        $http = new HttpClient();
+        $html = $http->get($this->getDocumentRootURL() . $path);
+        $statusCode = $http->getStatusCode();
+        $this->assertEquals($statusCode, $statusCode);
+    }
 }

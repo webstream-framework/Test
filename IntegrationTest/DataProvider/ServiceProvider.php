@@ -12,15 +12,15 @@ trait ServiceProvider
     public function serviceAccessProvider()
     {
         return [
-            ["/service/test1", "test1"]
+            ["/service/ok", "test1"]
         ];
     }
 
     public function serviceNotAccessProvider()
     {
         return [
-            ["/service/method_noexist", 404],
-            ["/service_class_noexist", 500]
+            ["/service/service_method_noexist", 404],
+            ["/service/service_class_noexist_and_model_class_noexist", 500]
         ];
     }
 }
