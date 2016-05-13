@@ -6,4 +6,7 @@
 '/service/service_class_noexist_and_model_class_noexist': "test_no_service_class_no_model_class#test1"
 '/model/ok': 'test_model#test1'
 '/model/service_class_noexist_and_model_class_exist': 'test_no_service_class_exist_model#test1'
-'/model/mysql/test1': 'test_mysql#test1'
+'/model/mysql/direct_select_query': 'test_mysql#direct_select_query'
+'/model/mysql/annotation_select_query': 'test_mysql#annotation_select_query'
+'/model/mysql/direct_insert_query': 'test_mysql#direct_insert_query'
+'/model/mysql/annotation_insert_query': 'test_mysql#annotation_insert_query'

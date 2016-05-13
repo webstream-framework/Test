@@ -3,7 +3,7 @@
   "-//github.com/mapserver2007//DTD Mapper 3.0//EN"
   "http://localhost:8080/query/webstream-model-mapper.dtd">
 <mapper namespace="WebStream\Test\IntegrationTest\Model">
-  <select id="getTestData">
+  <select id="queryAnnotationSelect">
     SELECT
         *
     FROM
@@ -12,30 +12,7 @@
         :limit, :offset
   </select>
 
-  <select id="getTestData2">
-    SELECT
-        *
-    FROM
-        T_WebStream
-    LIMIT
-        :limit
-    OFFSET
-        :offset
-  </select>
-
-  <select id="getTestDataNum">
-    SELECT
-        count(*) AS count
-    FROM
-        T_WebStream
-  </select>
-
-  <delete id="deleteTestData">
-    DELETE FROM
-        T_WebStream
-  </delete>
-
-  <insert id="setTestData">
+  <insert id="queryAnnotationInsert">
     INSERT
     INTO
         T_WebStream
@@ -47,5 +24,12 @@
         :name
     )
   </insert>
+
+  <delete id="deleteTestData">
+    DELETE FROM
+        T_WebStream
+  </delete>
+
+
 
 </mapper>

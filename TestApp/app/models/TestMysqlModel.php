@@ -10,28 +10,59 @@ use WebStream\Annotation\Database;
  */
 class TestMysqlModel extends CoreModel
 {
-    public function selectDirectSqlExecute()
+    public function directSelectQuery()
     {
-        echo "test1";
+        $sql = "select * from T_WebStream limit :limit, :offset";
+        $bind = ["limit" => 0, "offset" => 1];
+
+        return $this->select($sql, $bind);
     }
-
-    public function selectAnnotationExecute()
-    {
-
-    }
-
-
 
     /**
-     * @Query(file="query/webstream-test-common-mapper.xml")
+     * @Query(file="query/webstream-test-mapper.xml")
+     */
+    public function annotationSelectQuery()
+    {
+        return $this->queryAnnotationSelect(["limit" => 0, "offset" => 1]);
+    }
+
+    public function directInsertQuery($name)
+    {
+        $sql = "INSERT INTO T_WebStream (name) VALUES (:name)";
+        $bind = ["name" => $name];
+
+        $this->insert($sql, $bind);
+    }
+
+    /**
+     * @Query(file="query/webstream-test-mapper.xml")
+     */
+    public function annotationInsertQuery($name)
+    {
+        $this->queryAnnotationInsert(["name" => $name]);
+    }
+
+    /**
+     * @Query(file="query/webstream-test-mysql-common-mapper.xml")
      */
     public function setUp($name)
     {
         $this->querySetUp(['name' => $name]);
     }
 
+    /**
+     * @Query(file="query/webstream-test-mysql-common-mapper.xml")
+     */
     public function cleanUp()
     {
+        $this->queryCleanUp();
+    }
 
+    /**
+     * @Query(file="query/webstream-test-mysql-common-mapper.xml")
+     */
+    public function pop()
+    {
+        return $this->queryPop();
     }
 }
