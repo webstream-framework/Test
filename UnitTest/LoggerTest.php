@@ -27,7 +27,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        Logger::finalize();
+        // Logger::finalize();
     }
 
     private function getLogger(Container $config)
@@ -667,6 +667,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             };
         };
 
+        Logger::finalize();
         $manager = new LoggerConfigurationManager($config);
         $manager->inject('ioContainer', $ioContainer);
         $manager->load();
@@ -715,6 +716,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             };
         };
 
+        Logger::finalize();
         $manager = new LoggerConfigurationManager($config);
         $manager->inject('ioContainer', $ioContainer);
         $manager->load();

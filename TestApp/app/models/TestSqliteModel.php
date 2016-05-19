@@ -6,24 +6,24 @@ use WebStream\Annotation\Query;
 use WebStream\Annotation\Database;
 
 /**
- * @Database(driver="WebStream\Database\Driver\Mysql", config="config/database.mysql.ini")
+ * @Database(driver="WebStream\Database\Driver\Sqlite", config="config/database.sqlite.ini")
  */
-class TestMysqlModel extends CoreModel
+class TestSqliteModel extends CoreModel
 {
     public function directSelectQuery()
     {
-        $sql = "SELECT * FROM T_WebStream LIMIT :limit, :offset";
-        $bind = ["limit" => 0, "offset" => 1];
+        $sql = "SELECT * FROM T_WebStream LIMIT :limit OFFSET :offset";
+        $bind = ["limit" => 1, "offset" => 0];
 
         return $this->select($sql, $bind);
     }
 
     /**
-     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     * @Query(file="query/webstream-test-sqlite-mapper.xml")
      */
     public function annotationSelectQuery()
     {
-        return $this->queryAnnotationSelect(["limit" => 0, "offset" => 1]);
+        return $this->queryAnnotationSelect(["limit" => 1, "offset" => 0]);
     }
 
     public function directInsertQuery($name)
@@ -35,7 +35,7 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     * @Query(file="query/webstream-test-sqlite-mapper.xml")
      */
     public function annotationInsertQuery($name)
     {
@@ -51,7 +51,7 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     * @Query(file="query/webstream-test-sqlite-mapper.xml")
      */
     public function annotationUpdateQuery($name)
     {
@@ -66,7 +66,7 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
-     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     * @Query(file="query/webstream-test-sqlite-mapper.xml")
      */
     public function annotationDeleteQuery()
     {

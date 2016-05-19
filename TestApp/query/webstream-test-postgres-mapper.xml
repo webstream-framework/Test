@@ -9,7 +9,9 @@
     FROM
         T_WebStream
     LIMIT
-        :limit, :offset
+        :limit
+    OFFSET
+        :offset
   </select>
 
   <insert id="queryAnnotationInsert">
@@ -25,11 +27,16 @@
     )
   </insert>
 
-  <delete id="deleteTestData">
-    DELETE FROM
+  <update id="queryAnnotationUpdate">
+    UPDATE
+        T_WebStream
+    SET
+        name = :name
+  </update>
+
+  <delete id="queryAnnotationDelete">
+    DELETE
+    FROM
         T_WebStream
   </delete>
-
-
-
 </mapper>

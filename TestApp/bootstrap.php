@@ -150,7 +150,6 @@ $classLoader->importAll("app", function ($filepath) {
     // MVCレイヤのクラスとview配下のphpファイルは除外
     return preg_match("/(?:(?:Controller|Service|Model)\.php|app\/views\/.+\.php)$/", $filepath) === 0;
 });
-register_shutdown_function('shutdownHandler');
 
 // アプリケーションを起動
 $application = new \WebStream\Core\Application($container);

@@ -33,6 +33,35 @@ class TestMysqlController extends CoreController
         $this->TestMysql->cleanUp();
     }
 
+    public function directUpdateQuery()
+    {
+        $this->TestMysql->setUp("dummy");
+        $this->TestMysql->directUpdateQuery("direct_update");
+        $this->print($this->TestMysql->pop());
+        $this->TestMysql->cleanUp();
+    }
+
+    public function annotationUpdateQuery()
+    {
+        $this->TestMysql->setUp("dummy");
+        $this->TestMysql->annotationUpdateQuery("annotation_update");
+        $this->print($this->TestMysql->pop());
+        $this->TestMysql->cleanUp();
+    }
+
+    public function directDeleteQuery()
+    {
+        $this->TestMysql->setUp("dummy");
+        $this->TestMysql->directDeleteQuery();
+        echo count($this->TestMysql->pop());
+    }
+
+    public function annotationDeleteQuery()
+    {
+        $this->TestMysql->setUp("dummy");
+        $this->TestMysql->annotationDeleteQuery();
+        echo count($this->TestMysql->pop());
+    }
 
     public function print($result)
     {

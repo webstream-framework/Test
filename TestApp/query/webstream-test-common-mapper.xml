@@ -4,7 +4,7 @@
   "http://localhost:8080/query/webstream-model-mapper.dtd">
 <mapper namespace="WebStream\Test\IntegrationTest\Model">
   <select id="queryPop">
-    SELECT * FROM T_WebStream LIMIT 0, 1
+    SELECT * FROM T_WebStream
   </select>
   <insert id="querySetUp">
     INSERT INTO T_WebStream (name) VALUES (:name)
