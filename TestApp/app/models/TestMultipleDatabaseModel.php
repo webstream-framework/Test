@@ -10,13 +10,12 @@ use WebStream\Annotation\Database;
 class TestMultipleDatabaseModel extends TestParentMultipleDatabaseModel
 {
     /**
-     * @Query(file="query/webstream-model-mapper-sample-multipledb.xml")
+     * @Query(file="query/webstream-test-mysql-mapper.xml")
      */
     public function multipleDatabaseAccess()
     {
         $this->setUp("multiple_database_access");
         $result1 = $this->queryAnnotationSelect(["limit" => 0, "offset" => 1]);
-        var_dump($result1);
         $this->cleanUp();
         $result2 = parent::multipleDatabaseAccess();
 

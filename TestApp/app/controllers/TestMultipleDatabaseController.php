@@ -7,9 +7,7 @@ class TestMultipleDatabaseController extends CoreController
 {
     public function multipleDatabaseAccess()
     {
-        echo "test";
-        // $result = $this->TestMultipleDatabase->multipleDatabaseAccess();
-
-        // var_dump($result);
+        $result = $this->TestMultipleDatabase->multipleDatabaseAccess();
+        var_dump("aaa");
     }
 }
