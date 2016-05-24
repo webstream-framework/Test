@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+  "-//github.com/mapserver2007//DTD Mapper 3.0//EN"
+  "http://localhost:8080/query/webstream-model-mapper.dtd">
+<mapper namespace="WebStream\Test\IntegrationTest\Model">
+  <select id="queryEntitySelect1" entity="\WebStream\Test\IntegrationTest\Entity\QueryEntity1">
+    SELECT
+        *
+    FROM
+        T_WebStream
+  </select>
+
+  <select id="queryEntitySelect2" entity="\WebStream\Test\IntegrationTest\Entity\QueryEntity2">
+    SELECT
+        *
+    FROM
+        T_WebStream_Entity_Mapping
+  </select>
+
+  <select id="queryEntityJoinedTable" entity="\WebStream\Test\IntegrationTest\Entity\QueryEntity3">
+    SELECT
+        *
+    FROM
+        T_WebStream
+    CROSS JOIN
+        T_WebStream_Entity_Mapping
+  </select>
+
+  <select id="queryEntityColumnAlias" entity="\WebStream\Test\IntegrationTest\Entity\QueryEntity4">
+    SELECT
+        T1.name AS name1,
+        T2.name AS name2
+    FROM
+        T_WebStream AS T1
+    CROSS JOIN
+        T_WebStream AS T2
+  </select>
+
+  <select id="queryEntityType" entity="\WebStream\Test\IntegrationTest\Entity\QueryEntity5">
+    SELECT
+        *
+    FROM
+        T_WebStream_Entity_Mapping_Type
+  </select>
+
+  <select id="queryEntityTrait" entity="\WebStream\Test\IntegrationTest\Entity\QueryEntity6">
+      SELECT
+          T1.name AS name1,
+          T2.name AS name2
+      FROM
+          T_WebStream AS T1
+      CROSS JOIN
+          T_WebStream AS T2
+  </select>
+
+  <select id="queryEntityPropertyProxy" entity="\WebStream\Test\IntegrationTest\Entity\QueryEntity7">
+    SELECT
+        *
+    FROM
+        T_WebStream
+  </select>
+
+  <insert id="queryAnnotationInsert">
+    INSERT
+    INTO
+        T_WebStream
+    (
+        name
+    )
+    VALUES
+    (
+        :name
+    )
+  </insert>
+
+  <insert id="queryEntityMappingInsert">
+    INSERT
+    INTO
+        T_WebStream_Entity_Mapping
+    (
+        camelcaseCol,
+        snakecase_col,
+        UcamelcaseCol
+    )
+    VALUES
+    (
+        :value1,
+        :value2,
+        :value3
+    )
+  </insert>
+
+  <insert id="queryEntityMappingTypeInsert">
+    INSERT
+    INTO
+        T_WebStream_Entity_Mapping_Type
+    (
+        name,
+        created_at,
+        created_at_time,
+        created_at_date,
+        bigint_num,
+        smallint_num
+    )
+    VALUES
+    (
+        :name,
+        NOW(),
+        CURRENT_TIME(),
+        CURRENT_DATE(),
+        :bigint_num,
+        :smallint_num
+    )
+  </insert>
+
+  <delete id="queryEntityMappingDelete">
+    DELETE FROM
+        T_WebStream_Entity_Mapping
+  </delete>
+
+  <delete id="queryEntityMappingTypeDelete">
+    DELETE FROM
+        T_WebStream_Entity_Mapping_Type
+  </delete>
+</mapper>

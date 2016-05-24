@@ -245,7 +245,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                 };
                 $manager->inject('connectionManager', $conn);
 
-                $queryId = get_class($this) . "#" . $this->container->cmMethod;
+                $queryId = "WebStream\Test\UnitTest\ModelTest" . "#" . $this->container->cmMethod;
                 $queryAnnotations = new Container(false);
                 $queryAnnotations->{$queryId} = new AnnotationListContainer();
                 $crudMethod = $this->container->crudMethod;

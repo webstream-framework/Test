@@ -74,6 +74,80 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
+     * @Query(file="query/webstream-test-entity-mapper.xml")
+     */
+    public function entityMapping1()
+    {
+        return $this->queryEntitySelect1();
+    }
+
+    /**
+     * @Query(file="query/webstream-test-entity-mapper.xml")
+     */
+    public function entityMapping2()
+    {
+        $this->queryEntityMappingDelete();
+        $this->queryEntityMappingInsert(['value1' => "a", 'value2' => "b", 'value3' => "c"]);
+
+        return $this->queryEntitySelect2();
+    }
+
+    /**
+     * @Query(file="query/webstream-test-common-mapper.xml")
+     * @Query(file="query/webstream-test-entity-mapper.xml")
+     */
+    public function entityMappingJoinedTable()
+    {
+        $this->querySetUp(['name' => 'a']);
+        $this->queryEntityMappingInsert(['value1' => "b", 'value2' => "c", 'value3' => "d"]);
+
+        return $this->queryEntityJoinedTable();
+    }
+
+    /**
+     * @Query(file="query/webstream-test-common-mapper.xml")
+     * @Query(file="query/webstream-test-entity-mapper.xml")
+     */
+    public function entityMappingColumnAlias()
+    {
+        $this->querySetUp(['name' => 'a']);
+
+        return $this->queryEntityColumnAlias();
+    }
+
+    /**
+     * @Query(file="query/webstream-test-entity-mapper.xml")
+     */
+    public function entityMappingType()
+    {
+        $this->queryEntityMappingTypeInsert(['name' => "a", 'bigint_num' => 9223372036854775807, 'smallint_num' => 3]);
+
+        return $this->queryEntityType();
+    }
+
+    /**
+     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     * @Query(file="query/webstream-test-entity-mapper.xml")
+     */
+    public function entityMappingTrait()
+    {
+        $this->queryAnnotationInsert(["name" => 'a']);
+
+        return $this->queryEntityTrait();
+    }
+
+    /**
+     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     * @Query(file="query/webstream-test-entity-mapper.xml")
+     */
+    public function entityMappingPropertyProxy()
+    {
+        $this->queryAnnotationInsert(["name" => 'a']);
+
+        return $this->queryEntityPropertyProxy();
+    }
+
+    /**
      * @Query(file="query/webstream-test-common-mapper.xml")
      */
     public function setUp($name)
@@ -83,10 +157,13 @@ class TestMysqlModel extends CoreModel
 
     /**
      * @Query(file="query/webstream-test-common-mapper.xml")
+     * @Query(file="query/webstream-test-entity-mapper.xml")
      */
     public function cleanUp()
     {
         $this->queryCleanUp();
+        $this->queryEntityMappingDelete();
+        $this->queryEntityMappingTypeDelete();
     }
 
     /**

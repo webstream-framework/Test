@@ -7,6 +7,6 @@ class TestNoServiceClassNoModelClassController extends CoreController
 {
     public function test1()
     {
-        $this->TestNoServiceClass->notFound();
+        $this->TestNoServiceClassNoModelClass->notFound();
     }
 }

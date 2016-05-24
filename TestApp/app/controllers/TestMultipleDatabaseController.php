@@ -8,6 +8,8 @@ class TestMultipleDatabaseController extends CoreController
     public function multipleDatabaseAccess()
     {
         $result = $this->TestMultipleDatabase->multipleDatabaseAccess();
-        var_dump("aaa");
+        foreach ($result as $item) {
+            echo $item->toArray()[0]["name"];
+        }
     }
 }

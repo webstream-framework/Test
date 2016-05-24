@@ -11,30 +11,15 @@ class TestMultipleDatabaseModel extends TestParentMultipleDatabaseModel
 {
     /**
      * @Query(file="query/webstream-test-mysql-mapper.xml")
+     * @Query(file="query/webstream-test-common-mapper.xml")
      */
     public function multipleDatabaseAccess()
     {
-        $this->setUp("multiple_database_access");
+        $this->querySetUp(['name' => "multiple_database_access"]);
         $result1 = $this->queryAnnotationSelect(["limit" => 0, "offset" => 1]);
-        $this->cleanUp();
+        $this->queryCleanUp();
         $result2 = parent::multipleDatabaseAccess();
 
         return [$result1, $result2];
-    }
-
-    /**
-     * @Query(file="query/webstream-test-common-mapper.xml")
-     */
-    public function setUp($name)
-    {
-        $this->querySetUp(['name' => $name]);
-    }
-
-    /**
-     * @Query(file="query/webstream-test-common-mapper.xml")
-     */
-    public function cleanUp()
-    {
-        $this->queryCleanUp();
     }
 }

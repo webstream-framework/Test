@@ -38,7 +38,14 @@ trait ModelProvider
             ["/model/sqlite/direct_update_query", "direct_update"],
             ["/model/sqlite/annotation_update_query", "annotation_update"],
             ["/model/sqlite/direct_delete_query", "0"],
-            ["/model/sqlite/annotation_delete_query", "0"]
+            ["/model/sqlite/annotation_delete_query", "0"],
+            ["/model/multiple_database_access", "multiple_database_accessmultiple_database_access"],
+            ["/model/entity_mapping1", "WebStream\Test\IntegrationTest\Entity\QueryEntity1"],
+            ["/model/entity_mapping2", "WebStream\Test\IntegrationTest\Entity\QueryEntity2"],
+            ["/model/entity_mapping_joined_table", "abcd"],
+            ["/model/entity_mapping_column_alias", "aa"],
+            ["/model/entity_mapping_type", "integerstringobjectstringobjectdoubleinteger"],
+            ["/model/entity_mapping_trait", "aa"]
         ];
     }
 }
