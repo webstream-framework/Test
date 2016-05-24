@@ -67,10 +67,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         return new class()
         {
             public function __call($name, $args) {}
-            public function move($statusCode)
-            {
-                throw new \Exception($statusCode);
-            }
+            public function move($statusCode) {}
         };
     }
 
