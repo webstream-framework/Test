@@ -4,6 +4,7 @@ namespace WebStream\Test\UnitTest;
 use WebStream\Log\Logger;
 use WebStream\Log\LoggerAdapter;
 use WebStream\Log\LoggerConfigurationManager;
+use WebStream\Log\LoggerCache;
 use WebStream\Log\Outputter\ConsoleOutputter;
 use WebStream\IO\File;
 use WebStream\IO\StringInputStream;
@@ -673,6 +674,20 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $manager->load();
 
         $this->assertInstanceOf('\WebStream\Module\Container', $manager->getConfig());
+    }
+
+    /**
+     * 正常系
+     * ログキャッシュできること
+     * @test
+     */
+    public function okLoggerCache()
+    {
+        $cache = new LoggerCache();
+        $cache->add("a");
+        $cache->add("b");
+        $this->assertEquals(2, $cache->length());
+        $this->assertEquals(implode("", $cache->get()), "ab");
     }
 
     /**

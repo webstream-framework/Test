@@ -19,6 +19,7 @@ require_once dirname(__FILE__) . '/core/WebStream/Annotation/Base/IAnnotatable.p
 require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerConfigurationManager.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/Logger.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerAdapter.php';
+require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerCache.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/LoggerFormatter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/Outputter/IOutputter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Log/Outputter/ILazyWriter.php';

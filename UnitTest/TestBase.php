@@ -11,6 +11,7 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Annotation/Base/IAn
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerConfigurationManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Logger.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerAdapter.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerCache.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerFormatter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/IOutputter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/ILazyWriter.php';
