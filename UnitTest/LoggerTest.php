@@ -683,11 +683,13 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function okLoggerCache()
     {
-        $cache = new LoggerCache();
-        $cache->add("a");
-        $cache->add("b");
-        $this->assertEquals(2, $cache->length());
-        $this->assertEquals(implode("", $cache->get()), "ab");
+        if ($this->enableApcu()) {
+            $cache = new LoggerCache();
+            $cache->add("a");
+            $cache->add("b");
+            $this->assertEquals(2, $cache->length());
+            $this->assertEquals(implode("", $cache->get()), "ab");
+        }
     }
 
     /**
