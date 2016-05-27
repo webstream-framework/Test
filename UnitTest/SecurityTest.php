@@ -74,11 +74,15 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
      * 異常系
      * 文字列以外は安全な値に置換されないこと
      * @test
-     * @dataProvider ignoreSafetyInProvider
+     * @dataProvider ignoreReplaceProvider
      */
-    public function ngIgnoreSafetyIn($value, $type)
+    public function ngIgnoreReplace($value, $type)
     {
         $this->assertEquals(Security::safetyIn($value), $value);
         $this->assertEquals(gettype(Security::safetyIn($value)), $type);
+        $this->assertEquals(Security::safetyOut($value), $value);
+        $this->assertEquals(gettype(Security::safetyOut($value)), $type);
+        $this->assertEquals(Security::safetyOutJavaScript($value), $value);
+        $this->assertEquals(gettype(Security::safetyOutJavaScript($value)), $type);
     }
 }

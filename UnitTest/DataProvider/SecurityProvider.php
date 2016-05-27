@@ -45,7 +45,7 @@ trait SecurityProvider
         ];
     }
 
-    public function ignoreSafetyInProvider()
+    public function ignoreReplaceProvider()
     {
         return [
             [1, "integer"],
