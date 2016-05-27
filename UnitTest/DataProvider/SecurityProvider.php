@@ -11,10 +11,12 @@ trait SecurityProvider
 {
     public function deleteInvisibleCharacterProvider()
     {
-        return [['%E3%81%82%00%08%09', '%E3%81%82%09']]; // 00,08は制御文字
+        return [
+            ['%E3%81%82%00%08%09', '%E3%81%82%09'] // 00,08は制御文字
+        ];
     }
 
-    public function replaceXSSStringsProvider()
+    public function replaceXSSStringProvider()
     {
         return [
             ["<div>\\a\t\n\r\r\n<!-- --><![CDATA[</div>",
@@ -22,10 +24,34 @@ trait SecurityProvider
         ];
     }
 
+    public function replaceXSSJavaScriptProvider()
+    {
+        return [
+            ["<script></script>", '\x3cscript\x3e\x3c\/script\x3e']
+        ];
+    }
+
+    public function replaceXSSXmlProvider()
+    {
+        return [
+            ["\xD7FF", ""]
+        ];
+    }
+
     public function createCsrfTokenProvider()
     {
         return [
             ['/csrf', '/csrf_helper']
+        ];
+    }
+
+    public function ignoreSafetyInProvider()
+    {
+        return [
+            [1, "integer"],
+            [true, "boolean"],
+            [[1], "array"],
+            [(object) "hoge", "object"]
         ];
     }
 }

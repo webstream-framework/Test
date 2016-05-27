@@ -32,16 +32,53 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
     public function okDeleteInvisibleCharacter($withinInvisibleStr, $withoutInvisibleStr)
     {
         $this->assertEquals(Security::safetyIn($withinInvisibleStr), rawurldecode($withoutInvisibleStr));
+        $this->assertEquals(Security::safetyIn([$withinInvisibleStr])[0], rawurldecode($withoutInvisibleStr));
     }
 
     /**
      * 正常系
-     * XSS対象の文字列を置換できること
+     * XSS文字列を置換できること
      * @test
-     * @dataProvider replaceXSSStringsProvider
+     * @dataProvider replaceXSSStringProvider
      */
-    public function okReplaceXSSStrings($withinXssHtml, $withoutXssHtml)
+    public function okReplaceXSSString($withinXssHtml, $withoutXssHtml)
     {
         $this->assertEquals(Security::safetyOut($withinXssHtml), $withoutXssHtml);
+        $this->assertEquals(Security::safetyOut([$withinXssHtml])[0], $withoutXssHtml);
+    }
+
+    /**
+     * 正常系
+     * XSSJavaScriptを置換できること
+     * @test
+     * @dataProvider replaceXSSJavaScriptProvider
+     */
+    public function okReplaceXSSJavaScript($withinXssJavaScript, $withoutXssJavaScript)
+    {
+        $this->assertEquals(Security::safetyOutJavaScript($withinXssJavaScript), $withoutXssJavaScript);
+        $this->assertEquals(Security::safetyOutJavaScript([$withinXssJavaScript])[0], $withoutXssJavaScript);
+    }
+
+    /**
+     * 正常系
+     * XSSXMLを置換できること
+     * @test
+     * @dataProvider replaceXSSXmlProvider
+     */
+    public function okReplaceXSSXml($withinXssXml, $withoutXssXml)
+    {
+        $this->assertEquals(Security::safetyOutXML($withinXssXml), $withoutXssXml);
+    }
+
+    /**
+     * 異常系
+     * 文字列以外は安全な値に置換されないこと
+     * @test
+     * @dataProvider ignoreSafetyInProvider
+     */
+    public function ngIgnoreSafetyIn($value, $type)
+    {
+        $this->assertEquals(Security::safetyIn($value), $value);
+        $this->assertEquals(gettype(Security::safetyIn($value)), $type);
     }
 }
