@@ -66,6 +66,10 @@ trait RouterProvider
             ["/action_ng4", "test#test_action_123"],
             ["/action_ng5", "test#testAction"],
             ["/param_ng1/:!", "test#test_action"],
+            ["/img/hoge.jpg", "test#test_action"],
+            ["/js/hoge.js", "test#test_action"],
+            ["/css/hoge.css", "test#test_action"],
+            ["/file/hoge.pdf", "test#test_action"]
         ];
     }
 }
