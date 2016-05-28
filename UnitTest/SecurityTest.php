@@ -3,6 +3,7 @@ namespace WebStream\Test\UnitTest;
 
 use WebStream\Delegate\Router;
 use WebStream\Module\Security;
+use WebStream\Module\Utility\SecurityUtils;
 use WebStream\Test\UnitTest\DataProvider\SecurityProvider;
 
 require_once dirname(__FILE__) . '/TestBase.php';
@@ -16,7 +17,7 @@ require_once dirname(__FILE__) . '/DataProvider/SecurityProvider.php';
  */
 class SecurityTest extends \PHPUnit_Framework_TestCase
 {
-    use SecurityProvider;
+    use SecurityUtils, SecurityProvider;
 
     public function setUp()
     {
@@ -68,6 +69,19 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
     public function okReplaceXSSXml($withinXssXml, $withoutXssXml)
     {
         $this->assertEquals(Security::safetyOutXML($withinXssXml), $withoutXssXml);
+    }
+
+    /**
+     * 正常系
+     * SecurityUtilsが正常に動作すること
+     * @test
+     */
+    public function okSecurityUtil()
+    {
+        $this->assertEquals($this->getCsrfTokenKey(), "__CSRF_TOKEN__");
+        $this->assertEquals($this->getCsrfTokenHeader(), "X-CSRF-Token");
+        $this->assertEquals($this->encode("hoge"), "czo0OiJob2dlIjs=");
+        $this->assertEquals($this->decode("czo0OiJob2dlIjs="), "hoge");
     }
 
     /**
