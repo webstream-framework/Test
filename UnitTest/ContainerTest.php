@@ -36,6 +36,10 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container = new Container();
         $container->register($key, $value);
         $this->assertEquals($value, $container->get($key));
+
+        $container = new Container();
+        $container->$key($value);
+        $this->assertEquals($value, $container->get($key));
     }
 
     /**
@@ -63,6 +67,20 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         $container->{$key} = $closure;
+        $this->assertEquals($value, $container->{$key});
+    }
+
+    /**
+     * 正常系
+     * クロージャ型の値をKey指定でコンテナにセットしたとき
+     * クロージャの戻り値が取り出せること
+     * @test
+     * @dataProvider closureContainerProvider
+     */
+    public function okSetClosureByMethodContainer($key, $closure, $value)
+    {
+        $container = new Container();
+        $container->{$key}($closure);
         $this->assertEquals($value, $container->{$key});
     }
 
