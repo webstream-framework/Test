@@ -70,6 +70,7 @@ require_once dirname(__FILE__) . '/core/WebStream/Annotation/Validate.php';
 require_once dirname(__FILE__) . '/core/WebStream/Database/DatabaseManager.php';
 require_once dirname(__FILE__) . '/core/WebStream/Database/ConnectionManager.php';
 require_once dirname(__FILE__) . '/core/WebStream/Database/EntityManager.php';
+require_once dirname(__FILE__) . '/core/WebStream/Database/EntityProperty.php';
 require_once dirname(__FILE__) . '/core/WebStream/Database/Driver/DatabaseDriver.php';
 require_once dirname(__FILE__) . '/core/WebStream/Database/Driver/Mysql.php';
 require_once dirname(__FILE__) . '/core/WebStream/Database/Driver/Postgresql.php';

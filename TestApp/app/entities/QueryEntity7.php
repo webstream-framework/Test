@@ -1,11 +1,11 @@
 <?php
 namespace WebStream\Test\IntegrationTest\Entity;
 
-use WebStream\Module\PropertyProxy;
+use WebStream\Database\EntityProperty;
 
 class QueryEntity7
 {
-    use PropertyProxy;
-
+    use EntityProperty;
     private $name;
+    private $age;
 }

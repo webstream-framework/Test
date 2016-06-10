@@ -127,11 +127,26 @@ class TestMysqlController extends CoreController
 
     public function entityMappingPropertyProxy()
     {
-        // TODO
         $this->TestMysql->cleanUp();
         foreach ($this->TestMysql->entityMappingPropertyProxy() as $entity) {
             echo $entity->name;
         }
+    }
+
+    public function transactionCommit()
+    {
+        $this->TestMysql->cleanUp();
+        $this->TestMysql->transactionCommit();
+        $result = $this->TestMysql->annotationSelectQuery();
+        echo $result->toArray()[0]["name"];
+    }
+
+    public function transactionRollback()
+    {
+        $this->TestMysql->cleanUp();
+        $this->TestMysql->transactionRollback();
+        $result = $this->TestMysql->annotationSelectQuery();
+        echo count($result->toArray());
     }
 
     public function print($result)

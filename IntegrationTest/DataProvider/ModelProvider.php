@@ -23,6 +23,8 @@ trait ModelProvider
             ["/model/mysql/direct_delete_query", "0"],
             ["/model/mysql/annotation_delete_query", "0"],
             ["/model/mysql/yml", "direct_select"],
+            ["/model/mysql/transaction_commit", "a"],
+            ["/model/mysql/transaction_rollback", "0"],
             ["/model/postgres/direct_select_query", "direct_select"],
             ["/model/postgres/annotation_select_query", "annotation_select"],
             ["/model/postgres/direct_insert_query", "direct_insert"],
@@ -45,7 +47,8 @@ trait ModelProvider
             ["/model/entity_mapping_joined_table", "abcd"],
             ["/model/entity_mapping_column_alias", "aa"],
             ["/model/entity_mapping_type", "integerstringobjectstringobjectdoubleinteger"],
-            ["/model/entity_mapping_trait", "aa"]
+            ["/model/entity_mapping_trait", "aa"],
+            ["/model/entity_mapping_property_proxy", "a"]
         ];
     }
 }

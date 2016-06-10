@@ -15,6 +15,8 @@
 '/model/mysql/direct_delete_query': 'test_mysql#direct_delete_query'
 '/model/mysql/annotation_delete_query': 'test_mysql#annotation_delete_query'
 '/model/mysql/yml': 'test_mysql_yml#direct_select_query'
+'/model/mysql/transaction_commit': 'test_mysql#transaction_commit'
+'/model/mysql/transaction_rollback': 'test_mysql#transaction_rollback'
 '/model/postgres/direct_select_query': 'test_postgres#direct_select_query'
 '/model/postgres/annotation_select_query': 'test_postgres#annotation_select_query'
 '/model/postgres/direct_insert_query': 'test_postgres#direct_insert_query'

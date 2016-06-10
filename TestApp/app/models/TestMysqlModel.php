@@ -148,6 +148,26 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
+     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     */
+    public function transactionCommit()
+    {
+        $this->beginTransaction();
+        $this->queryAnnotationInsert(["name" => 'a']);
+        $this->commit();
+    }
+
+    /**
+     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     */
+    public function transactionRollback()
+    {
+        $this->beginTransaction();
+        $this->queryAnnotationInsert(["name" => 'a']);
+        $this->rollback();
+    }
+
+    /**
      * @Query(file="query/webstream-test-common-mapper.xml")
      */
     public function setUp($name)
