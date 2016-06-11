@@ -8,8 +8,6 @@
         *
     FROM
         T_WebStream
-    ORDER BY
-        id DESC
     LIMIT
         :limit, :offset
   </select>
