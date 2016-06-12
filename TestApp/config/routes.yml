@@ -54,3 +54,5 @@
 '/model/error/undefined_config_file': 'test_error_undefined_config_file#undefined_config_file'
 '/model/error/undefined_query': 'test_error_undefined_query#undefined_query'
 '/model/error/undefined_query_mapping': 'test_error_undefined_query#undefined_query_mapping'
+'/view/basic': 'test_view#basic'
+'/view/twig': 'test_view#twig'
