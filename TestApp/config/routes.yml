@@ -50,3 +50,7 @@
 '/model/sqlite/direct_delete_query': 'test_sqlite#direct_delete_query'
 '/model/sqlite/annotation_delete_query': 'test_sqlite#annotation_delete_query'
 '/model/multiple_database_access': 'test_multiple_database#multiple_database_access'
+'/model/error/undefined_driver': 'test_error_undefined_driver#undefined_driver'
+'/model/error/undefined_config_file': 'test_error_undefined_config_file#undefined_config_file'
+'/model/error/undefined_query': 'test_error_undefined_query#undefined_query'
+'/model/error/undefined_query_mapping': 'test_error_undefined_query#undefined_query_mapping'

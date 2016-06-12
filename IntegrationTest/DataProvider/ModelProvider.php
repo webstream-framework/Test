@@ -60,4 +60,14 @@ trait ModelProvider
             ["/model/sqlite/annotation_delete_query", "0"]
         ];
     }
+
+    public function modelNotAccessProvider()
+    {
+        return [
+            ["/model/error/undefined_driver", "500", "Database driver is undefined"],
+            ["/model/error/undefined_config_file", "500", "Database config file is not found"],
+            ["/model/error/undefined_query", "500", "SQL statement can't getting from xml file"],
+            ["/model/error/undefined_query_mapping", "500", "Entity classpath is not found"]
+        ];
+    }
 }

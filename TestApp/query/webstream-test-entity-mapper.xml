@@ -122,4 +122,11 @@
     DELETE FROM
         T_WebStream_Entity_Mapping_Type
   </delete>
+
+  <select id="queryUndefinedEntitySelect" entity="\WebStream\Test\IntegrationTest\Entity\Undefined">
+    SELECT
+        *
+    FROM
+        T_WebStream
+  </select>
 </mapper>

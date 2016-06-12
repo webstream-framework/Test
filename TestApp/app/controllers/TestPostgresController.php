@@ -136,16 +136,14 @@ class TestPostgresController extends CoreController
     {
         $this->TestPostgres->cleanUp();
         $this->TestPostgres->transactionCommit();
-        $result = $this->TestPostgres->annotationSelectQuery();
-        echo $result->toArray()[0]["name"];
+        $this->print($this->TestPostgres->annotationSelectQuery());
     }
 
     public function transactionRollback()
     {
         $this->TestPostgres->cleanUp();
         $this->TestPostgres->transactionRollback();
-        $result = $this->TestPostgres->annotationSelectQuery();
-        echo count($result->toArray());
+        echo count($this->TestPostgres->annotationSelectQuery()->toArray());
     }
 
     public function print($result)

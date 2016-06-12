@@ -137,16 +137,14 @@ class TestMysqlController extends CoreController
     {
         $this->TestMysql->cleanUp();
         $this->TestMysql->transactionCommit();
-        $result = $this->TestMysql->annotationSelectQuery();
-        echo $result->toArray()[0]["name"];
+        $this->print($this->TestMysql->annotationSelectQuery());
     }
 
     public function transactionRollback()
     {
         $this->TestMysql->cleanUp();
         $this->TestMysql->transactionRollback();
-        $result = $this->TestMysql->annotationSelectQuery();
-        echo count($result->toArray());
+        echo count($this->TestMysql->annotationSelectQuery()->toArray());
     }
 
     public function print($result)
