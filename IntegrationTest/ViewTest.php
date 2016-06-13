@@ -29,7 +29,7 @@ class ViewTest extends \PHPUnit_Framework_TestCase
         $http = new HttpClient();
         $html = $http->get($this->getDocumentRootURL() . $path);
         $statusCode = $http->getStatusCode();
-        $this->assertEquals($html, $response);
+        $this->assertEquals(trim($html), $response);
         $this->assertEquals($statusCode, 200);
     }
 }

@@ -55,4 +55,5 @@
 '/model/error/undefined_query': 'test_error_undefined_query#undefined_query'
 '/model/error/undefined_query_mapping': 'test_error_undefined_query#undefined_query_mapping'
 '/view/basic': 'test_view#basic'
+'/view/basic/parts': 'test_view#basic_parts'
 '/view/twig': 'test_view#twig'

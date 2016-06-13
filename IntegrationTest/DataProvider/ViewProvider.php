@@ -13,7 +13,8 @@ trait ViewProvider
     {
         return [
             ["/view/basic", "basic"],
-            ["/view/twig", "twig\n"]
+            ["/view/basic/parts", "basic_parts"],
+            ["/view/twig", "twig"]
         ];
     }
 }

@@ -21,4 +21,11 @@ class TestViewController extends CoreController
     {
         $this->TestView->setTmplName("twig");
     }
+
+    /**
+     * @Template("basic_parts.tmpl")
+     */
+    public function basicParts()
+    {
+    }
 }
