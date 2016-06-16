@@ -16,8 +16,7 @@ trait ViewProvider
             ["/view/basic/parts", "basic_parts"],
             ["/view/basic/encode/html", "&lt;p&gt;a&lt;/p&gt;"],
             ["/view/basic/encode/javascript", '\x3cscript\x3ealert(\u0022a\u0022);\x3c\/script\x3e'],
-            ["/view/basic/encode/xml", "<item>&lt;test&gt;a&lt;/test&gt;</item>"],
-            ["/view/twig", "twig"]
+            ["/view/basic/encode/xml", "<item>&lt;test&gt;a&lt;/test&gt;</item>"]
         ];
     }
 }

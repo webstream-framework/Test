@@ -63,4 +63,3 @@
 '/view/basic/encode/html': 'test_view#basic_encode_html'
 '/view/basic/encode/javascript': 'test_view#basic_encode_javascript'
 '/view/basic/encode/xml': 'test_view#basic_encode_xml'
-'/view/twig': 'test_view#twig'
