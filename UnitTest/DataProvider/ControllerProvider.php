@@ -12,7 +12,9 @@ trait ControllerProvider
     public function runControllerProvider()
     {
         return [
-            ["/test", "unit_test#found_controller", "c"]
+            ["/test", "unit_test#found_controller", "c"],
+            ["/test", "unit_test#multi_case1_controller", "c"],
+            ["/test", "unit_test#multi_case2_controller", "c"]
         ];
     }
 

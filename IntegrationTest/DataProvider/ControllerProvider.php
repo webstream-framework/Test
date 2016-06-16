@@ -13,7 +13,11 @@ trait ControllerProvider
     {
         return [
             ["/controller/ok", "test1"],
-            ["/controller/parent_class_method_access", "parent"]
+            ["/controller/parent_class_method_access", "parent"],
+            ["/controller/upper_method/1", "u"],
+            ["/controller/upper_method/2", "u"],
+            ["/controller/lower_method/1", "l"],
+            ["/controller/lower_method/2", "l"]
         ];
     }
 

@@ -17,4 +17,9 @@ class TestViewService extends CoreService
     {
         return $this->tmplName;
     }
+
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
 }

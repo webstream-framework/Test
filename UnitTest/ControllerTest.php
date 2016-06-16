@@ -114,6 +114,16 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
                         echo "c";
                     }
 
+                    public function multicase1Controller()
+                    {
+                        echo "c";
+                    }
+
+                    public function multiCase2Controller()
+                    {
+                        echo "c";
+                    }
+
                     public function testParam(array $params)
                     {
                         echo $params['id'];
