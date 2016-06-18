@@ -2,6 +2,7 @@
 namespace WebStream\Test\IntegrationTest\Controller;
 
 use WebStream\Core\CoreController;
+use WebStream\Annotation\ExceptionHandler;
 
 class TestMysqlController extends CoreController
 {
@@ -147,8 +148,23 @@ class TestMysqlController extends CoreController
         echo count($this->TestMysql->annotationSelectQuery()->toArray());
     }
 
+    public function transactionIsolationLevel($params)
+    {
+        $this->TestMysql->cleanUp();
+        $this->TestMysql->transactionIsolationLevel(intval($params["level"]));
+        $this->print($this->TestMysql->annotationSelectQuery());
+    }
+
     public function print($result)
     {
         echo $result->toArray()[0]["name"];
+    }
+
+    /**
+     * @ExceptionHandler("WebStream\Exception\Extend\DatabaseException")
+     */
+    public function handle($params)
+    {
+        echo $params["exception"];
     }
 }

@@ -33,6 +33,10 @@ trait ModelProvider
             ["/model/mysql/entity_mapping_property_proxy", "a"],
             ["/model/mysql/transaction_commit", "a"],
             ["/model/mysql/transaction_rollback", "0"],
+            ["/model/mysql/transaction_isolationlevel/1", "a"],
+            ["/model/mysql/transaction_isolationlevel/2", "a"],
+            ["/model/mysql/transaction_isolationlevel/3", "a"],
+            ["/model/mysql/transaction_isolationlevel/4", "a"],
             ["/model/postgres/direct_select_query", "direct_select"],
             ["/model/postgres/annotation_select_query", "annotation_select"],
             ["/model/postgres/direct_insert_query", "direct_insert"],
@@ -64,6 +68,7 @@ trait ModelProvider
     public function modelNotAccessProvider()
     {
         return [
+            ["/model/error/mysql/transaction_isolationlevel/5", "500", "Invalid transaction isolation level: 5"],
             ["/model/error/undefined_driver", "500", "Database driver is undefined"],
             ["/model/error/undefined_config_file", "500", "Database config file is not found"],
             ["/model/error/undefined_query", "500", "SQL statement can't getting from xml file"],

@@ -168,6 +168,16 @@ class TestMysqlModel extends CoreModel
     }
 
     /**
+     * @Query(file="query/webstream-test-mysql-mapper.xml")
+     */
+    public function transactionIsolationLevel($isolationLevel)
+    {
+        $this->beginTransaction($isolationLevel);
+        $this->queryAnnotationInsert(["name" => 'a']);
+        $this->commit();
+    }
+
+    /**
      * @Query(file="query/webstream-test-common-mapper.xml")
      */
     public function setUp($name)
