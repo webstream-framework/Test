@@ -68,11 +68,11 @@ trait ModelProvider
     public function modelNotAccessProvider()
     {
         return [
-            ["/model/error/mysql/transaction_isolationlevel/5", "500", "Invalid transaction isolation level: 5"],
-            ["/model/error/undefined_driver", "500", "Database driver is undefined"],
-            ["/model/error/undefined_config_file", "500", "Database config file is not found"],
-            ["/model/error/undefined_query", "500", "SQL statement can't getting from xml file"],
-            ["/model/error/undefined_query_mapping", "500", "Entity classpath is not found"]
+            ["/model/error/mysql/transaction_isolationlevel/5", "Invalid transaction isolation level: 5"],
+            ["/model/error/undefined_driver", "Database driver is undefined"],
+            ["/model/error/undefined_config_file", "Database config file is not found"],
+            ["/model/error/undefined_query", "SQL statement can't getting from xml file"],
+            ["/model/error/undefined_query_mapping", "Entity classpath is not found"]
         ];
     }
 }

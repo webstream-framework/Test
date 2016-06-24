@@ -19,4 +19,11 @@ trait ViewProvider
             ["/view/basic/encode/xml", "<item>&lt;test&gt;a&lt;/test&gt;</item>"]
         ];
     }
+
+    public function viewNotAccessProvider()
+    {
+        return [
+            ["/view/error/service_class_noexist_and_model_class_noexist", "TestNoServiceClassNoModelClassInViewService and TestNoServiceClassNoModelClassInViewModel is not defined."]
+        ];
+    }
 }

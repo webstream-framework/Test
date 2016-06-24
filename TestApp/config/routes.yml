@@ -1,13 +1,13 @@
 '/controller/ok': 'test_controller#test1'
-'/controller/controller_method_noexist': 'test_controller#notFound'
 '/controller/parent_class_method_access': 'test_child#test1'
 '/controller/upper_method/1': 'test_method_case#upper_case'
 '/controller/upper_method/2': 'test_method_case#uppercase'
 '/controller/lower_method/1': 'test_method_case#lower_case'
 '/controller/lower_method/2': 'test_method_case#lowercase'
+'/controller/error/controller_method_noexist': 'test_controller#notFound'
 '/service/ok': 'test_service#test1'
-'/service/service_method_noexist': 'test_service#notFound'
-'/service/service_class_noexist_and_model_class_noexist': "test_no_service_class_no_model_class#test1"
+'/service/error/service_method_noexist': 'test_service#notFound'
+'/service/error/service_class_noexist_and_model_class_noexist': "test_no_service_class_no_model_class#test1"
 '/model/ok': 'test_model#test1'
 '/model/service_class_noexist_and_model_class_exist': 'test_no_service_class_exist_model#test1'
 '/model/mysql/direct_select_query': 'test_mysql#direct_select_query'
@@ -65,3 +65,4 @@
 '/view/basic/encode/html': 'test_view#basic_encode_html'
 '/view/basic/encode/javascript': 'test_view#basic_encode_javascript'
 '/view/basic/encode/xml': 'test_view#basic_encode_xml'
+'/view/error/service_class_noexist_and_model_class_noexist': 'test_no_service_class_no_model_class_in_view#test1'

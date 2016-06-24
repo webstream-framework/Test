@@ -24,7 +24,7 @@ trait ControllerProvider
     public function controllerNotAccessProvider()
     {
         return [
-            ["/controller/controller_method_noexist", 404]
+            ["/controller/error/controller_method_noexist", "500"]
         ];
     }
 }

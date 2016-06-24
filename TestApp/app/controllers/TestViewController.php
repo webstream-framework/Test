@@ -4,6 +4,7 @@ namespace WebStream\Test\IntegrationTest\Controller;
 use WebStream\Core\CoreController;
 use WebStream\Annotation\Template;
 use WebStream\Annotation\Header;
+use WebStream\Annotation\ExceptionHandler;
 
 class TestViewController extends CoreController
 {
@@ -53,5 +54,13 @@ class TestViewController extends CoreController
     public function basicEncodeXml()
     {
         $this->TestView->setCode("<test>a</test>");
+    }
+
+    /**
+     * @ExceptionHandler("\Exception")
+     */
+    public function handle($params)
+    {
+        echo $params["exception"];
     }
 }

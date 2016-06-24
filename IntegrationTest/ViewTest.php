@@ -32,4 +32,17 @@ class ViewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(trim($html), $response);
         $this->assertEquals($statusCode, 200);
     }
+
+    /**
+     * 異常系
+     * Viewで例外が発生した場合、エラーになること
+     * @test
+     * @dataProvider viewNotAccessProvider
+     */
+    public function ngViewNotAccess($path, $errorMessage)
+    {
+        $http = new HttpClient();
+        $html = $http->get($this->getDocumentRootURL() . $path);
+        $this->assertTrue(strpos($html, $errorMessage) !== false);
+    }
 }

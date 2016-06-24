@@ -19,8 +19,8 @@ trait ServiceProvider
     public function serviceNotAccessProvider()
     {
         return [
-            ["/service/service_method_noexist", 404],
-            ["/service/service_class_noexist_and_model_class_noexist", 500]
+            ["/service/error/service_method_noexist", "404"],
+            ["/service/error/service_class_noexist_and_model_class_noexist", "500"]
         ];
     }
 }

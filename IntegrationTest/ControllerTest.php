@@ -35,7 +35,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * 異常系
-     * Controllerにアクセスできず、500エラーになること
+     * Controllerにアクセスできず、エラーになること
      * @test
      * @dataProvider controllerNotAccessProvider
      */
@@ -43,7 +43,6 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     {
         $http = new HttpClient();
         $html = $http->get($this->getDocumentRootURL() . $path);
-        $statusCode = $http->getStatusCode();
-        $this->assertEquals($statusCode, $statusCode);
+        $this->assertEquals($statusCode, $http->getStatusCode());
     }
 }

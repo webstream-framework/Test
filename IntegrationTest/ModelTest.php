@@ -35,16 +35,14 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * 異常系
-     * Modelにアクセスできず、500エラーになること
+     * Modelにアクセスできず、エラーになること
      * @test
      * @dataProvider modelNotAccessProvider
      */
-    public function ngModelNotAccess($path, $statusCode, $errorMessage)
+    public function ngModelNotAccess($path, $errorMessage)
     {
         $http = new HttpClient();
         $html = $http->get($this->getDocumentRootURL() . $path);
-        $statusCode = $http->getStatusCode();
-        $this->assertEquals($statusCode, $statusCode);
         $this->assertTrue(strpos($html, $errorMessage) !== false);
     }
 }
