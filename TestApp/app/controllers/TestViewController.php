@@ -57,6 +57,14 @@ class TestViewController extends CoreController
     }
 
     /**
+     * @Template("basic_in_helper.tmpl")
+     */
+    public function basicTemplateInHelper()
+    {
+        $this->TestView->setTmplName("parts.tmpl");
+    }
+
+    /**
      * @ExceptionHandler("\Exception")
      */
     public function handle($params)
