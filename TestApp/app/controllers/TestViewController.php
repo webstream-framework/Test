@@ -65,6 +65,14 @@ class TestViewController extends CoreController
     }
 
     /**
+     * @Template("basic_async.tmpl")
+     */
+    public function basicAsync()
+    {
+        $this->TestView->setPath("/view/basic");
+    }
+
+    /**
      * @ExceptionHandler("\Exception")
      */
     public function handle($params)

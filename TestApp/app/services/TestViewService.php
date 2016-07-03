@@ -22,4 +22,9 @@ class TestViewService extends CoreService
     {
         $this->code = $code;
     }
+
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
 }
