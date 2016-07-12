@@ -59,6 +59,11 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Annotation/Header.p
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Annotation/Query.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Annotation/Template.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Annotation/Validate.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/CacheDriverFactory.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/ICache.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Apcu.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Memcached.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Redis.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/DatabaseManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/ConnectionManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/EntityManager.php';
