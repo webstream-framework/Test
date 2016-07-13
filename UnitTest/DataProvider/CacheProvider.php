@@ -114,6 +114,8 @@ trait CacheProvider
         $redisContainer = new Container();
         $redisContainer->available = true;
         $redisContainer->cachePrefix = "cache.redis.";
+        $redisContainer->redisOptPrefix = 2;
+
         $redisContainer->driver = new class()
         {
             private $expect;
