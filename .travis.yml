@@ -10,7 +10,6 @@ before_script:
   - docker run --name test-postgres -p 15432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d webstream/postgres
   - docker run --name test-php-apache -itd -p 8080:80 --link test-mysql:mysql --link test-postgres:postgres -v /home/travis/build/webstream-framework/Test/TestApp:/var/www/html webstream/php-apache
   - docker ps
-  - docker exec -it test-php-apache php -r 'echo class_exists("\Memcached");'
   - composer install && cd TestApp && composer install && cd ..
   - touch TestApp/log/webstream.test.log && chmod 777 -R TestApp/log
 
