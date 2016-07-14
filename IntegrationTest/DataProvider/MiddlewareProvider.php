@@ -32,11 +32,8 @@ trait MiddlewareProvider
         $redis = $factory->create("WebStream\Cache\Driver\Redis", $redisConfig);
         $redis->inject('logger', $logger);
 
-        echo get_class($memcached);
-
         return [
             [$apcu],
-            [$memcached],
             [$redis]
         ];
     }
