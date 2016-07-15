@@ -1,9 +1,11 @@
 <?php
 namespace WebStream\Test\IntegrationTest;
 
+use WebStream\Module\HttpClient;
 use WebStream\Test\IntegrationTest\DataProvider\MiddlewareProvider;
 
 require_once dirname(__FILE__) . '/TestBase.php';
+require_once dirname(__FILE__) . '/TestConstant.php';
 require_once dirname(__FILE__) . '/DataProvider/MiddlewareProvider.php';
 
 /**
@@ -14,45 +16,18 @@ require_once dirname(__FILE__) . '/DataProvider/MiddlewareProvider.php';
  */
 class MiddlewareTest extends \PHPUnit_Framework_TestCase
 {
-    use MiddlewareProvider;
+    use MiddlewareProvider, TestConstant;
 
     /**
      * 正常系
-     * 外部キャッシュライブラリを使用してキャッシュを追加できること
+     * 外部キャッシュライブラリを使用してキャッシュを利用できること
      * @test
-     * @dataProvider cacheConfigProvider
+     * @dataProvider cacheProvider
      */
-    public function okAddCache($cache)
+    public function okCache($path, $response)
     {
-        $cache->add("key", "value1", 0, true);
-        $this->assertEquals($cache->get("key"), "value1");
-    }
-
-    /**
-     * 正常系
-     * 外部キャッシュライブラリを使用してキャッシュを削除できること
-     * @test
-     * @dataProvider cacheConfigProvider
-     */
-    public function okDeleteCache($cache)
-    {
-        $cache->add("key", "value1", 0, true);
-        $cache->delete("key");
-        $this->assertNull($cache->get("key"));
-    }
-
-    /**
-     * 正常系
-     * 外部キャッシュライブラリを使用してキャッシュをすべて削除できること
-     * @test
-     * @dataProvider cacheConfigProvider
-     */
-    public function okClearCache($cache)
-    {
-        $cache->add("key1", "value1", 0, true);
-        $cache->add("key2", "value2", 0, true);
-        $cache->clear();
-        $this->assertNull($cache->get("key1"));
-        $this->assertNull($cache->get("key2"));
+        $http = new HttpClient();
+        $html = $http->get($this->getDocumentRootURL() . $path);
+        $this->assertEquals($html, $response);
     }
 }
