@@ -14,7 +14,8 @@ trait MiddlewareProvider
         return [
             ["/middleware/cache/apcu", "12111"],
             ["/middleware/cache/memcached", "12111"],
-            ["/middleware/cache/redis", "12111"]
+            ["/middleware/cache/redis", "12111"],
+            ["/middleware/cache/temporaryfile", "12111"]
         ];
     }
 }

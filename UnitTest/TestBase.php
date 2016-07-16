@@ -64,6 +64,7 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/ICache
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Apcu.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Memcached.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Redis.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/TemporaryFile.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/DatabaseManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/ConnectionManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/EntityManager.php';

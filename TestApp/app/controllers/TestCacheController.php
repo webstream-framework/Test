@@ -38,6 +38,16 @@ class TestCacheController extends CoreController
         $this->print($redis);
     }
 
+    public function temporaryfile()
+    {
+        $factory = new CacheDriverFactory();
+        $temporaryFileConfig = new Container(false);
+        $temporaryFileConfig->cacheDir = "/tmp";
+        $temporaryFile = $factory->create("WebStream\Cache\Driver\TemporaryFile", $temporaryFileConfig);
+        $temporaryFile->inject('logger', $this->logger);
+        $this->print($temporaryFile);
+    }
+
     private function print($cache)
     {
         $cache->add("key", 1, 0, false);

@@ -5,6 +5,8 @@ use WebStream\Module\Container;
 use WebStream\Cache\Driver\Apcu;
 use WebStream\Cache\Driver\Memcached;
 use WebStream\Cache\Driver\Redis;
+use WebStream\Cache\Driver\TemporaryFile;
+use WebStream\IO\File;
 
 /**
  * CacheProvider
