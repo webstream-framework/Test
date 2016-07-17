@@ -314,7 +314,8 @@ trait LoggerProvider
     {
         $apcuContainer = new Container();
         $apcuContainer->available = true;
-        $apcuContainer->cachePrefix = "cache.apcu.";
+        $apcuContainer->cachePrefix = "cache.apcu";
+        $apcuContainer->classPrefix = "unittest";
         $apcuContainer->driver = new class()
         {
             private $expect = [];

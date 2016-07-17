@@ -30,6 +30,7 @@ trait CacheProvider
         $apcuContainer = new Container();
         $apcuContainer->available = true;
         $apcuContainer->cachePrefix = "cache.apcu.";
+        $apcuContainer->classPrefix = "unittest";
         $apcuContainer->driver = new class($apcuContainer->cachePrefix)
         {
             private $expect = [];
@@ -71,6 +72,7 @@ trait CacheProvider
         $memcachedContainer = new Container();
         $memcachedContainer->available = true;
         $memcachedContainer->cachePrefix = "cache.memcached.";
+        $memcachedContainer->classPrefix = "unittest";
         $memcachedContainer->codes = ["success" => 1, "notfound" => 1];
         $memcachedContainer->driver = new class()
         {
@@ -118,6 +120,7 @@ trait CacheProvider
         $redisContainer = new Container();
         $redisContainer->available = true;
         $redisContainer->cachePrefix = "cache.redis.";
+        $redisContainer->classPrefix = "unittest";
         $redisContainer->redisOptPrefix = 2;
 
         $redisContainer->driver = new class()

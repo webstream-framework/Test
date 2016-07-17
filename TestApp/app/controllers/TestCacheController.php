@@ -2,50 +2,38 @@
 namespace WebStream\Test\IntegrationTest\Controller;
 
 use WebStream\Core\CoreController;
-use WebStream\Cache\Driver\CacheDriverFactory;
-use WebStream\Module\Container;
+use WebStream\Module\Utility\CacheUtils;
 
 class TestCacheController extends CoreController
 {
+    use CacheUtils;
+
     public function apcu()
     {
-        $factory = new CacheDriverFactory();
-        $apcu = $factory->create("WebStream\Cache\Driver\Apcu");
-        $apcu->inject('logger', $this->logger);
-        $this->print($apcu);
+        $cache = $this->getCacheDriver("apcu", "test_cache");
+        $cache->inject('logger', $this->logger);
+        $this->print($cache);
     }
 
     public function memcached()
     {
-        $factory = new CacheDriverFactory();
-        $memcachedConfig = new Container(false);
-        $memcachedConfig->servers = [
-            ['memcached', 11211]
-        ];
-        $memcached = $factory->create("WebStream\Cache\Driver\Memcached", $memcachedConfig);
-        $memcached->inject('logger', $this->logger);
-        $this->print($memcached);
+        $cache = $this->getCacheDriver("memcached", "test_cache");
+        $cache->inject('logger', $this->logger);
+        $this->print($cache);
     }
 
     public function redis()
     {
-        $factory = new CacheDriverFactory();
-        $redisConfig = new Container(false);
-        $redisConfig->host = "redis";
-        $redisConfig->port = 6379;
-        $redis = $factory->create("WebStream\Cache\Driver\Redis", $redisConfig);
-        $redis->inject('logger', $this->logger);
-        $this->print($redis);
+        $cache = $this->getCacheDriver("redis", "test_cache");
+        $cache->inject('logger', $this->logger);
+        $this->print($cache);
     }
 
     public function temporaryfile()
     {
-        $factory = new CacheDriverFactory();
-        $temporaryFileConfig = new Container(false);
-        $temporaryFileConfig->cacheDir = "/tmp";
-        $temporaryFile = $factory->create("WebStream\Cache\Driver\TemporaryFile", $temporaryFileConfig);
-        $temporaryFile->inject('logger', $this->logger);
-        $this->print($temporaryFile);
+        $cache = $this->getCacheDriver("temporaryFile", "test_cache");
+        $cache->inject('logger', $this->logger);
+        $this->print($cache);
     }
 
     private function print($cache)
