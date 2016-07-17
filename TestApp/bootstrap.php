@@ -40,7 +40,6 @@ require_once dirname(__FILE__) . '/core/WebStream/IO/Writer/FileWriter.php';
 require_once dirname(__FILE__) . '/core/WebStream/IO/Writer/SimpleFileWriter.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/core/WebStream/DI/ServiceLocator.php';
-require_once dirname(__FILE__) . '/core/WebStream/Module/Cache.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Container.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/Functions.php';
 require_once dirname(__FILE__) . '/core/WebStream/Module/HttpClient.php';

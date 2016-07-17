@@ -32,7 +32,6 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/Writer/FileWrite
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/IO/Writer/SimpleFileWriter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Singleton.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/ServiceLocator.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Cache.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Container.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Functions.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/HttpClient.php';
