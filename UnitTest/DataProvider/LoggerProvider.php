@@ -1,6 +1,9 @@
 <?php
 namespace WebStream\Test\UnitTest\DataProvider;
 
+use WebStream\Module\Container;
+use WebStream\Cache\Driver\Apcu;
+
 /**
  * LoggerProvider
  * @author Ryuichi TANAKA.
@@ -304,6 +307,49 @@ trait LoggerProvider
             [["path" => "dummy", "level" => "info"], ["exists" => false]],
             [["path" => "dummy", "level" => "info", "rotate_cycle" => "dummy"]],
             [["path" => "dummy", "level" => "info", "rotate_size" => "dummy"]]
+        ];
+    }
+
+    public function loggerCacheDriverProvider()
+    {
+        $apcuContainer = new Container();
+        $apcuContainer->available = true;
+        $apcuContainer->cachePrefix = "cache.apcu.";
+        $apcuContainer->driver = new class()
+        {
+            private $expect = [];
+
+            public function delegate($function, array $args = [])
+            {
+                $result = null;
+                switch ($function) {
+                    case "apcu_store":
+                    case "apcu_add":
+                        $this->expect[$args[0]] = $args[1];
+                        $result = true;
+                        break;
+                    case "apcu_delete":
+                    case "apcu_clear_cache":
+                        $this->expect = [];
+                        $result = true;
+                        break;
+                    case "apcu_fetch":
+                        if (array_key_exists($args[0], $this->expect)) {
+                            $result = $this->expect[$args[0]];
+                        }
+                        break;
+                }
+
+                return $result;
+            }
+        };
+
+        $logger = new class() { function __call($name, $args) {} };
+        $apcu = new Apcu($apcuContainer);
+        $apcu->inject('logger', $logger);
+
+        return [
+            [$apcu]
         ];
     }
 }

@@ -30,9 +30,9 @@ trait CacheProvider
         $apcuContainer = new Container();
         $apcuContainer->available = true;
         $apcuContainer->cachePrefix = "cache.apcu.";
-        $apcuContainer->driver = new class()
+        $apcuContainer->driver = new class($apcuContainer->cachePrefix)
         {
-            private $expect;
+            private $expect = [];
 
             public function delegate($function, array $args = [])
             {
@@ -40,16 +40,18 @@ trait CacheProvider
                 switch ($function) {
                     case "apcu_store":
                     case "apcu_add":
-                        $this->expect = "value1";
+                        $this->expect[$args[0]] = $args[1];
                         $result = true;
                         break;
                     case "apcu_delete":
                     case "apcu_clear_cache":
-                        $this->expect = null;
+                        $this->expect = [];
                         $result = true;
                         break;
                     case "apcu_fetch":
-                        $result = $this->expect;
+                        if (array_key_exists($args[0], $this->expect)) {
+                            $result = $this->expect[$args[0]];
+                        }
                         break;
                 }
 

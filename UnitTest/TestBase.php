@@ -4,6 +4,7 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/PropertyProx
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/Injector.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/CommonUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/ApplicationUtils.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/CacheUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/FileUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/LoggerUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/SecurityUtils.php';
@@ -11,7 +12,6 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Annotation/Base/IAn
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerConfigurationManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Logger.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerAdapter.php';
-require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerCache.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/LoggerFormatter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/IOutputter.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Log/Outputter/ILazyWriter.php';
@@ -65,6 +65,7 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Apcu.p
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Memcached.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/Redis.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/Driver/TemporaryFile.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Cache/LoggerCache.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/DatabaseManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/ConnectionManager.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Database/EntityManager.php';

@@ -92,6 +92,7 @@ trait LoggerUtils
      */
     public function enableApcu()
     {
+        // TODO APCu依存の関数の直接呼び出しはしない
         return function_exists('apcu_cache_info') && @apcu_cache_info() !== false;
     }
 }

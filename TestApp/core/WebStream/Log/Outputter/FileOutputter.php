@@ -2,7 +2,7 @@
 namespace WebStream\Log\Outputter;
 
 use WebStream\IO\Writer\SimpleFileWriter;
-use WebStream\Log\LoggerCache;
+use WebStream\Cache\LoggerCache;
 use WebStream\Module\Utility\LoggerUtils;
 
 /**

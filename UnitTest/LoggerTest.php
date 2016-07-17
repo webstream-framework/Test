@@ -4,11 +4,11 @@ namespace WebStream\Test\UnitTest;
 use WebStream\Log\Logger;
 use WebStream\Log\LoggerAdapter;
 use WebStream\Log\LoggerConfigurationManager;
-use WebStream\Log\LoggerCache;
 use WebStream\Log\Outputter\ConsoleOutputter;
 use WebStream\IO\File;
 use WebStream\IO\StringInputStream;
 use WebStream\IO\Reader\InputStreamReader;
+use WebStream\Cache\LoggerCache;
 use WebStream\Module\Container;
 use WebStream\Module\Utility\LoggerUtils;
 use WebStream\Test\UnitTest\DataProvider\LoggerProvider;
@@ -680,16 +680,15 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      * 正常系
      * ログキャッシュできること
      * @test
+     * @dataProvider loggerCacheDriverProvider
      */
-    public function okLoggerCache()
+    public function okLoggerCache($driver)
     {
-        if ($this->enableApcu()) {
-            $cache = new LoggerCache();
-            $cache->add("a");
-            $cache->add("b");
-            $this->assertEquals(2, $cache->length());
-            $this->assertEquals(implode("", $cache->get()), "ab");
-        }
+        $cache = new LoggerCache($driver);
+        $cache->add("a");
+        $cache->add("b");
+        $this->assertEquals(2, $cache->length());
+        $this->assertEquals(implode("", $cache->get()), "ab");
     }
 
     /**

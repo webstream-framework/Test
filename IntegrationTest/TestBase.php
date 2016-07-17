@@ -4,6 +4,7 @@ require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/PropertyProx
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/DI/Injector.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/CommonUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/ApplicationUtils.php';
+require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/CacheUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/FileUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/LoggerUtils.php';
 require_once dirname(__FILE__) . '/../TestApp/core/WebStream/Module/Utility/SecurityUtils.php';
