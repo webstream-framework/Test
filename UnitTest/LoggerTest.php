@@ -692,6 +692,53 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * 正常系
+     * ログファイルが見つからない場合、新規作成できること
+     * @test
+     * @dataProvider loggerNewLogFileProvider
+     */
+    public function okLoggerNewLogFile($config)
+    {
+        $ioContainer = new Container();
+        $ioContainer->file = function () {
+            $filePath = "dummy";
+            return new class($filePath) extends File
+            {
+                public function __construct($filePath)
+                {
+                    parent::__construct($filePath);
+                }
+
+                public function isFile()
+                {
+                    return false;
+                }
+
+                public function exists()
+                {
+                    return false;
+                }
+            };
+        };
+        $ioContainer->fileWriter = function() {
+            return new class()
+            {
+                public function write()
+                {
+                    echo "create new log file";
+                }
+            };
+        };
+
+        Logger::finalize();
+        $manager = new LoggerConfigurationManager($config);
+        $manager->inject('ioContainer', $ioContainer);
+        $manager->load();
+
+        $this->expectOutputString("create new log file");
+    }
+
+    /**
      * 異常系
      * ログ設定に誤りがある場合、例外が発生すること
      * @test

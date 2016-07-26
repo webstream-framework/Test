@@ -295,6 +295,12 @@ trait LoggerProvider
         ];
     }
 
+    public function loggerNewLogFileProvider()
+    {
+        return [
+            [["path" => "dummy", "level" => "info"]]
+        ];
+    }
 
     public function loggerConfigurationErrorProvider()
     {
@@ -303,8 +309,6 @@ trait LoggerProvider
             [[]], // path notfound
             [["path" => "dummy"]], // level notfound
             [["path" => "dummy", "level" => "dummy"]], // invalid level
-            [["path" => "dummy", "level" => "info"], ["isFile" => false]],
-            [["path" => "dummy", "level" => "info"], ["exists" => false]],
             [["path" => "dummy", "level" => "info", "rotate_cycle" => "dummy"]],
             [["path" => "dummy", "level" => "info", "rotate_size" => "dummy"]]
         ];
