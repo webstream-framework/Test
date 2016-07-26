@@ -13,7 +13,7 @@ before_script:
   - docker run --name test-php-apache -itd -p 8080:80 --link test-memcached:memcached --link test-redis:redis --link test-mysql:mysql --link test-postgres:postgres -v /home/travis/build/webstream-framework/Test/TestApp:/var/www/html webstream/php-apache
   - docker ps
   - composer install && cd TestApp && composer install && cd ..
-  - touch TestApp/log/webstream.test.log && chmod 777 -R TestApp/log
+  - chmod 777 -R TestApp/log
 
 script:
   - vendor/bin/phpunit --configuration phpunit.xml --coverage-clover build/logs/clover.xml
