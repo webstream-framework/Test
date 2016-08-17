@@ -138,7 +138,7 @@ class AliasTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Alias(name="aliasMethod1")
@@ -164,11 +164,19 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                         $this->UnitTest->aliasMethod3();
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
 
             public function getService()
             {
-                return new class($this->container) extends CoreService
+                $service = new class($this->container) extends CoreService
                 {
                     /**
                      * @Alias(name="aliasMethod2")
@@ -178,11 +186,16 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                         echo "originMethod2";
                     }
                 };
+
+                $service->inject('coreDelegator', $this->container->coreDelegator)
+                        ->inject('logger', $this->container->logger);
+
+                return $service;
             }
 
             public function getModel()
             {
-                $model = new class($this->container) extends CoreModel
+                $model = new class() extends CoreModel
                 {
                     /**
                      * @Alias(name="aliasMethod3")
@@ -192,6 +205,8 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                         echo "originMethod3";
                     }
                 };
+
+                $model->inject('logger', $this->container->logger);
 
                 return $model;
             }
@@ -231,7 +246,7 @@ class AliasTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Alias(name="aliasMethod1")
@@ -262,11 +277,19 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                         $this->UnitTest->aliasMethod3();
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
 
             public function getService()
             {
-                return new class($this->container) extends CoreService
+                $service = new class($this->container) extends CoreService
                 {
                     /**
                      * @Alias(name="aliasMethod2")
@@ -281,11 +304,16 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                         echo "originMethod2";
                     }
                 };
+
+                $service->inject('coreDelegator', $this->container->coreDelegator)
+                        ->inject('logger', $this->container->logger);
+
+                return $service;
             }
 
             public function getModel()
             {
-                $model = new class($this->container) extends CoreModel
+                $model = new class() extends CoreModel
                 {
                     /**
                      * @Alias(name="aliasMethod3")
@@ -300,6 +328,8 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                         echo "originMethod3";
                     }
                 };
+
+                $model->inject('logger', $this->container->logger);
 
                 return $model;
             }
@@ -339,7 +369,7 @@ class AliasTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Alias(name="12345")
@@ -353,11 +383,19 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                         $this->UnitTest->originMethod2();
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
 
             public function getService()
             {
-                return new class($this->container) extends CoreService
+                $service = new class($this->container) extends CoreService
                 {
                     /**
                      * @Alias(name="12345")
@@ -371,11 +409,16 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                         $this->UnitTest->originMethod3();
                     }
                 };
+
+                $service->inject('coreDelegator', $this->container->coreDelegator)
+                        ->inject('logger', $this->container->logger);
+
+                return $service;
             }
 
             public function getModel()
             {
-                $model = new class($this->container) extends CoreModel
+                $model = new class() extends CoreModel
                 {
                     /**
                      * @Alias(name="12345")
@@ -384,6 +427,8 @@ class AliasTest extends \PHPUnit_Framework_TestCase
                     {
                     }
                 };
+
+                $model->inject('logger', $this->container->logger);
 
                 return $model;
             }

@@ -108,7 +108,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller =  new class() extends CoreController
                 {
                     public function testFoundService()
                     {
@@ -140,11 +140,19 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
                         $this->UnitTest->notfoundServiceAndFoundModelArgument("m");
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
 
             public function getService()
             {
-                return new class($this->container) extends CoreService
+                $service = new class() extends CoreService
                 {
                     public function foundService()
                     {
@@ -162,6 +170,11 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
                         $this->UnitTest->notfoundModel();
                     }
                 };
+
+                $service->inject('coreDelegator', $this->container->coreDelegator)
+                        ->inject('logger', $this->container->logger);
+
+                return $service;
             }
 
             public function getModel()
@@ -209,18 +222,26 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     public function action()
                     {
                         $this->UnitTest->serviceAction();
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
 
             public function getService()
             {
-                return new class($this->container) extends CoreService
+                $service = new class() extends CoreService
                 {
                     public function serviceAction()
                     {
@@ -228,6 +249,11 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
                         $this->UnitTest->modelAction();
                     }
                 };
+
+                $service->inject('coreDelegator', $this->container->coreDelegator)
+                        ->inject('logger', $this->container->logger);
+
+                return $service;
             }
         };
     }

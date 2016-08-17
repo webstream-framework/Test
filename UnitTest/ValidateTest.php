@@ -121,7 +121,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Validate(key="test", rule="required", method="get")
@@ -737,6 +737,14 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
                     public function __call($name, $args) {}
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
     }

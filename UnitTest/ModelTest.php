@@ -112,7 +112,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     public function testFoundModel()
                     {
@@ -149,11 +149,19 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                         $this->UnitTest->executeXmlQueryToEntity();
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
 
             public function getModel()
             {
-                $model = new class($this->container) extends CoreModel
+                $model = new class() extends CoreModel
                 {
                     public function foundModel()
                     {
@@ -316,6 +324,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                     return [$mockXmlObject];
                 });
 
+                $model->inject('logger', $this->container->logger);
                 $model->inject('manager', $manager);
                 $model->inject('queryAnnotations', [$queryAnnotations]);
                 $model->inject('classpath', get_class($this));

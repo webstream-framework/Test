@@ -124,7 +124,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Filter(type="before")
@@ -162,6 +162,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                     {
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
 
@@ -199,7 +207,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Filter(type="before", except="beforeExceptEnable")
@@ -237,6 +245,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                         echo "aed";
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
 
@@ -274,7 +290,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Filter(type="before", only="beforeOnlyEnable")
@@ -312,6 +328,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                         echo "aod";
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
 
@@ -349,7 +373,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Filter(type="before", except={"beforeExceptEnable", "beforeExceptEnable2"})
@@ -387,6 +411,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                         echo "aee2";
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
 
@@ -424,7 +456,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Filter(type="before", only={"beforeOnlyEnable", "beforeOnlyEnable2"})
@@ -462,6 +494,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                         echo "aoe2";
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
 
@@ -499,7 +539,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Filter(type="before")
@@ -533,6 +573,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                         echo "mse";
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
 
@@ -571,7 +619,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Filter(type="before", except="action", only="action")
@@ -586,6 +634,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                         echo "a";
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
 
@@ -623,7 +679,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
             public function getController()
             {
-                return new class($this->container) extends CoreController
+                $controller = new class() extends CoreController
                 {
                     /**
                      * @Filter(type="initialize")
@@ -636,6 +692,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                     {
                     }
                 };
+
+                $controller->inject('request', $this->container->request)
+                           ->inject('response', $this->container->response)
+                           ->inject('session', $this->container->session)
+                           ->inject('coreDelegator', $this->container->coreDelegator)
+                           ->inject('logger', $this->container->logger);
+
+                return $controller;
             }
         };
 
