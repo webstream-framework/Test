@@ -3,12 +3,12 @@ namespace WebStream\Test\UnitTest;
 
 use WebStream\Core\Application;
 use WebStream\Core\CoreController;
+use WebStream\Container\Container;
 use WebStream\Annotation\Validate;
 use WebStream\Delegate\Router;
 use WebStream\Delegate\CoreDelegator;
 use WebStream\Delegate\AnnotationDelegator;
 use WebStream\Module\Utility\ApplicationUtils;
-use WebStream\Module\Container;
 use WebStream\Http\Request;
 use WebStream\Http\Response;
 use WebStream\Test\UnitTest\DataProvider\ValidateProvider;

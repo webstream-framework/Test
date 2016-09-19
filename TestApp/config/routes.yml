@@ -68,7 +68,3 @@
 '/view/basic/template_in_helper': 'test_view#basic_template_in_helper'
 '/view/basic/async': 'test_view#basic_async'
 '/view/error/service_class_noexist_and_model_class_noexist': 'test_no_service_class_no_model_class_in_view#test1'
-'/middleware/cache/apcu': 'test_cache#apcu'
-'/middleware/cache/memcached': 'test_cache#memcached'
-'/middleware/cache/redis': 'test_cache#redis'
-'/middleware/cache/temporaryfile': 'test_cache#temporaryfile'

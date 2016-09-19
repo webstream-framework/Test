@@ -1,9 +1,9 @@
 <?php
 namespace WebStream\Test\UnitTest;
 
-use WebStream\Module\Container;
-use WebStream\Module\Utility\LoggerUtils;
+use WebStream\Container\Container;
 use WebStream\Log\Logger;
+use WebStream\Log\LoggerUtils;
 use WebStream\Log\Outputter\ConsoleOutputter;
 use WebStream\Exception\DelegateException;
 use WebStream\Exception\Extend\ClassNotFoundException;

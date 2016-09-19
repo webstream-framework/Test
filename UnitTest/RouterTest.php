@@ -3,7 +3,7 @@ namespace WebStream\Test\UnitTest;
 
 use WebStream\Delegate\Router;
 use WebStream\Module\Utility\ApplicationUtils;
-use WebStream\Module\Container;
+use WebStream\Container\Container;
 use WebStream\Http\Request;
 use WebStream\Test\UnitTest\DataProvider\RouterProvider;
 
